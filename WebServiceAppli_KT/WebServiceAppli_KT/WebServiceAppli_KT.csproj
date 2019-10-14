@@ -73,6 +73,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Controlador\" />
+    <Folder Include="Datos\" />
+    <Folder Include="Modelo\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
