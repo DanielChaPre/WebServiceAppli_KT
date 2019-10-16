@@ -42,6 +42,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="MySql.Data, Version=8.0.18.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -65,6 +66,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Datos\ConexionClass.cs" />
+    <Compile Include="Datos\LoginDAOClass.cs" />
+    <Compile Include="Modelo\CarrerasESClass.cs" />
+    <Compile Include="Modelo\ConfiguracionTemaClass.cs" />
+    <Compile Include="Modelo\DetallePlantelClass.cs" />
+    <Compile Include="Modelo\HistorialBusquedaClass.cs" />
+    <Compile Include="Modelo\NotificacionClass.cs" />
+    <Compile Include="Modelo\PersonaClass.cs" />
+    <Compile Include="Modelo\PlantelesEMSClass.cs" />
+    <Compile Include="Modelo\PlantelesESClass.cs" />
+    <Compile Include="Modelo\UsuarioClass.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
@@ -74,8 +86,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Controlador\" />
-    <Folder Include="Datos\" />
-    <Folder Include="Modelo\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
