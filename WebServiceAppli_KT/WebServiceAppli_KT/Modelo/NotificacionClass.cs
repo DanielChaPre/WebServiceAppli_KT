@@ -28,9 +28,9 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string audiencia { get; set; }
         [DataMember]
-        public int medioDifusion { get; set; }
+        public MediosEnvioClass medioDifusion { get; set; }
         [DataMember]
-        public int colorSemaforizacion { get; set; }
+        public string colorSemaforizacion { get; set; }
         [DataMember]
         public DateTime fechaNotificacion { get; set; }
         [DataMember]

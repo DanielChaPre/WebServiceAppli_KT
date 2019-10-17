@@ -28,7 +28,7 @@ namespace WebServiceAppli_KT.Datos
                 builder.Server = "localhost";
                 builder.UserID = "root";
                 builder.Password = "";
-                builder.Database = "mydb01";
+                builder.Database = "appli-kt";
             }
             catch (MySqlException ex)
             {

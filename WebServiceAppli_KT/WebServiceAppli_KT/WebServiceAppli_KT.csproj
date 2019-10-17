@@ -66,12 +66,18 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controlador\EscuelaESControllerClass.cs" />
+    <Compile Include="Controlador\LoginControllerClass.cs" />
+    <Compile Include="Controlador\NotificacionControllerClass.cs" />
     <Compile Include="Datos\ConexionClass.cs" />
+    <Compile Include="Datos\EscuelaESDAOClass.cs" />
     <Compile Include="Datos\LoginDAOClass.cs" />
+    <Compile Include="Datos\NotificacionDAOClass.cs" />
     <Compile Include="Modelo\CarrerasESClass.cs" />
     <Compile Include="Modelo\ConfiguracionTemaClass.cs" />
     <Compile Include="Modelo\DetallePlantelClass.cs" />
     <Compile Include="Modelo\HistorialBusquedaClass.cs" />
+    <Compile Include="Modelo\MediosEnvioClass.cs" />
     <Compile Include="Modelo\NotificacionClass.cs" />
     <Compile Include="Modelo\PersonaClass.cs" />
     <Compile Include="Modelo\PlantelesEMSClass.cs" />
@@ -85,7 +91,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Controlador\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">

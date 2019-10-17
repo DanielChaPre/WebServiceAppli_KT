@@ -5,6 +5,7 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT
 {
@@ -12,13 +13,10 @@ namespace WebServiceAppli_KT
     [ServiceContract]
     public interface IService1
     {
-
         [OperationContract]
-        string GetData(int value);
-
+        bool IniciarSesion(string user, string pass);
         [OperationContract]
-        CompositeType GetDataUsingDataContract(CompositeType composite);
-
+        NotificacionClass consultar();
         // TODO: agregue aquí sus operaciones de servicio
     }
 

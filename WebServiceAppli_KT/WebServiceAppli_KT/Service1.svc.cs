@@ -5,6 +5,8 @@ using System.Runtime.Serialization;
 using System.ServiceModel;
 using System.ServiceModel.Web;
 using System.Text;
+using WebServiceAppli_KT.Controlador;
+using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT
 {
@@ -12,22 +14,42 @@ namespace WebServiceAppli_KT
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class Service1 : IService1
     {
-        public string GetData(int value)
+        LoginControllerClass loginController;
+        NotificacionControllerClass notificacionController;
+        NotificacionClass entNotificacion;
+        UsuarioClass entUsuarion = new UsuarioClass();
+
+
+        public NotificacionClass consultar()
         {
-            return string.Format("You entered edfe: {0}", value);
+            try
+            {
+                notificacionController = new NotificacionControllerClass();
+                entNotificacion = new NotificacionClass();
+                entNotificacion = notificacionController.consultar();
+                return entNotificacion;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
-        public CompositeType GetDataUsingDataContract(CompositeType composite)
+        public bool IniciarSesion(string user, string pass)
         {
-            if (composite == null)
+            loginController = new LoginControllerClass();
+            try
             {
-                throw new ArgumentNullException("composite");
+                entUsuarion.nombreUsuario = user;
+                entUsuarion.contrasenia = pass;
+                loginController.iniciarSesion(entUsuarion);
+                return true;
             }
-            if (composite.BoolValue)
+            catch (Exception)
             {
-                composite.StringValue += "Suffix";
+                return false;
+                throw;
             }
-            return composite;
         }
     }
 }
