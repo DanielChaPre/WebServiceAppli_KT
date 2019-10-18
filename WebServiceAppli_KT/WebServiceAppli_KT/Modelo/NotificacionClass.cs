@@ -16,8 +16,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string texto { get; set; }
         [DataMember]
-        public string detalle { get; set; }
-        [DataMember]
         public string responsable { get; set; }
         [DataMember]
         public string categorizacion { get; set;}
@@ -31,10 +29,10 @@ namespace WebServiceAppli_KT.Modelo
         public MediosEnvioClass medioDifusion { get; set; }
         [DataMember]
         public string colorSemaforizacion { get; set; }
+      /*  [DataMember]
+        public string fechaNotificacion { get; set; }
         [DataMember]
-        public DateTime fechaNotificacion { get; set; }
-        [DataMember]
-        public DateTime horaNotificacion { get; set; }
+        public string horaNotificacion { get; set; }*/
 
     }
 }

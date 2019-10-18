@@ -17,29 +17,10 @@ namespace WebServiceAppli_KT
         bool IniciarSesion(string user, string pass);
         [OperationContract]
         NotificacionClass consultar();
+        [OperationContract]
+        List<PlantelesESClass> obtenerPlanteles();
+        [OperationContract]
+        List<CarrerasESClass> obtenerCarreras();
         // TODO: agregue aquí sus operaciones de servicio
-    }
-
-
-    // Utilice un contrato de datos, como se ilustra en el ejemplo siguiente, para agregar tipos compuestos a las operaciones de servicio.
-    [DataContract]
-    public class CompositeType
-    {
-        bool boolValue = true;
-        string stringValue = "Hello ";
-
-        [DataMember]
-        public bool BoolValue
-        {
-            get { return boolValue; }
-            set { boolValue = value; }
-        }
-
-        [DataMember]
-        public string StringValue
-        {
-            get { return stringValue; }
-            set { stringValue = value; }
-        }
     }
 }

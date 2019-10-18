@@ -14,10 +14,18 @@ namespace WebServiceAppli_KT
     // NOTE: para iniciar el Cliente de prueba WCF para probar este servicio, seleccione Service1.svc o Service1.svc.cs en el Explorador de soluciones e inicie la depuración.
     public class Service1 : IService1
     {
+        #region controladores
         LoginControllerClass loginController;
         NotificacionControllerClass notificacionController;
+        EscuelaESControllerClass escuelaESController;
+        CarrerasControllerClass carrerasController;
+        #endregion
+        #region variabnles(Objetos)
         NotificacionClass entNotificacion;
         UsuarioClass entUsuarion = new UsuarioClass();
+        List<PlantelesESClass> lstPlanteles;
+        List<CarrerasESClass> lstCarreras;
+        #endregion
 
 
         public NotificacionClass consultar()
@@ -48,7 +56,36 @@ namespace WebServiceAppli_KT
             catch (Exception)
             {
                 return false;
-                throw;
+            }
+        }
+
+        public List<CarrerasESClass> obtenerCarreras()
+        {
+            try
+            {
+                carrerasController = new CarrerasControllerClass();
+                lstCarreras = new List<CarrerasESClass>();
+                lstCarreras = carrerasController.obtenerCarreras();
+                return lstCarreras;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public List<PlantelesESClass> obtenerPlanteles()
+        {
+            try
+            {
+                escuelaESController = new EscuelaESControllerClass();
+                lstPlanteles = new List<PlantelesESClass>();
+                lstPlanteles = escuelaESController.obtenerPlanteles();
+                return lstPlanteles;
+            }
+            catch (Exception)
+            {
+                return null;
             }
         }
     }

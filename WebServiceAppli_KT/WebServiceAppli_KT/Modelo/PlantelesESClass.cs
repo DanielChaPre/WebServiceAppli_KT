@@ -32,8 +32,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string nivelAgrupado { get; set; }
         [DataMember]
-        public string carreraES { get; set; }
-        [DataMember]
         public DetallePlantelClass detallePlantel { get; set; }
     }
 }

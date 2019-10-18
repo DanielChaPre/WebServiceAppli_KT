@@ -25,7 +25,7 @@ namespace WebServiceAppli_KT.Controlador
                 entNotificacion = notificacionDAO.consultarNotificaciones();
                 return entNotificacion;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

@@ -21,7 +21,7 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select*from notificaciones";
+                cmd.CommandText = "Select * from notificaciones";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -35,11 +35,9 @@ namespace WebServiceAppli_KT.Datos
                     entNotificacion.titulo = reader["titulo"].ToString();
                     entNotificacion.url = reader["url"].ToString();
                     entNotificacion.audiencia = reader["audiencia"].ToString();
-                    entNotificacion.medioDifusion.nombre = reader["nombre"].ToString();
                     entNotificacion.colorSemaforizacion = reader["color_semaforizacion"].ToString();
-                    entNotificacion.fechaNotificacion =DateTime.Parse(reader["fecha_notificacion"].ToString());
-                    entNotificacion.horaNotificacion =DateTime.Parse( reader["hora_notificacion"].ToString());
-                    //entNotificacion.detalle = reader[""].ToString();
+               //     entNotificacion.fechaNotificacion = reader["fecha_notificacion"].ToString();
+                 //   entNotificacion.horaNotificacion = reader["hora_notificacion"].ToString();
                 }
                 return entNotificacion;
             }
@@ -47,6 +45,10 @@ namespace WebServiceAppli_KT.Datos
             {
                 Console.WriteLine("Error en la consulta de notificaciones: "+ex.Message);
                 return null;
+            }
+            finally
+            {
+                con.Close();
             }
         }
 
