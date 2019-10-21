@@ -13,14 +13,23 @@ namespace WebServiceAppli_KT
     [ServiceContract]
     public interface IService1
     {
+        //Cuenta
         [OperationContract]
         bool IniciarSesion(string user, string pass);
         [OperationContract]
+        bool CrearCuenta(UsuarioClass usuario);
+        //Perfil
+
+        //Notificaciones
+        [OperationContract]
         NotificacionClass consultar();
+        //Atlas
         [OperationContract]
         List<PlantelesESClass> obtenerPlanteles();
         [OperationContract]
         List<CarrerasESClass> obtenerCarreras();
+        //Historial
+
         // TODO: agregue aquí sus operaciones de servicio
     }
 }

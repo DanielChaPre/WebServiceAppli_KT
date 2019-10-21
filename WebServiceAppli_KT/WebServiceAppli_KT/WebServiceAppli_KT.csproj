@@ -107,8 +107,10 @@
     <Compile Include="Datos\CarrerasDAOClass.cs" />
     <Compile Include="Datos\ConexionClass.cs" />
     <Compile Include="Datos\EscuelaESDAOClass.cs" />
+    <Compile Include="Datos\HistorialDAO.cs" />
     <Compile Include="Datos\LoginDAOClass.cs" />
     <Compile Include="Datos\NotificacionDAOClass.cs" />
+    <Compile Include="Datos\PerfilDAO.cs" />
     <Compile Include="Modelo\CarrerasESClass.cs" />
     <Compile Include="Modelo\ConfiguracionTemaClass.cs" />
     <Compile Include="Modelo\DetallePlantelClass.cs" />

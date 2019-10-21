@@ -1,10 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Serialization;
-using System.ServiceModel;
-using System.ServiceModel.Web;
-using System.Text;
 using WebServiceAppli_KT.Controlador;
 using WebServiceAppli_KT.Modelo;
 
@@ -20,6 +15,7 @@ namespace WebServiceAppli_KT
         EscuelaESControllerClass escuelaESController;
         CarrerasControllerClass carrerasController;
         #endregion
+
         #region variabnles(Objetos)
         NotificacionClass entNotificacion;
         UsuarioClass entUsuarion = new UsuarioClass();
@@ -43,11 +39,28 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool IniciarSesion(string user, string pass)
+        public bool CrearCuenta(UsuarioClass usuario)
         {
-            loginController = new LoginControllerClass();
             try
             {
+                loginController = new LoginControllerClass();
+                if (loginController.CrearCuenta(usuario))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public bool IniciarSesion(string user, string pass)
+        {  
+            try
+            {
+                loginController = new LoginControllerClass();
                 entUsuarion.nombreUsuario = user;
                 entUsuarion.contrasenia = pass;
                 loginController.iniciarSesion(entUsuarion);

@@ -28,5 +28,20 @@ namespace WebServiceAppli_KT.Controlador
                 return false;
             }
         }
+
+        public bool CrearCuenta(UsuarioClass usuario)
+        {
+            try
+            {
+                if (loginDAO.CrearCuenta(usuario))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
     }
 }

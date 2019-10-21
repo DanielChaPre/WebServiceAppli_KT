@@ -39,5 +39,33 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
+
+        public bool CrearCuenta(UsuarioClass usuario)
+        {
+            try
+            {
+                
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "Insert	into usuario(cve_usuario,nombre_usuario,contraseña,fecha_registro,estatus,rol,cve_persona) " +
+                    "values(5 , @user, @password, '', '', '', 0); ";
+                cmd.Parameters.AddWithValue("@user", usuario.nombreUsuario);
+                cmd.Parameters.AddWithValue("@password", usuario.contrasenia);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en la creación de la base de datos, " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }
