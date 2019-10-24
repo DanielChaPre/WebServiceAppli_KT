@@ -104,6 +104,7 @@
     <Compile Include="Controlador\EscuelaESControllerClass.cs" />
     <Compile Include="Controlador\LoginControllerClass.cs" />
     <Compile Include="Controlador\NotificacionControllerClass.cs" />
+    <Compile Include="Controlador\PerfilController.cs" />
     <Compile Include="Datos\CarrerasDAOClass.cs" />
     <Compile Include="Datos\ConexionClass.cs" />
     <Compile Include="Datos\EscuelaESDAOClass.cs" />

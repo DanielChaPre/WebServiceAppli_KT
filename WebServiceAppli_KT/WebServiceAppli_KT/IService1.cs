@@ -19,7 +19,14 @@ namespace WebServiceAppli_KT
         [OperationContract]
         bool CrearCuenta(UsuarioClass usuario);
         //Perfil
-
+        [OperationContract]
+        bool CrearPerfil(UsuarioClass usuario);
+        [OperationContract]
+        bool ModificarPerfil(UsuarioClass usuario);
+        [OperationContract]
+        bool EliminarPerfil(int cveUsuario, int cvePersona);
+        [OperationContract]
+        UsuarioClass ConsultarPerfil(string user, string pass);
         //Notificaciones
         [OperationContract]
         NotificacionClass consultar();

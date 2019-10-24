@@ -14,11 +14,12 @@ namespace WebServiceAppli_KT
         NotificacionControllerClass notificacionController;
         EscuelaESControllerClass escuelaESController;
         CarrerasControllerClass carrerasController;
+        PerfilController perfilController;
         #endregion
 
-        #region variabnles(Objetos)
+        #region variables(Objetos)
         NotificacionClass entNotificacion;
-        UsuarioClass entUsuarion = new UsuarioClass();
+        UsuarioClass entUsuario = new UsuarioClass();
         List<PlantelesESClass> lstPlanteles;
         List<CarrerasESClass> lstCarreras;
         #endregion
@@ -39,6 +40,22 @@ namespace WebServiceAppli_KT
             }
         }
 
+        public UsuarioClass ConsultarPerfil(string user, string pass)
+        {
+            try
+            {
+                perfilController = new PerfilController();
+                entUsuario = perfilController.ConsultarPerfil(user, pass);
+                return entUsuario;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
+            
+        }
+
         public bool CrearCuenta(UsuarioClass usuario)
         {
             try
@@ -56,19 +73,64 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool IniciarSesion(string user, string pass)
-        {  
+        public bool CrearPerfil(UsuarioClass usuario)
+        {
             try
             {
-                loginController = new LoginControllerClass();
-                entUsuarion.nombreUsuario = user;
-                entUsuarion.contrasenia = pass;
-                loginController.iniciarSesion(entUsuarion);
+                perfilController = new PerfilController();
+                perfilController.CrearPerfil(usuario);
                 return true;
             }
             catch (Exception)
             {
                 return false;
+                throw;
+            }
+        }
+
+        public bool EliminarPerfil(int cveUsuario, int cvePersona)
+        {
+            try
+            {
+                perfilController = new PerfilController();
+                perfilController.EliminarPerfil(cveUsuario, cvePersona);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public bool IniciarSesion(string user, string pass)
+        {  
+            try
+            {
+                loginController = new LoginControllerClass();
+                entUsuario.nombreUsuario = user;
+                entUsuario.contrasenia = pass;
+                loginController.iniciarSesion(entUsuario);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool ModificarPerfil(UsuarioClass usuario)
+        {
+            try
+            {
+                perfilController = new PerfilController();
+                perfilController.ModificarPerfil(usuario);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
             }
         }
 
