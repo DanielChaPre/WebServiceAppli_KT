@@ -15,26 +15,77 @@ namespace WebServiceAppli_KT
     {
         //Cuenta
         [OperationContract]
-        bool IniciarSesion(string user, string pass);
+        [WebGet(UriTemplate = "/validarUsuario/{usuario}",
+                ResponseFormat = WebMessageFormat.Json, 
+                BodyStyle = WebMessageBodyStyle.Wrapped)]
+        bool ValidarUsuario(string usuario);
         [OperationContract]
+        [WebInvoke(UriTemplate = "/validarContrasenia/{contrasenia}",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+        bool ValidarContrasenia(string contrasenia);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/crearCuenta",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json, 
+            Method = "POST", 
+            BodyStyle = WebMessageBodyStyle.Wrapped)]
+       // bool CrearCuenta(string usuario, string contrasenia);
         bool CrearCuenta(UsuarioClass usuario);
         //Perfil
         [OperationContract]
+        [WebInvoke(UriTemplate = "/perfil",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "POST",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool CrearPerfil(UsuarioClass usuario);
         [OperationContract]
+        [WebInvoke(UriTemplate = "/perfil",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "UPDATE",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfil(UsuarioClass usuario);
         [OperationContract]
+        [WebInvoke(UriTemplate = "/perfil",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "DELETE",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfil(int cveUsuario, int cvePersona);
         [OperationContract]
+        [WebInvoke(UriTemplate = "/perfil/{user}/{pass}",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
         UsuarioClass ConsultarPerfil(string user, string pass);
         //Notificaciones
         [OperationContract]
-        NotificacionClass consultar();
+        [WebInvoke(UriTemplate = "/notificacion",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+        NotificacionClass ConsultarNotificaciones();
         //Atlas
         [OperationContract]
-        List<PlantelesESClass> obtenerPlanteles();
+        [WebInvoke(UriTemplate = "/planteles",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<PlantelesESClass> ObtenerPlanteles();
         [OperationContract]
-        List<CarrerasESClass> obtenerCarreras();
+        [WebInvoke(UriTemplate = "/carreras",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<CarrerasESClass> ObtenerCarreras();
         //Historial
 
         // TODO: agregue aquí sus operaciones de servicio

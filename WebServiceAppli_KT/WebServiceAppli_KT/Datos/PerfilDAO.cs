@@ -126,7 +126,7 @@ namespace WebServiceAppli_KT.Datos
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    usuario = new UsuarioClass();
+                        usuario = new UsuarioClass();
                         usuario.cveUsuario = Convert.ToInt32(reader["cve_usuario"].ToString());
                         usuario.nombreUsuario = reader["nombre_usuario"].ToString();
                         usuario.contrasenia = reader["contraseña"].ToString();

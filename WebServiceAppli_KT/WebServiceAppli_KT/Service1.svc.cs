@@ -25,7 +25,7 @@ namespace WebServiceAppli_KT
         #endregion
 
 
-        public NotificacionClass consultar()
+        public NotificacionClass ConsultarNotificaciones()
         {
             try
             {
@@ -56,11 +56,13 @@ namespace WebServiceAppli_KT
             
         }
 
+        //public bool CrearCuenta(string usuario, string contrasenia)
         public bool CrearCuenta(UsuarioClass usuario)
         {
             try
             {
                 loginController = new LoginControllerClass();
+                //if (loginController.CrearCuenta(usuario, contrasenia))
                 if (loginController.CrearCuenta(usuario))
                     return true;
                 else
@@ -103,21 +105,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool IniciarSesion(string user, string pass)
-        {  
-            try
-            {
-                loginController = new LoginControllerClass();
-                entUsuario.nombreUsuario = user;
-                entUsuario.contrasenia = pass;
-                loginController.iniciarSesion(entUsuario);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
+       
 
         public bool ModificarPerfil(UsuarioClass usuario)
         {
@@ -134,7 +122,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<CarrerasESClass> obtenerCarreras()
+        public List<CarrerasESClass> ObtenerCarreras()
         {
             try
             {
@@ -149,7 +137,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<PlantelesESClass> obtenerPlanteles()
+        public List<PlantelesESClass> ObtenerPlanteles()
         {
             try
             {
@@ -161,6 +149,40 @@ namespace WebServiceAppli_KT
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public bool ValidarContrasenia(string contrasenia)
+        {
+            try
+            {
+                loginController = new LoginControllerClass();
+                if (loginController.ValidarContrasenia(contrasenia))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public bool ValidarUsuario(string usuario)
+        {
+            try
+            {
+                loginController = new LoginControllerClass();
+                if (loginController.ValidarUsuario(usuario))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
             }
         }
     }

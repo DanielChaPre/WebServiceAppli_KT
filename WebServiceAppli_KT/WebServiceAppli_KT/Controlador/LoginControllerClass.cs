@@ -16,11 +16,11 @@ namespace WebServiceAppli_KT.Controlador
 
         }
 
-        public bool iniciarSesion(UsuarioClass entUsuario)
+        public bool ValidarUsuario(string usuario)
         {
             try
             {
-                loginDAO.iniciarSesion(entUsuario);
+                loginDAO.ValidarUsuario(usuario);
                 return true;
             }
             catch (Exception)
@@ -29,10 +29,25 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
+        public bool ValidarContrasenia(string contrasenia)
+        {
+            try
+            {
+                loginDAO.ValidarContrasenia(contrasenia);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+       // public bool CrearCuenta(string usuario, string contrasenia)
         public bool CrearCuenta(UsuarioClass usuario)
         {
             try
             {
+               // if (loginDAO.CrearCuenta(usuario, contrasenia))
                 if (loginDAO.CrearCuenta(usuario))
                     return true;
                 else

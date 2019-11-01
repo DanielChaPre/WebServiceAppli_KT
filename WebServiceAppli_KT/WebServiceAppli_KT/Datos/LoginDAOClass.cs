@@ -13,20 +13,19 @@ namespace WebServiceAppli_KT.Datos
         MySqlConnection con;
 
 
-        public bool iniciarSesion(UsuarioClass entUsuario)
+        public bool ValidarUsuario(string usuario)
         {
             try
-            { 
+            {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-               
+
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where nombre_usuario = @user and contraseña = @pass";
-                cmd.Parameters.AddWithValue("@user",entUsuario.nombreUsuario );
-                cmd.Parameters.AddWithValue("@pass",entUsuario.contrasenia);
+                cmd.CommandText = "Select * From usuario where nombre_usuario = @user";
+                cmd.Parameters.AddWithValue("@user", usuario);
                 con.Open();
                 cmd.ExecuteNonQuery();
-                
+
                 return true;
             }
             catch (MySqlException ex)
@@ -40,6 +39,33 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
+        public bool ValidarContrasenia(string contrasenia)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select * From usuario where contraseña = @pass";
+                cmd.Parameters.AddWithValue("@pass", contrasenia);
+                con.Open();
+                cmd.ExecuteNonQuery();
+
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en el logeo, " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+       // public bool CrearCuenta(string usuario, string contrasenia)
         public bool CrearCuenta(UsuarioClass usuario)
         {
             try
@@ -49,8 +75,9 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "Insert	into usuario(cve_usuario,nombre_usuario,contraseña,fecha_registro,estatus,rol,cve_persona) " +
-                    "values(5 , @user, @password, '', '', '', 0); ";
+                cmd.CommandText = "Insert into usuario(cve_usuario,nombre_usuario,contraseña,fecha_registro,estatus,rol,cve_personas) " +
+                    "values(@cve_usuario , @user, @password, '', '', '', 0); ";
+                cmd.Parameters.AddWithValue("@cve_usuario", usuario.cveUsuario);
                 cmd.Parameters.AddWithValue("@user", usuario.nombreUsuario);
                 cmd.Parameters.AddWithValue("@password", usuario.contrasenia);
                 con.Open();
