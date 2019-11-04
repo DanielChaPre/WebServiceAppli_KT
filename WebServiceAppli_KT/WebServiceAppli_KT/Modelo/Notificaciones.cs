@@ -7,7 +7,7 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 { 
     [DataContract]
-    public class NotificacionClass
+    public class Notificaciones
     {
         [DataMember]
         public int cveNotificaciones { get; set; }
@@ -26,7 +26,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string audiencia { get; set; }
         [DataMember]
-        public MediosEnvioClass medioDifusion { get; set; }
+        public MediosEnvio medioDifusion { get; set; }
         [DataMember]
         public string colorSemaforizacion { get; set; }
       /*  [DataMember]

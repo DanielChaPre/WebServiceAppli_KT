@@ -7,7 +7,7 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class MediosEnvioClass
+    public class MediosEnvio
     {
         [DataMember]
         public int cveMedioEnvio { get; set; }

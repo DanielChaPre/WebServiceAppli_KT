@@ -7,7 +7,7 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class PersonaClass
+    public class Persona
     {
         [DataMember]
         public int cvePersona { get; set; }

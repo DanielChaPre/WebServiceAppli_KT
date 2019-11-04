@@ -15,7 +15,7 @@ namespace WebServiceAppli_KT.Controlador
             perfilDAO = new PerfilDAO();
         }
 
-        public bool CrearPerfil(UsuarioClass usuario)
+        public bool CrearPerfil(Usuario usuario)
         {
             try
             {
@@ -29,7 +29,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfil(UsuarioClass usuario)
+        public bool ModificarPerfil(Usuario usuario)
         {
             try
             {
@@ -57,11 +57,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public UsuarioClass ConsultarPerfil(string user, string pass)
+        public Usuario ConsultarPerfil(string user, string pass)
         {
             try
             {
-                UsuarioClass usuario = new UsuarioClass();
+                Usuario usuario = new Usuario();
                 usuario = perfilDAO.ConsultarPerfilUsuario(user, pass);
                 return usuario;
             }

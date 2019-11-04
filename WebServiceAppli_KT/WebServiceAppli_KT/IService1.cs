@@ -33,7 +33,7 @@ namespace WebServiceAppli_KT
             Method = "POST", 
             BodyStyle = WebMessageBodyStyle.Wrapped)]
        // bool CrearCuenta(string usuario, string contrasenia);
-        bool CrearCuenta(UsuarioClass usuario);
+        bool CrearCuenta(Usuario usuario);
         //Perfil
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
@@ -41,14 +41,14 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "POST",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool CrearPerfil(UsuarioClass usuario);
+        bool CrearPerfil(Usuario usuario);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "UPDATE",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool ModificarPerfil(UsuarioClass usuario);
+        bool ModificarPerfil(Usuario usuario);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
@@ -62,7 +62,7 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        UsuarioClass ConsultarPerfil(string user, string pass);
+        Usuario ConsultarPerfil(string user, string pass);
         //Notificaciones
         [OperationContract]
         [WebInvoke(UriTemplate = "/notificacion",
@@ -70,7 +70,7 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        NotificacionClass ConsultarNotificaciones();
+        Notificaciones ConsultarNotificaciones();
         //Atlas
         [OperationContract]
         [WebInvoke(UriTemplate = "/planteles",
@@ -78,14 +78,14 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        List<PlantelesESClass> ObtenerPlanteles();
+        List<PlantelesES> ObtenerPlanteles();
         [OperationContract]
         [WebInvoke(UriTemplate = "/carreras",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        List<CarrerasESClass> ObtenerCarreras();
+        List<CarrerasES> ObtenerCarreras();
         //Historial
 
         // TODO: agregue aquí sus operaciones de servicio

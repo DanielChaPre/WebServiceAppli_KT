@@ -112,16 +112,20 @@
     <Compile Include="Datos\LoginDAOClass.cs" />
     <Compile Include="Datos\NotificacionDAOClass.cs" />
     <Compile Include="Datos\PerfilDAO.cs" />
-    <Compile Include="Modelo\CarrerasESClass.cs" />
-    <Compile Include="Modelo\ConfiguracionTemaClass.cs" />
-    <Compile Include="Modelo\DetallePlantelClass.cs" />
-    <Compile Include="Modelo\HistorialBusquedaClass.cs" />
-    <Compile Include="Modelo\MediosEnvioClass.cs" />
-    <Compile Include="Modelo\NotificacionClass.cs" />
-    <Compile Include="Modelo\PersonaClass.cs" />
-    <Compile Include="Modelo\PlantelesEMSClass.cs" />
-    <Compile Include="Modelo\PlantelesESClass.cs" />
-    <Compile Include="Modelo\UsuarioClass.cs" />
+    <Compile Include="Modelo\Alumno.cs" />
+    <Compile Include="Modelo\CarrerasES.cs" />
+    <Compile Include="Modelo\ConfiguracionTema.cs" />
+    <Compile Include="Modelo\DetallePlantel.cs" />
+    <Compile Include="Modelo\Empleado.cs" />
+    <Compile Include="Modelo\GrupoSeguridad.cs" />
+    <Compile Include="Modelo\Historial.cs" />
+    <Compile Include="Modelo\HistorialBusquedaCarreras.cs" />
+    <Compile Include="Modelo\MediosEnvio.cs" />
+    <Compile Include="Modelo\Notificaciones.cs" />
+    <Compile Include="Modelo\Persona.cs" />
+    <Compile Include="Modelo\PlantelesEMS.cs" />
+    <Compile Include="Modelo\PlantelesES.cs" />
+    <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>
     </Compile>

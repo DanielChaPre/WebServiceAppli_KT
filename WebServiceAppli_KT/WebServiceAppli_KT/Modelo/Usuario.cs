@@ -7,7 +7,7 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class UsuarioClass
+    public class Usuario
     {
         [DataMember]
         public int cveUsuario { get; set; }
@@ -22,6 +22,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string rol { get; set; }
         [DataMember]
-        public PersonaClass persona { get; set; }
+        public Persona persona { get; set; }
     }
 }

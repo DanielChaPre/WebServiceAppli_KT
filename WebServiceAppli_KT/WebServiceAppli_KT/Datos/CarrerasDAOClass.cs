@@ -11,9 +11,9 @@ namespace WebServiceAppli_KT.Datos
     {
         ConexionClass conexion = new ConexionClass();
         MySqlConnection con;
-        List<CarrerasESClass> lstCarreras;
+        List<CarrerasES> lstCarreras;
 
-        public List<CarrerasESClass> obtenerCarreras()
+        public List<CarrerasES> obtenerCarreras()
         {
             try
             {
@@ -27,7 +27,7 @@ namespace WebServiceAppli_KT.Datos
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    lstCarreras = new List<CarrerasESClass>();
+                    lstCarreras = new List<CarrerasES>();
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         lstCarreras[i].idCarreraES = Convert.ToInt32(reader["idCarreraEs"].ToString());

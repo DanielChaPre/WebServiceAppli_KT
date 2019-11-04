@@ -18,19 +18,19 @@ namespace WebServiceAppli_KT
         #endregion
 
         #region variables(Objetos)
-        NotificacionClass entNotificacion;
-        UsuarioClass entUsuario = new UsuarioClass();
-        List<PlantelesESClass> lstPlanteles;
-        List<CarrerasESClass> lstCarreras;
+        Notificaciones entNotificacion;
+        Usuario entUsuario = new Usuario();
+        List<PlantelesES> lstPlanteles;
+        List<CarrerasES> lstCarreras;
         #endregion
 
 
-        public NotificacionClass ConsultarNotificaciones()
+        public Notificaciones ConsultarNotificaciones()
         {
             try
             {
                 notificacionController = new NotificacionControllerClass();
-                entNotificacion = new NotificacionClass();
+                entNotificacion = new Notificaciones();
                 entNotificacion = notificacionController.consultar();
                 return entNotificacion;
             }
@@ -40,7 +40,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public UsuarioClass ConsultarPerfil(string user, string pass)
+        public Usuario ConsultarPerfil(string user, string pass)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace WebServiceAppli_KT
         }
 
         //public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(UsuarioClass usuario)
+        public bool CrearCuenta(Usuario usuario)
         {
             try
             {
@@ -75,7 +75,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool CrearPerfil(UsuarioClass usuario)
+        public bool CrearPerfil(Usuario usuario)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace WebServiceAppli_KT
 
        
 
-        public bool ModificarPerfil(UsuarioClass usuario)
+        public bool ModificarPerfil(Usuario usuario)
         {
             try
             {
@@ -122,12 +122,12 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<CarrerasESClass> ObtenerCarreras()
+        public List<CarrerasES> ObtenerCarreras()
         {
             try
             {
                 carrerasController = new CarrerasControllerClass();
-                lstCarreras = new List<CarrerasESClass>();
+                lstCarreras = new List<CarrerasES>();
                 lstCarreras = carrerasController.obtenerCarreras();
                 return lstCarreras;
             }
@@ -137,12 +137,12 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<PlantelesESClass> ObtenerPlanteles()
+        public List<PlantelesES> ObtenerPlanteles()
         {
             try
             {
                 escuelaESController = new EscuelaESControllerClass();
-                lstPlanteles = new List<PlantelesESClass>();
+                lstPlanteles = new List<PlantelesES>();
                 lstPlanteles = escuelaESController.obtenerPlanteles();
                 return lstPlanteles;
             }

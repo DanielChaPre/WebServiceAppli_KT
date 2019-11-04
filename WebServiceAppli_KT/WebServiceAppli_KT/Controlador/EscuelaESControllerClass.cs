@@ -10,18 +10,18 @@ namespace WebServiceAppli_KT.Controlador
     public class EscuelaESControllerClass
     {
         EscuelaESDAOClass escuelaESDAO;
-        List<PlantelesESClass> lstPlanteles;
+        List<PlantelesES> lstPlanteles;
 
         public EscuelaESControllerClass()
         {
             escuelaESDAO = new EscuelaESDAOClass();
         }
 
-        public List<PlantelesESClass> obtenerPlanteles()
+        public List<PlantelesES> obtenerPlanteles()
         {
             try
             {
-                lstPlanteles = new List<PlantelesESClass>();
+                lstPlanteles = new List<PlantelesES>();
                 lstPlanteles = escuelaESDAO.obtenerPlnateles();
                 return lstPlanteles;
             }

@@ -7,7 +7,7 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class ConfiguracionTemaClass
+    public class ConfiguracionTema
     {
         [DataMember]
         public int cveConfiguracionTema { get; set; }

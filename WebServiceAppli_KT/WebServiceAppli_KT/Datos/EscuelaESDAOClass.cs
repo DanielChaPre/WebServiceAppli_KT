@@ -11,9 +11,9 @@ namespace WebServiceAppli_KT.Datos
     {
         ConexionClass conexion = new ConexionClass();
         MySqlConnection con;
-        List<PlantelesESClass> lstPlanteles;
+        List<PlantelesES> lstPlanteles;
 
-        public List<PlantelesESClass> obtenerPlnateles()
+        public List<PlantelesES> obtenerPlnateles()
         {
             try
             {
@@ -28,7 +28,7 @@ namespace WebServiceAppli_KT.Datos
                 
                 if (reader.Read())
                 {
-                    lstPlanteles = new List<PlantelesESClass>();
+                    lstPlanteles = new List<PlantelesES>();
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         lstPlanteles[i].idPlantelesES = Convert.ToInt16(reader["idPlantelesEs"].ToString());

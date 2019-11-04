@@ -7,7 +7,7 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class PlantelesEMSClass
+    public class PlantelesEMS
     {
         [DataMember]
         public int idPlantelesEMS { get; set; }

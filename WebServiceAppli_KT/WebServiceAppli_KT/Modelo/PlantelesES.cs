@@ -7,7 +7,7 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class PlantelesESClass
+    public class PlantelesES
     {
         [DataMember]
         public int idPlantelesES { get; set; }
@@ -32,6 +32,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string nivelAgrupado { get; set; }
         [DataMember]
-        public DetallePlantelClass detallePlantel { get; set; }
+        public DetallePlantel detallePlantel { get; set; }
     }
 }

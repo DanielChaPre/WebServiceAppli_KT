@@ -7,14 +7,14 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class CarrerasESClass
+    public class CarrerasES
     {
         [DataMember]
         public int idCarreraES { get; set; }
         [DataMember]
         public string nombreCarreraES { get; set; }
         [DataMember]
-        public PlantelesESClass plantelES { get; set; }
+        public PlantelesES plantelES { get; set; }
         [DataMember]
         public int activa { get; set; }
         [DataMember]

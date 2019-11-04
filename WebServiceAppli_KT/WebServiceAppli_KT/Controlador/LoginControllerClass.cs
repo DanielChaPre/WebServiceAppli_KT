@@ -43,7 +43,7 @@ namespace WebServiceAppli_KT.Controlador
         }
 
        // public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(UsuarioClass usuario)
+        public bool CrearCuenta(Usuario usuario)
         {
             try
             {

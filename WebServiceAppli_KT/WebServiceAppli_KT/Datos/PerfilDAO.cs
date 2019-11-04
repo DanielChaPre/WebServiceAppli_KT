@@ -11,10 +11,10 @@ namespace WebServiceAppli_KT.Datos
     {
         ConexionClass conexion = new ConexionClass();
         MySqlConnection con;
-        UsuarioClass usuario;
-        PersonaClass persona;
+        Usuario usuario;
+        Persona persona;
 
-        public bool GuardarPerfilPersona(UsuarioClass usuario)
+        public bool GuardarPerfilPersona(Usuario usuario)
         {
             try
             {
@@ -61,7 +61,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool ModificarPerfil(UsuarioClass usuario)
+        public bool ModificarPerfil(Usuario usuario)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public UsuarioClass ConsultarPerfilUsuario(string user, string password)
+        public Usuario ConsultarPerfilUsuario(string user, string password)
         {
             try
             {
@@ -126,7 +126,7 @@ namespace WebServiceAppli_KT.Datos
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                        usuario = new UsuarioClass();
+                        usuario = new Usuario();
                         usuario.cveUsuario = Convert.ToInt32(reader["cve_usuario"].ToString());
                         usuario.nombreUsuario = reader["nombre_usuario"].ToString();
                         usuario.contrasenia = reader["contraseña"].ToString();
@@ -145,7 +145,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public PersonaClass ConsultarPerfilPersona(int cvePersona)
+        public Persona ConsultarPerfilPersona(int cvePersona)
         {
             try
             {
@@ -158,7 +158,7 @@ namespace WebServiceAppli_KT.Datos
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    persona = new PersonaClass();
+                    persona = new Persona();
                         persona.cvePersona = Convert.ToInt16(reader["cve_persona"].ToString());
                         persona.nombre= reader["nombre"].ToString();
                         persona.apellidoPaterno= reader["apellido_paterno"].ToString();

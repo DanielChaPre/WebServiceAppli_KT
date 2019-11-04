@@ -10,18 +10,18 @@ namespace WebServiceAppli_KT.Controlador
     public class CarrerasControllerClass
     {
         CarrerasDAOClass carrerasDAO;
-        List<CarrerasESClass> lstCarreras;
+        List<CarrerasES> lstCarreras;
 
         public CarrerasControllerClass()
         {
             carrerasDAO = new CarrerasDAOClass();
         }
 
-        public List<CarrerasESClass> obtenerCarreras()
+        public List<CarrerasES> obtenerCarreras()
         {
             try
             {
-                lstCarreras = new List<CarrerasESClass>();
+                lstCarreras = new List<CarrerasES>();
                 lstCarreras = carrerasDAO.obtenerCarreras();
                 return lstCarreras;
             }
