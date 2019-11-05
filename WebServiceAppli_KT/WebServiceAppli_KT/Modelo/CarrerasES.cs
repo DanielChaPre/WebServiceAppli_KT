@@ -12,23 +12,23 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int idCarreraES { get; set; }
         [DataMember]
-        public string nombreCarreraES { get; set; }
+        public string NombreCarreraES { get; set; }
         [DataMember]
-        public PlantelesES plantelES { get; set; }
+        public PlantelesES PlantelES { get; set; }
         [DataMember]
-        public int activa { get; set; }
+        public int Activa { get; set; }
         [DataMember]
-        public string claveCarrera { get; set; }
+        public string ClaveCarrera { get; set; }
         [DataMember]
-        public string campoAmplio2016 { get; set; }
+        public string CampoAmplio2016 { get; set; }
         [DataMember]
-        public string campoAmplioAnterior { get; set; }
+        public string CampoAmplioAnterior { get; set; }
         [DataMember]
-        public string nivel { get; set; }
+        public string Nivel { get; set; }
         [DataMember]
-        public string campoEspecifico2016 { get; set; }
+        public string CampoEspecifico2016 { get; set; }
         [DataMember]
-        public string campoEspecificoAnterior { get; set; }
+        public string CampoEspecificoAnterior { get; set; }
 
     }
 }

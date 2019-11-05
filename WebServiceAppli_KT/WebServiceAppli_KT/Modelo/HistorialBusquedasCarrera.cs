@@ -7,10 +7,10 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class HistorialBusquedaClass
+    public class HistorialBusquedasCarrera
     {
         [DataMember]
-        public int cveHistorialBusqueda { get; set; }
+        public int cve_historial_busqueda_carrera { get; set; }
         [DataMember]
         public string usuario { get; set; }
         [DataMember]

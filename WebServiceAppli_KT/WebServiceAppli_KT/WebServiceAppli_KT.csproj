@@ -119,7 +119,7 @@
     <Compile Include="Modelo\Empleado.cs" />
     <Compile Include="Modelo\GrupoSeguridad.cs" />
     <Compile Include="Modelo\Historial.cs" />
-    <Compile Include="Modelo\HistorialBusquedaCarreras.cs" />
+    <Compile Include="Modelo\HistorialBusquedasCarrera.cs" />
     <Compile Include="Modelo\MediosEnvio.cs" />
     <Compile Include="Modelo\Notificaciones.cs" />
     <Compile Include="Modelo\Persona.cs" />

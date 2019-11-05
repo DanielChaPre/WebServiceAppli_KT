@@ -10,13 +10,13 @@ namespace WebServiceAppli_KT.Modelo
     public class Persona
     {
         [DataMember]
-        public int cvePersona { get; set; }
+        public int cve_persona { get; set; }
         [DataMember]
         public string nombre { get; set; }
         [DataMember]
-        public string apellidoPaterno { get; set; }
+        public string apellido_paterno { get; set; }
         [DataMember]
-        public string apellidoMaterno { get; set; }
+        public string apellido_materno { get; set; }
         [DataMember]
         public string rfc { get; set; }
         [DataMember]
@@ -24,22 +24,22 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string sexo { get; set; }
         [DataMember]
-        public DateTime fechaNacimiento { get; set; }
+        public DateTime fecha_nacimiento { get; set; }
         [DataMember]
-        public string numeroTelefono { get; set; }
+        public string numero_telefono { get; set; }
         [DataMember]
-        public string correoElectronico { get; set; }
+        public string correo_electronico { get; set; }
         [DataMember]
-        public int estadoCivil { get; set; }
+        public int estado_civil { get; set; }
         [DataMember]
         public string nacionalidad { get; set; }
         [DataMember]
         public string municipio { get; set; }
         [DataMember]
-        public DateTime fechaRegistro { get; set; }
+        public DateTime fecha_registro { get; set; }
         [DataMember]
         public string colonia { get; set; }
         [DataMember]
-        public string perfil { get; set; }
+        public int cve_grupo_seguridad_usuario { get; set; }
     }
 }

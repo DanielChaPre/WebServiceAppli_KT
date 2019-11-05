@@ -10,13 +10,13 @@ namespace WebServiceAppli_KT.Modelo
     public class DetallePlantel
     {
         [DataMember]
-        public int cveDetallePlantel { get; set; }
+        public int cve_detalle_plantel { get; set; }
         [DataMember]
-        public string urlVinculacion { get; set; }
+        public string url_vinculacion { get; set; }
         [DataMember]
-        public string imagenPlantel { get; set; }
+        public string imiagen_plantel { get; set; }
         [DataMember]
-        public string logoPlantel { get; set; }
+        public string logo_plantel { get; set; }
         [DataMember]
         public string costos { get; set; }
         [DataMember]
@@ -32,6 +32,8 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string longitud { get; set; }
         [DataMember]
-        public string nivelEstudio { get; set; }
+        public string nivel_estudio { get; set; }
+        [DataMember]
+        public int cve_imagen_plantel{ get; set; }
     }
 }

@@ -12,26 +12,28 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int idPlantelesES { get; set; }
         [DataMember]
-        public string clavePlantel { get; set; }
+        public string ClavePlantel { get; set; }
         [DataMember]
-        public string nombrePlantelES { get; set; }
+        public string NombrePlantelES { get; set; }
         [DataMember]
-        public string subsistema { get; set; }
+        public string Subsistema { get; set; }
         [DataMember]
-        public string sostenimiento { get; set; }
+        public string Sostenimiento { get; set; }
         [DataMember]
-        public string municipio { get; set; }
+        public string Municipio { get; set; }
         [DataMember]
-        public string claveInstitucion { get; set; }
+        public int Activo { get; set; }
         [DataMember]
-        public string nombreInstitucionEs { get; set; }
+        public string ClaveInstitucion { get; set; }
+        [DataMember]
+        public string NombreInstitucionES { get; set; }
         [DataMember]
         public string OPD { get; set; }
         [DataMember]
-        public int activo { get; set; }
+        public string NivelAgrupado { get; set; }
         [DataMember]
-        public string nivelAgrupado { get; set; }
+        public string CarreraES { get; set; }
         [DataMember]
-        public DetallePlantel detallePlantel { get; set; }
+        public DetallePlantel detalle_lantel { get; set; }
     }
 }
