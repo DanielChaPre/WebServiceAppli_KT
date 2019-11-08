@@ -7,12 +7,12 @@ using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Controlador
 {
-    public class LoginControllerClass
+    public class ControladorLogin
     {
-        LoginDAOClass loginDAO;
-        public LoginControllerClass()
+        LoginDAO loginDAO;
+        public ControladorLogin()
         {
-            loginDAO = new LoginDAOClass(); 
+            loginDAO = new LoginDAO(); 
 
         }
 

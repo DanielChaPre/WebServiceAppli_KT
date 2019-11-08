@@ -100,17 +100,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controlador\CarrerasControllerClass.cs" />
-    <Compile Include="Controlador\EscuelaESControllerClass.cs" />
-    <Compile Include="Controlador\LoginControllerClass.cs" />
-    <Compile Include="Controlador\NotificacionControllerClass.cs" />
-    <Compile Include="Controlador\PerfilController.cs" />
-    <Compile Include="Datos\CarrerasDAOClass.cs" />
-    <Compile Include="Datos\ConexionClass.cs" />
-    <Compile Include="Datos\EscuelaESDAOClass.cs" />
+    <Compile Include="Controlador\ControladorAlumno.cs" />
+    <Compile Include="Controlador\ControladorCarreasES.cs" />
+    <Compile Include="Controlador\ControladorEscuelasES.cs" />
+    <Compile Include="Controlador\ControladorGrupoSeguridad.cs" />
+    <Compile Include="Controlador\ControladorLogin.cs" />
+    <Compile Include="Controlador\ControladorNotificacion.cs" />
+    <Compile Include="Controlador\ControladorPerfil.cs" />
+    <Compile Include="Datos\AlumnoDAO.cs" />
+    <Compile Include="Datos\CarrerasDAO.cs" />
+    <Compile Include="Datos\ConexionDAO.cs" />
+    <Compile Include="Datos\EscuelaESDAO.cs" />
+    <Compile Include="Datos\GrupoSeguridadDAO.cs" />
     <Compile Include="Datos\HistorialDAO.cs" />
-    <Compile Include="Datos\LoginDAOClass.cs" />
-    <Compile Include="Datos\NotificacionDAOClass.cs" />
+    <Compile Include="Datos\LoginDAO.cs" />
+    <Compile Include="Datos\NotificacionDAO.cs" />
     <Compile Include="Datos\PerfilDAO.cs" />
     <Compile Include="Modelo\Alumno.cs" />
     <Compile Include="Modelo\CarrerasES.cs" />

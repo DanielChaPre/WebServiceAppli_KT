@@ -7,13 +7,13 @@ using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Datos
 {
-    public class NotificacionDAOClass
+    public class NotificacionDAO
     {
-        ConexionClass conexion = new ConexionClass();
+        ConexionDAO conexion = new ConexionDAO();
         MySqlConnection con;
-        NotificacionClass entNotificacion;
+        Notificaciones entNotificacion;
 
-        public NotificacionClass consultarNotificaciones()
+        public Notificaciones ConsultarNotificaciones()
         {
             try
             {
@@ -21,21 +21,20 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * from notificaciones";
+                cmd.CommandText = "Select * from bandeja_notificacion_usuario";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    entNotificacion = new NotificacionClass();
-                    entNotificacion.cveNotificaciones = int.Parse(reader["cve_notificaciones"].ToString());
-                    entNotificacion.tipoNotificacion = reader["tipo_notificacion"].ToString();
+                    entNotificacion = new Notificaciones();
+                    entNotificacion.cve_notificaciones = int.Parse(reader["cve_notificaciones"].ToString());
+                    entNotificacion.tipo_notificaciones = reader["tipo_notificacion"].ToString();
                     entNotificacion.texto = reader["texto"].ToString();
                     entNotificacion.responsable = reader["responsable"].ToString();
-                    entNotificacion.categorizacion = reader["categorizacion"].ToString();
+                    entNotificacion.cve_categoria = reader["categorizacion"].ToString();
                     entNotificacion.titulo = reader["titulo"].ToString();
                     entNotificacion.url = reader["url"].ToString();
                     entNotificacion.audiencia = reader["audiencia"].ToString();
-                    entNotificacion.colorSemaforizacion = reader["color_semaforizacion"].ToString();
                //     entNotificacion.fechaNotificacion = reader["fecha_notificacion"].ToString();
                  //   entNotificacion.horaNotificacion = reader["hora_notificacion"].ToString();
                 }
@@ -52,7 +51,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public void eliminarNotificacion()
+        public void EliminarNotificacion()
         {
             try
             {

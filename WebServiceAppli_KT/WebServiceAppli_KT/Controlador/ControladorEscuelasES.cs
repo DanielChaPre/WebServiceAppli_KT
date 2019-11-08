@@ -7,22 +7,22 @@ using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Controlador
 {
-    public class EscuelaESControllerClass
+    public class ControladorEscuelasES
     {
-        EscuelaESDAOClass escuelaESDAO;
+        EscuelaESDAO escuelaESDAO;
         List<PlantelesES> lstPlanteles;
 
-        public EscuelaESControllerClass()
+        public ControladorEscuelasES()
         {
-            escuelaESDAO = new EscuelaESDAOClass();
+            escuelaESDAO = new EscuelaESDAO();
         }
 
-        public List<PlantelesES> obtenerPlanteles()
+        public List<PlantelesES> ObtenerPlanteles()
         {
             try
             {
                 lstPlanteles = new List<PlantelesES>();
-                lstPlanteles = escuelaESDAO.obtenerPlnateles();
+                lstPlanteles = escuelaESDAO.ObtenerPlnateles();
                 return lstPlanteles;
             }
             catch (Exception)

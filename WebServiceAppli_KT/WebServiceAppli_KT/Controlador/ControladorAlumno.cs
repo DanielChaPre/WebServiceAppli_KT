@@ -7,68 +7,69 @@ using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Controlador
 {
-    public class PerfilController
+    public class ControladorAlumno
     {
-        PerfilDAO perfilDAO;
-        public PerfilController()
+        AlumnoDAO alumnoDAO;
+        Alumno alumno;
+
+        public ControladorAlumno()
         {
-            perfilDAO = new PerfilDAO();
+            alumnoDAO = new AlumnoDAO();
         }
 
-        public bool CrearPerfil(Usuario usuario)
+        public bool GuardarAlumno(Alumno alumno)
         {
             try
             {
-                perfilDAO.GuardarPerfilPersona(usuario);
+                if (!alumnoDAO.GuardarAlummo(alumno))
+                {
+                    return false;
+                }
                 return true;
             }
             catch (Exception)
             {
                 return false;
-                throw;
             }
         }
 
-        public bool ModificarPerfil(Usuario usuario)
+        public bool EliminarAlumno()
         {
             try
             {
-                perfilDAO.ModificarPerfil(usuario);
+                if (!alumnoDAO.GuardarAlummo(alumno))
+                { 
+                    return false;
+                }
                 return true;
             }
             catch (Exception)
             {
                 return false;
-                throw;
             }
         }
 
-        public  bool EliminarPerfil(int cveUsuario, int cvePersona)
+        public bool ModificarAlumno()
         {
             try
             {
-                perfilDAO.EliminarPerfil(cveUsuario, cvePersona);
                 return true;
             }
             catch (Exception)
             {
                 return false;
-                throw;
             }
         }
 
-        public Usuario ConsultarPerfil(string user, string pass)
+        public Alumno ConsultarAlumno()
         {
             try
             {
-                Usuario usuario = new Usuario();
-                usuario = perfilDAO.ConsultarPerfilUsuario(user, pass);
-                return usuario;
+                return alumno;
             }
             catch (Exception)
             {
                 return null;
-                throw;
             }
         }
     }

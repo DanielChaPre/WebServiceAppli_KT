@@ -7,9 +7,9 @@ using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Datos
 {
-    public class LoginDAOClass
+    public class LoginDAO
     {
-        ConexionClass conexion = new ConexionClass();
+        ConexionDAO conexion = new ConexionDAO();
         MySqlConnection con;
 
 
@@ -77,9 +77,9 @@ namespace WebServiceAppli_KT.Datos
 
                 cmd.CommandText = "Insert into usuario(cve_usuario,nombre_usuario,contraseña,fecha_registro,estatus,rol,cve_personas) " +
                     "values(@cve_usuario , @user, @password, '', '', '', 0); ";
-                cmd.Parameters.AddWithValue("@cve_usuario", usuario.cveUsuario);
-                cmd.Parameters.AddWithValue("@user", usuario.nombreUsuario);
-                cmd.Parameters.AddWithValue("@password", usuario.contrasenia);
+                cmd.Parameters.AddWithValue("@cve_usuario", usuario.cve_usuario);
+                cmd.Parameters.AddWithValue("@user", usuario.nombre_usuario);
+                cmd.Parameters.AddWithValue("@password", usuario.contraseña);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;

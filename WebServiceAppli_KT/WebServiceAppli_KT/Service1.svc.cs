@@ -10,11 +10,11 @@ namespace WebServiceAppli_KT
     public class Service1 : IService1
     {
         #region controladores
-        LoginControllerClass loginController;
-        NotificacionControllerClass notificacionController;
-        EscuelaESControllerClass escuelaESController;
-        CarrerasControllerClass carrerasController;
-        PerfilController perfilController;
+        ControladorLogin loginController;
+        ControladorNotificacion notificacionController;
+        ControladorEscuelasES escuelaESController;
+        ControladorCarreasES carrerasController;
+        ControladorPerfil perfilController;
         #endregion
 
         #region variables(Objetos)
@@ -29,9 +29,9 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                notificacionController = new NotificacionControllerClass();
+                notificacionController = new ControladorNotificacion();
                 entNotificacion = new Notificaciones();
-                entNotificacion = notificacionController.consultar();
+                entNotificacion = notificacionController.Consultar();
                 return entNotificacion;
             }
             catch (Exception)
@@ -44,7 +44,7 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                perfilController = new PerfilController();
+                perfilController = new ControladorPerfil();
                 entUsuario = perfilController.ConsultarPerfil(user, pass);
                 return entUsuario;
             }
@@ -61,7 +61,7 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                loginController = new LoginControllerClass();
+                loginController = new ControladorLogin();
                 //if (loginController.CrearCuenta(usuario, contrasenia))
                 if (loginController.CrearCuenta(usuario))
                     return true;
@@ -79,7 +79,7 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                perfilController = new PerfilController();
+                perfilController = new ControladorPerfil();
                 perfilController.CrearPerfil(usuario);
                 return true;
             }
@@ -94,7 +94,7 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                perfilController = new PerfilController();
+                perfilController = new ControladorPerfil();
                 perfilController.EliminarPerfil(cveUsuario, cvePersona);
                 return true;
             }
@@ -111,7 +111,7 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                perfilController = new PerfilController();
+                perfilController = new ControladorPerfil();
                 perfilController.ModificarPerfil(usuario);
                 return true;
             }
@@ -126,9 +126,9 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                carrerasController = new CarrerasControllerClass();
+                carrerasController = new ControladorCarreasES();
                 lstCarreras = new List<CarrerasES>();
-                lstCarreras = carrerasController.obtenerCarreras();
+                lstCarreras = carrerasController.ObtenerCarreras();
                 return lstCarreras;
             }
             catch (Exception)
@@ -141,9 +141,9 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                escuelaESController = new EscuelaESControllerClass();
+                escuelaESController = new ControladorEscuelasES();
                 lstPlanteles = new List<PlantelesES>();
-                lstPlanteles = escuelaESController.obtenerPlanteles();
+                lstPlanteles = escuelaESController.ObtenerPlanteles();
                 return lstPlanteles;
             }
             catch (Exception)
@@ -156,7 +156,7 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                loginController = new LoginControllerClass();
+                loginController = new ControladorLogin();
                 if (loginController.ValidarContrasenia(contrasenia))
                     return true;
                 else
@@ -173,7 +173,7 @@ namespace WebServiceAppli_KT
         {
             try
             {
-                loginController = new LoginControllerClass();
+                loginController = new ControladorLogin();
                 if (loginController.ValidarUsuario(usuario))
                     return true;
                 else

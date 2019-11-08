@@ -7,21 +7,19 @@ using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Datos
 {
-    public class CarrerasDAOClass
+    public class CarrerasDAO
     {
-        ConexionClass conexion = new ConexionClass();
+        ConexionDAO conexion = new ConexionDAO();
         MySqlConnection con;
         List<CarrerasES> lstCarreras;
 
-        public List<CarrerasES> obtenerCarreras()
+        public List<CarrerasES> ObtenerCarreras()
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-
                 MySqlCommand cmd = con.CreateCommand();
-                //Queda pendiente la consulata para la realizacuion de la vista en mysql
                 cmd.CommandText = "select * from vistaCarreras";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -31,15 +29,15 @@ namespace WebServiceAppli_KT.Datos
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
                         lstCarreras[i].idCarreraES = Convert.ToInt32(reader["idCarreraEs"].ToString());
-                        lstCarreras[i].nombreCarreraES = reader["NombreCarreraES"].ToString();
-                        lstCarreras[i].activa= Convert.ToInt16(reader["Activa"].ToString());
-                        lstCarreras[i].claveCarrera= reader["ClaveCarrera"].ToString();
-                        lstCarreras[i].campoAmplio2016= reader["CampoAmplio2016"].ToString();
-                        lstCarreras[i].campoAmplioAnterior= reader["CampoAmplioAnterior"].ToString();
-                        lstCarreras[i].nivel= reader["Nivel"].ToString();
-                        lstCarreras[i].campoEspecifico2016= reader["CampoEspecífico2016"].ToString();
-                        lstCarreras[i].campoEspecificoAnterior= reader["CampoEspecificoAnterior"].ToString();
-                        lstCarreras[i].plantelES.idPlantelesES= Convert.ToInt16(reader["idPlantelesES"].ToString());
+                        lstCarreras[i].NombreCarreraES = reader["NombreCarreraES"].ToString();
+                        lstCarreras[i].Activa = Convert.ToInt16(reader["Activa"].ToString());
+                        lstCarreras[i].ClaveCarrera = reader["ClaveCarrera"].ToString();
+                        lstCarreras[i].CampoAmplio2016 = reader["CampoAmplio2016"].ToString();
+                        lstCarreras[i].CampoAmplioAnterior = reader["CampoAmplioAnterior"].ToString();
+                        lstCarreras[i].Nivel = reader["Nivel"].ToString();
+                        lstCarreras[i].CampoEspecifico2016 = reader["CampoEspecífico2016"].ToString();
+                        lstCarreras[i].CampoEspecificoAnterior = reader["CampoEspecificoAnterior"].ToString();
+                        lstCarreras[i].PlantelES.idPlantelesES = Convert.ToInt16(reader["idPlantelesES"].ToString());
                     }
                 }
                 return lstCarreras;

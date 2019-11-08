@@ -7,22 +7,22 @@ using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Controlador
 {
-    public class CarrerasControllerClass
+    public class ControladorCarreasES
     {
-        CarrerasDAOClass carrerasDAO;
+        CarrerasDAO carrerasDAO;
         List<CarrerasES> lstCarreras;
 
-        public CarrerasControllerClass()
+        public ControladorCarreasES()
         {
-            carrerasDAO = new CarrerasDAOClass();
+            carrerasDAO = new CarrerasDAO();
         }
 
-        public List<CarrerasES> obtenerCarreras()
+        public List<CarrerasES> ObtenerCarreras()
         {
             try
             {
                 lstCarreras = new List<CarrerasES>();
-                lstCarreras = carrerasDAO.obtenerCarreras();
+                lstCarreras = carrerasDAO.ObtenerCarreras();
                 return lstCarreras;
             }
             catch (Exception)

@@ -34,6 +34,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string CarreraES { get; set; }
         [DataMember]
-        public DetallePlantel detalle_lantel { get; set; }
+        public DetallePlantel detalle_plantel { get; set; }
     }
 }
