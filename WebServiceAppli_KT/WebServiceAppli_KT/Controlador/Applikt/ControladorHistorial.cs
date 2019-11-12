@@ -7,5 +7,17 @@ namespace WebServiceAppli_KT.Controlador.Applikt
 {
     public class ControladorHistorial
     {
+        public void ConsultarHistorial()
+        {
+            try
+            {
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
     }
 }

@@ -7,6 +7,9 @@ namespace WebServiceAppli_KT.Controlador.Applikt
 {
     public class ControladorHistorialBusquedaCarrera
     {
+        public void AgregarBusqueda()
+        {
 
+        }
     }
 }

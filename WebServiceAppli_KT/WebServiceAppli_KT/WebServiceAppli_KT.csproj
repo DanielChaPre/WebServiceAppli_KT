@@ -113,13 +113,17 @@
     <Compile Include="Controlador\Suredsu\ControladorPlantelEMS.cs" />
     <Compile Include="Datos\AlumnoDAO.cs" />
     <Compile Include="Datos\CarrerasDAO.cs" />
+    <Compile Include="Datos\ColoniasDAO.cs" />
     <Compile Include="Datos\ConexionSuredsuDAO.cs" />
     <Compile Include="Datos\ConexionAppliktDAO.cs" />
     <Compile Include="Datos\EscuelaESDAO.cs" />
+    <Compile Include="Datos\EstadosDAO.cs" />
     <Compile Include="Datos\GrupoSeguridadDAO.cs" />
     <Compile Include="Datos\HistorialDAO.cs" />
     <Compile Include="Datos\LoginDAO.cs" />
+    <Compile Include="Datos\MunicipiosDAO.cs" />
     <Compile Include="Datos\NotificacionDAO.cs" />
+    <Compile Include="Datos\PaisesDAO.cs" />
     <Compile Include="Datos\PerfilDAO.cs" />
     <Compile Include="Modelo\Alumno.cs" />
     <Compile Include="Modelo\CarrerasES.cs" />
