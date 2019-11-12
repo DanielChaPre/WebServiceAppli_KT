@@ -28,18 +28,14 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string numero_telefono { get; set; }
         [DataMember]
-        public string correo_electronico { get; set; }
-        [DataMember]
         public int estado_civil { get; set; }
         [DataMember]
         public string nacionalidad { get; set; }
         [DataMember]
+        public int idAlumno { get; set; }
+        [DataMember]
         public string municipio { get; set; }
         [DataMember]
-        public DateTime fecha_registro { get; set; }
-        [DataMember]
-        public string colonia { get; set; }
-        [DataMember]
-        public int cve_grupo_seguridad_usuario { get; set; }
+        public int idColonia { get; set; }
     }
 }

@@ -55,7 +55,7 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "DELETE",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool EliminarPerfil(int cveUsuario, int cvePersona);
+        bool EliminarPerfil(Usuario usuario);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil/{user}/{pass}",
                     RequestFormat = WebMessageFormat.Json,
@@ -86,6 +86,13 @@ namespace WebServiceAppli_KT
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<CarrerasES> ObtenerCarreras();
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/gruposeguridad",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET",
+                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<string> ObtenerGrupos();
         //Historial
 
         // TODO: agregue aquí sus operaciones de servicio

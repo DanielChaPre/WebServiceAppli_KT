@@ -9,7 +9,7 @@ namespace WebServiceAppli_KT.Datos
 {
     public class CarrerasDAO
     {
-        ConexionDAO conexion = new ConexionDAO();
+        ConexionAppliktDAO conexion = new ConexionAppliktDAO();
         MySqlConnection con;
         List<CarrerasES> lstCarreras;
 

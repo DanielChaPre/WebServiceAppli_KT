@@ -9,7 +9,7 @@ namespace WebServiceAppli_KT.Datos
 {
     public class PerfilDAO
     {
-        ConexionDAO conexion = new ConexionDAO();
+        ConexionAppliktDAO conexion = new ConexionAppliktDAO();
         MySqlConnection con;
         Usuario usuario;
         Persona persona;
@@ -125,14 +125,14 @@ namespace WebServiceAppli_KT.Datos
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                        usuario = new Usuario();
-                        usuario.cve_usuario = Convert.ToInt32(reader["cve_usuario"].ToString());
-                        usuario.nombre_usuario = reader["nombre_usuario"].ToString();
-                        usuario.contraseña = reader["contraseña"].ToString();
-                        usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
-                        usuario.estatus = reader["estatus"].ToString();
-                        usuario.rol = reader["rol"].ToString();
-                        usuario.persona = ConsultarPerfilPersona(Convert.ToInt32(reader["cve_personas"].ToString()));
+                    usuario = new Usuario();
+                    usuario.cve_usuario = Convert.ToInt32(reader["cve_usuario"].ToString());
+                    usuario.nombre_usuario = reader["nombre_usuario"].ToString();
+                    usuario.contraseña = reader["contraseña"].ToString();
+                    usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    usuario.estatus = reader["estatus"].ToString();
+                    usuario.rol = reader["rol"].ToString();
+                    usuario.persona = ConsultarPerfilPersona(Convert.ToInt32(reader["cve_personas"].ToString()));
                 }
 
                 return usuario;
@@ -158,20 +158,20 @@ namespace WebServiceAppli_KT.Datos
                 if (reader.Read())
                 {
                     persona = new Persona();
-                        persona.cve_persona = Convert.ToInt16(reader["cve_persona"].ToString());
-                        persona.nombre= reader["nombre"].ToString();
-                        persona.apellido_paterno= reader["apellido_paterno"].ToString();
-                        persona.apellido_materno= reader["apellido_materno"].ToString();
-                        persona.rfc= reader["rfc"].ToString();
-                        persona.curp= reader["curp"].ToString();
-                        persona.sexo= reader["sexo"].ToString();
-                        persona.fecha_nacimiento= Convert.ToDateTime( reader["fecha_nacimiento"].ToString());
-                        persona.numero_telefono= reader["numero_telefono"].ToString();
-                        persona.correo_electronico= reader["correo_electronico"].ToString();
-                        persona.estado_civil=Convert.ToInt16(reader["estado_civil"].ToString());
-                        persona.nacionalidad= reader["nacionalidad"].ToString();
-                        persona.municipio= reader["municipio"].ToString();
-                        persona.fecha_registro= Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    persona.cve_persona = Convert.ToInt16(reader["cve_persona"].ToString());
+                    persona.nombre = reader["nombre"].ToString();
+                    persona.apellido_paterno = reader["apellido_paterno"].ToString();
+                    persona.apellido_materno = reader["apellido_materno"].ToString();
+                    persona.rfc = reader["rfc"].ToString();
+                    persona.curp = reader["curp"].ToString();
+                    persona.sexo = reader["sexo"].ToString();
+                    persona.fecha_nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    persona.numero_telefono = reader["numero_telefono"].ToString();
+                    persona.correo_electronico = reader["correo_electronico"].ToString();
+                    persona.estado_civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    persona.nacionalidad = reader["nacionalidad"].ToString();
+                    persona.municipio = reader["municipio"].ToString();
+                    persona.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                     persona.colonia = reader["idColonia"].ToString();
                 }
                 return persona;
@@ -183,17 +183,17 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool EliminarPerfil(int cveUsuario, int cvePalabra)
+        public bool EliminarPerfil(Usuario usuario)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfil()";
+                cmd.CommandText = "";
                 //Datos de la persona
-                cmd.Parameters.AddWithValue("", cveUsuario);
-                cmd.Parameters.AddWithValue("", cvePalabra);
+                //cmd.Parameters.AddWithValue("", cveUsuario);
+                //cmd.Parameters.AddWithValue("", cvePalabra);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -208,5 +208,7 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
+
+
     }
 }

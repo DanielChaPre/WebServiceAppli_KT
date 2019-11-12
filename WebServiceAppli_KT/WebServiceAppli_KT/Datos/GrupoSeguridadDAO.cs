@@ -9,26 +9,27 @@ namespace WebServiceAppli_KT.Datos
 {
     public class GrupoSeguridadDAO
     {
-        ConexionDAO conexion = new ConexionDAO();
+        ConexionAppliktDAO conexion = new ConexionAppliktDAO();
         MySqlConnection con;
-        List<GrupoSeguridad> lstgruposeguridad;
+        List<string> lstgruposeguridad;
 
-        public List<GrupoSeguridad> ObtenerGrupos()
+
+        public List<string> ObtenerGrupos()
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From grupo_seguridad";
+                cmd.CommandText = "Select nombre From grupo_seguridad";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    lstgruposeguridad = new List<GrupoSeguridad>();
+                    lstgruposeguridad = new List<string>();
                     for (int i = 0; i < reader.FieldCount; i++)
                     {
-                        lstgruposeguridad[i].descripcion = reader[""].ToString();
+                        lstgruposeguridad[i] = reader["nombre"].ToString();
                     }
                 }
 

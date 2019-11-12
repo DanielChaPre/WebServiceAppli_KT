@@ -15,6 +15,7 @@ namespace WebServiceAppli_KT
         ControladorEscuelasES escuelaESController;
         ControladorCarreasES carrerasController;
         ControladorPerfil perfilController;
+        ControladorGrupoSeguridad grupoSeguridadController;
         #endregion
 
         #region variables(Objetos)
@@ -90,12 +91,12 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool EliminarPerfil(int cveUsuario, int cvePersona)
+        public bool EliminarPerfil(Usuario usuario)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.EliminarPerfil(cveUsuario, cvePersona);
+                perfilController.EliminarPerfil(usuario);
                 return true;
             }
             catch (Exception)
@@ -130,6 +131,21 @@ namespace WebServiceAppli_KT
                 lstCarreras = new List<CarrerasES>();
                 lstCarreras = carrerasController.ObtenerCarreras();
                 return lstCarreras;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public List<string> ObtenerGrupos()
+        {
+            try
+            {
+                grupoSeguridadController = new ControladorGrupoSeguridad();
+                List<string> lstGrupos = new List<string>();
+                lstGrupos = grupoSeguridadController.ConsultarGrupos();
+                return lstGrupos;
             }
             catch (Exception)
             {

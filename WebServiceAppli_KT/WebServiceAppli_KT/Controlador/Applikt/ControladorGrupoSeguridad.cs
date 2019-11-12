@@ -10,13 +10,13 @@ namespace WebServiceAppli_KT.Controlador
     public class ControladorGrupoSeguridad
     {
         GrupoSeguridadDAO grupo_seguridadDAO;
-        List<GrupoSeguridad> lstgrupoSeguridad;
+        List<string> lstgrupoSeguridad;
 
-        public List<GrupoSeguridad> ConsultarAlumno()
+        public List<string> ConsultarGrupos()
         {
             try
             {
-                lstgrupoSeguridad = new List<GrupoSeguridad>();
+                lstgrupoSeguridad = new List<string>();
                 grupo_seguridadDAO = new GrupoSeguridadDAO();
                 lstgrupoSeguridad = grupo_seguridadDAO.ObtenerGrupos();
                 return lstgrupoSeguridad;

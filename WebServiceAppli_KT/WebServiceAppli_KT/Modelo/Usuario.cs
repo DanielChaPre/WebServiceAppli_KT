@@ -12,15 +12,13 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int cve_usuario { get; set; }
         [DataMember]
-        public string nombre_usuario { get; set; }
-        [DataMember]
-        public string contraseña { get; set; }
+        public string contrasena { get; set; }
         [DataMember]
         public DateTime fecha_registro { get; set; }
         [DataMember]
         public string  estatus { get; set; }
         [DataMember]
-        public string rol { get; set; }
+        public string alias_redes { get; set; }
         [DataMember]
         public Persona persona { get; set; }
     }

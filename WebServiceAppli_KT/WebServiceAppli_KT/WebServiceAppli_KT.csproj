@@ -100,16 +100,21 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controlador\ControladorAlumno.cs" />
-    <Compile Include="Controlador\ControladorCarreasES.cs" />
-    <Compile Include="Controlador\ControladorEscuelasES.cs" />
-    <Compile Include="Controlador\ControladorGrupoSeguridad.cs" />
+    <Compile Include="Controlador\Applikt\ControladorHistorial.cs" />
+    <Compile Include="Controlador\Applikt\ControladorHistorialBusquedaCarrera.cs" />
+    <Compile Include="Controlador\Suredsu\ControladorAlumno.cs" />
+    <Compile Include="Controlador\Suredsu\ControladorCarreasES.cs" />
+    <Compile Include="Controlador\Suredsu\ControladorDireccion.cs" />
+    <Compile Include="Controlador\Suredsu\ControladorEscuelasES.cs" />
+    <Compile Include="Controlador\Applikt\ControladorGrupoSeguridad.cs" />
     <Compile Include="Controlador\ControladorLogin.cs" />
-    <Compile Include="Controlador\ControladorNotificacion.cs" />
-    <Compile Include="Controlador\ControladorPerfil.cs" />
+    <Compile Include="Controlador\Applikt\ControladorNotificacion.cs" />
+    <Compile Include="Controlador\Applikt\ControladorPerfil.cs" />
+    <Compile Include="Controlador\Suredsu\ControladorPlantelEMS.cs" />
     <Compile Include="Datos\AlumnoDAO.cs" />
     <Compile Include="Datos\CarrerasDAO.cs" />
-    <Compile Include="Datos\ConexionDAO.cs" />
+    <Compile Include="Datos\ConexionSuredsuDAO.cs" />
+    <Compile Include="Datos\ConexionAppliktDAO.cs" />
     <Compile Include="Datos\EscuelaESDAO.cs" />
     <Compile Include="Datos\GrupoSeguridadDAO.cs" />
     <Compile Include="Datos\HistorialDAO.cs" />
@@ -126,6 +131,7 @@
     <Compile Include="Modelo\HistorialBusquedasCarrera.cs" />
     <Compile Include="Modelo\MediosEnvio.cs" />
     <Compile Include="Modelo\Notificaciones.cs" />
+    <Compile Include="Modelo\PadreFamilia.cs" />
     <Compile Include="Modelo\Persona.cs" />
     <Compile Include="Modelo\PlantelesEMS.cs" />
     <Compile Include="Modelo\PlantelesES.cs" />

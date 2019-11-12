@@ -6,7 +6,7 @@ using MySql.Data.MySqlClient;
 
 namespace WebServiceAppli_KT.Datos
 {
-    public class ConexionDAO
+    public class ConexionSuredsuDAO
     {
         private MySqlConnectionStringBuilder builder;
 
@@ -16,26 +16,9 @@ namespace WebServiceAppli_KT.Datos
             set { builder = value; }
         }
 
-        public ConexionDAO()
+        public ConexionSuredsuDAO()
         {
-            ConexioBDApplikt();
             ConexioBDSuredsu();
-        }
-
-        public void ConexioBDApplikt()
-        {
-            try
-            {
-                this.builder = new MySqlConnectionStringBuilder();
-                this.builder.Server = "localhost";
-                this.builder.UserID = "root";
-                this.builder.Password = "";
-                this.builder.Database = "appli-kt";
-            }
-            catch (MySqlException ex)
-            {
-                Console.WriteLine("Error en la conexion a la base de datos: " + ex.Message);
-            }
         }
 
         public void ConexioBDSuredsu()

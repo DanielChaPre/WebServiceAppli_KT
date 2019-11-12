@@ -7,18 +7,18 @@ using System.Web;
 namespace WebServiceAppli_KT.Modelo
 {
     [DataContract]
-    public class Empleado
+    public class PadreFamilia
     {
         [DataMember]
-        public int cve_empleado { get; set; }
+        public int cve_padre_familia { get; set; }
         [DataMember]
-        public string numero_empleado { get; set; }
-        [DataMember]
-        public string estatus { get; set; }
+        public int id_alumno { get; set; }
         [DataMember]
         public DateTime fecha_registro { get; set; }
         [DataMember]
         public Persona persona { get; set; }
+        [DataMember]
+        public int idAlumno { get; set; }
         [DataMember]
         public Usuario usuario { get; set; }
     }
