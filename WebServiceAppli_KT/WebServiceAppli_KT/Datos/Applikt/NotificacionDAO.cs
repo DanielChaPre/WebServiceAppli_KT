@@ -21,7 +21,7 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * from bandeja_notificacion_usuario";
+                cmd.CommandText = "Select * from bandeja_notificacion_usuario where";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())

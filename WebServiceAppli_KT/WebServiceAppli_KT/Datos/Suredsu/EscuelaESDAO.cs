@@ -9,7 +9,7 @@ namespace WebServiceAppli_KT.Datos
 {
     public class EscuelaESDAO
     {
-        ConexionAppliktDAO conexion = new ConexionAppliktDAO();
+        ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
         MySqlConnection con;
         List<PlantelesES> lstPlanteles;
 
@@ -19,7 +19,6 @@ namespace WebServiceAppli_KT.Datos
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-
                 MySqlCommand cmd = con.CreateCommand();
                 //Queda pendiente la consulta en vista
                 cmd.CommandText = "select * from vistaPlanteles";

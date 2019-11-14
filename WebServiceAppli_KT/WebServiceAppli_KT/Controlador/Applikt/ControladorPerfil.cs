@@ -11,13 +11,15 @@ namespace WebServiceAppli_KT.Controlador
     {
         PerfilDAO perfilDAO;
 
+        #region Constructor
         public ControladorPerfil()
         {
             perfilDAO = new PerfilDAO();
-        }
+        } 
+        #endregion
 
         #region Usuario
-        public bool CrearPerfil(Usuario usuario)
+        public bool CrearPerfill(Usuario usuario)
         {
             try
             {
@@ -31,7 +33,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfil(Usuario usuario)
+        public bool ModificarPerfill(Usuario usuario)
         {
             try
             {
@@ -45,7 +47,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfil(Usuario usuario)
+        public bool EliminarPerfill(Usuario usuario)
         {
             try
             {
@@ -59,7 +61,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfil(string user, string pass)
+        public Usuario ConsultarPerfill(string user, string pass)
         {
             try
             {
@@ -76,7 +78,7 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region Empleado
-        public bool CrearPerfil(Usuario usuario)
+        public bool CrearPerfilEmpleado(Usuario usuario)
         {
             try
             {
@@ -90,7 +92,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfil(Usuario usuario)
+        public bool ModificarPerfilEmpleado(Usuario usuario)
         {
             try
             {
@@ -104,7 +106,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfil(Usuario usuario)
+        public bool EliminarPerfilEmpleado(Usuario usuario)
         {
             try
             {
@@ -118,7 +120,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfil(string user, string pass)
+        public Usuario ConsultarPerfilEmpleado(string user, string pass)
         {
             try
             {
@@ -135,7 +137,7 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region EmpleadoPlantel
-        public bool CrearPerfil(Usuario usuario)
+        public bool CrearPerfilEmpleadoPlantel(Usuario usuario)
         {
             try
             {
@@ -149,7 +151,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfil(Usuario usuario)
+        public bool ModificarPerfilEmpleadoPlantel(Usuario usuario)
         {
             try
             {
@@ -163,7 +165,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfil(Usuario usuario)
+        public bool EliminarPerfilEmpleadoPlantel(Usuario usuario)
         {
             try
             {
@@ -177,7 +179,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfil(string user, string pass)
+        public Usuario ConsultarPerfilEmpleadoPlantel(string user, string pass)
         {
             try
             {
@@ -194,7 +196,7 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region PadreFamilia
-        public bool CrearPerfil(Usuario usuario)
+        public bool CrearPerfilPadreFamilia(Usuario usuario)
         {
             try
             {
@@ -208,7 +210,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfil(Usuario usuario)
+        public bool ModificarPerfilPadreFamilia(Usuario usuario)
         {
             try
             {
@@ -222,7 +224,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfil(Usuario usuario)
+        public bool EliminarPerfilPadreFamilia(Usuario usuario)
         {
             try
             {
@@ -236,7 +238,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfil(string user, string pass)
+        public Usuario ConsultarPerfilPadreFamilia(string user, string pass)
         {
             try
             {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WebServiceAppli_KT.Controlador;
+using WebServiceAppli_KT.Controlador.Suredsu;
 using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT
@@ -16,6 +17,7 @@ namespace WebServiceAppli_KT
         ControladorCarreasES carrerasController;
         ControladorPerfil perfilController;
         ControladorGrupoSeguridad grupoSeguridadController;
+        ControladorDireccion controladorDireccion;
         #endregion
 
         #region variables(Objetos)
@@ -23,6 +25,10 @@ namespace WebServiceAppli_KT
         Usuario entUsuario = new Usuario();
         List<PlantelesES> lstPlanteles;
         List<CarrerasES> lstCarreras;
+        List<Colonias> lst_colonias;
+        List<Municipios> lst_municipios;
+        List<Estados> lst_estados;
+        List<Paises> lst_paises;
         #endregion
 
 
@@ -41,12 +47,12 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public Usuario ConsultarPerfil(string user, string pass)
+        public Usuario ConsultarPerfilS(string user, string pass)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                entUsuario = perfilController.ConsultarPerfil(user, pass);
+                entUsuario = perfilController.ConsultarPerfill(user,pass);
                 return entUsuario;
             }
             catch (Exception)
@@ -81,7 +87,7 @@ namespace WebServiceAppli_KT
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.CrearPerfil(usuario);
+                perfilController.CrearPerfill(usuario);
                 return true;
             }
             catch (Exception)
@@ -96,7 +102,7 @@ namespace WebServiceAppli_KT
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.EliminarPerfil(usuario);
+                perfilController.EliminarPerfill(usuario);
                 return true;
             }
             catch (Exception)
@@ -113,7 +119,7 @@ namespace WebServiceAppli_KT
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.ModificarPerfil(usuario);
+                perfilController.ModificarPerfill(usuario);
                 return true;
             }
             catch (Exception)
@@ -138,6 +144,38 @@ namespace WebServiceAppli_KT
             }
         }
 
+        public List<Colonias> ObtenerColonias()
+        {
+            try
+            {
+                controladorDireccion = new ControladorDireccion();
+                lst_colonias = new List<Colonias>();
+                lst_colonias = controladorDireccion.ConsultarColonia();
+                return lst_colonias;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
+        }
+
+        public List<Estados> ObtenerEstados()
+        {
+            try
+            {
+                controladorDireccion = new ControladorDireccion();
+                lst_estados = new List<Estados>();
+                lst_estados = controladorDireccion.ConsultarEstados();
+                return lst_estados;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
+        }
+
         public List<string> ObtenerGrupos()
         {
             try
@@ -150,6 +188,38 @@ namespace WebServiceAppli_KT
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public List<Municipios> ObtenerMunicipios()
+        {
+            try
+            {
+                controladorDireccion = new ControladorDireccion();
+                lst_municipios = new List<Municipios>();
+                lst_municipios = controladorDireccion.ConsultarMunicipios();
+                return lst_municipios;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<Paises> ObtenerPaises()
+        {
+            try
+            {
+                controladorDireccion = new ControladorDireccion();
+                lst_paises = new List<Paises>();
+                lst_paises = controladorDireccion.ConsultarPaises();
+                return lst_paises;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
             }
         }
 

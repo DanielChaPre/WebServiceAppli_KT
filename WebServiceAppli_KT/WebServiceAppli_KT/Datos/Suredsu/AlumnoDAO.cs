@@ -9,7 +9,8 @@ namespace WebServiceAppli_KT.Datos
 {
     public class AlumnoDAO
     {
-        ConexionAppliktDAO conexion = new ConexionAppliktDAO();
+        // ConexionAppliktDAO conexion = new ConexionAppliktDAO();
+        ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
         MySqlConnection con;
         Alumno alumno;
 
@@ -40,7 +41,7 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Delete from ALumno where idAlumno = @idAlumno";
+                cmd.CommandText = "Delete from Alumno where idAlumno = @idAlumno";
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 cmd.ExecuteNonQuery();

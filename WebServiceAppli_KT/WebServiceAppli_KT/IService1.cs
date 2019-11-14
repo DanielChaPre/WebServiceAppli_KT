@@ -62,7 +62,7 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Usuario ConsultarPerfil(string user, string pass);
+        Usuario ConsultarPerfilS(string user, string pass);
         //Notificaciones
         [OperationContract]
         [WebInvoke(UriTemplate = "/notificacion",
@@ -93,6 +93,31 @@ namespace WebServiceAppli_KT
                    Method = "GET",
                    BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<string> ObtenerGrupos();
+        //Direccion
+        [WebInvoke(UriTemplate = "/colonia",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET",
+                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<Colonias> ObtenerColonias();
+        [WebInvoke(UriTemplate = "/municipios",
+                  RequestFormat = WebMessageFormat.Json,
+                  ResponseFormat = WebMessageFormat.Json,
+                  Method = "GET",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<Municipios> ObtenerMunicipios();
+        [WebInvoke(UriTemplate = "/estados",
+                  RequestFormat = WebMessageFormat.Json,
+                  ResponseFormat = WebMessageFormat.Json,
+                  Method = "GET",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<Estados> ObtenerEstados();
+        [WebInvoke(UriTemplate = "/paises",
+                  RequestFormat = WebMessageFormat.Json,
+                  ResponseFormat = WebMessageFormat.Json,
+                  Method = "GET",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<Paises> ObtenerPaises();
         //Historial
 
         // TODO: agregue aquí sus operaciones de servicio
