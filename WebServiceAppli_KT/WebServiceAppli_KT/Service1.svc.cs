@@ -22,6 +22,7 @@ namespace WebServiceAppli_KT
 
         #region variables(Objetos)
         Notificaciones entNotificacion;
+        Persona entPersona = new Persona();
         Usuario entUsuario = new Usuario();
         List<PlantelesES> lstPlanteles;
         List<CarrerasES> lstCarreras;
@@ -64,13 +65,13 @@ namespace WebServiceAppli_KT
         }
 
         //public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(Usuario usuario)
+        public bool CrearCuenta(Persona persona)
         {
             try
             {
                 loginController = new ControladorLogin();
                 //if (loginController.CrearCuenta(usuario, contrasenia))
-                if (loginController.CrearCuenta(usuario))
+                if (loginController.CrearCuenta(persona))
                     return true;
                 else
                     return false;
@@ -82,12 +83,12 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool CrearPerfil(Usuario usuario)
+        public bool CrearPerfil(Persona persona)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.CrearPerfill(usuario);
+                perfilController.CrearPerfill(persona);
                 return true;
             }
             catch (Exception)
@@ -97,12 +98,12 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool EliminarPerfil(Usuario usuario)
+        public bool EliminarPerfil(Persona persona)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.EliminarPerfill(usuario);
+                perfilController.EliminarPerfill(persona);
                 return true;
             }
             catch (Exception)
@@ -114,12 +115,12 @@ namespace WebServiceAppli_KT
 
        
 
-        public bool ModificarPerfil(Usuario usuario)
+        public bool ModificarPerfil(Persona persona)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.ModificarPerfill(usuario);
+                perfilController.ModificarPerfill(persona);
                 return true;
             }
             catch (Exception)

@@ -19,11 +19,11 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region Usuario
-        public bool CrearPerfill(Usuario usuario)
+        public bool CrearPerfill(Persona persona)
         {
             try
             {
-                perfilDAO.GuardarPerfilPersona(usuario);
+                perfilDAO.GuardarPerfilPersona(persona);
                 return true;
             }
             catch (Exception)
@@ -33,11 +33,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfill(Usuario usuario)
+        public bool ModificarPerfill(Persona persona)
         {
             try
             {
-                perfilDAO.ModificarPerfil(usuario);
+                perfilDAO.ModificarPerfil(persona);
                 return true;
             }
             catch (Exception)
@@ -47,11 +47,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfill(Usuario usuario)
+        public bool EliminarPerfill(Persona persona)
         {
             try
             {
-                perfilDAO.EliminarPerfil(usuario);
+                perfilDAO.EliminarPerfil(persona);
                 return true;
             }
             catch (Exception)

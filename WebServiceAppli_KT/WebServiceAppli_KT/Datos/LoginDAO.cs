@@ -66,7 +66,7 @@ namespace WebServiceAppli_KT.Datos
         }
 
        // public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(Usuario usuario)
+        public bool CrearCuenta(Persona persona)
         {
             try
             {
@@ -77,9 +77,9 @@ namespace WebServiceAppli_KT.Datos
 
                 cmd.CommandText = "Insert into usuario(cve_usuario,nombre_usuario,contraseña,fecha_registro,estatus,rol,cve_personas) " +
                     "values(@cve_usuario , @user, @password, '', '', '', 0); ";
-                cmd.Parameters.AddWithValue("@cve_usuario", usuario.cve_usuario);
-                cmd.Parameters.AddWithValue("@user", usuario.nombre_usuario);
-                cmd.Parameters.AddWithValue("@password", usuario.contraseña);
+                cmd.Parameters.AddWithValue("@cve_usuario", persona.usuario.cve_usuario);
+                cmd.Parameters.AddWithValue("@user", persona.usuario.alias_redes);
+                cmd.Parameters.AddWithValue("@password", persona.usuario.contrasena);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;

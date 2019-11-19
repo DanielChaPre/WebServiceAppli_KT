@@ -33,7 +33,7 @@ namespace WebServiceAppli_KT
             Method = "POST", 
             BodyStyle = WebMessageBodyStyle.Wrapped)]
        // bool CrearCuenta(string usuario, string contrasenia);
-        bool CrearCuenta(Usuario usuario);
+        bool CrearCuenta(Persona persona);
         //Perfil
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
@@ -41,21 +41,21 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "POST",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool CrearPerfil(Usuario usuario);
+        bool CrearPerfil(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "UPDATE",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool ModificarPerfil(Usuario usuario);
+        bool ModificarPerfil(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "DELETE",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool EliminarPerfil(Usuario usuario);
+        bool EliminarPerfil(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil/{user}/{pass}",
                     RequestFormat = WebMessageFormat.Json,

@@ -18,6 +18,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string  estatus { get; set; }
         [DataMember]
-        public string alias_redes { get; set; }
+        public string alias_red { get; set; }
     }
 }
