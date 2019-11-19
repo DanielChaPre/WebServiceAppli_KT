@@ -20,8 +20,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public DateTime fecha_registro { get; set; }
         [DataMember]
-        public string responsable { get; set; }
-        [DataMember]
-        public string cve_grupo_seguridad_plantilla { get; set; }
+        public int cve_usuario { get; set; }
     }
 }

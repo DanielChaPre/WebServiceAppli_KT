@@ -10,7 +10,7 @@ namespace WebServiceAppli_KT.Modelo
     public class Notificaciones
     {
         [DataMember]
-        public int cve_notificaciones { get; set; }
+        public int cve_notificacion { get; set; }
         [DataMember]
         public string texto { get; set;}
         [DataMember]
@@ -24,15 +24,12 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string audiencia { get; set; }
         [DataMember]
-        public string tipo_notificaciones { get; set; }
+        public string tipo_notificacion { get; set; }
         [DataMember]
         public MediosEnvio medio_de_difusion { get; set; }
         [DataMember]
         public string fecha_notificacion { get; set; }
         [DataMember]
         public string hora_notificacion { get; set; }
-        [DataMember]
-        public int cve_detalle_notificacion { get; set; }
-
     }
 }

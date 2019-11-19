@@ -37,5 +37,7 @@ namespace WebServiceAppli_KT.Modelo
         public string municipio { get; set; }
         [DataMember]
         public int idColonia { get; set; }
+        [DataMember]
+        public Usuario usuario { get; set; }
     }
 }

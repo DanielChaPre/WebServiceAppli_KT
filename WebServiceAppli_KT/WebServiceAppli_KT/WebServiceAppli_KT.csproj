@@ -132,6 +132,7 @@
     <Compile Include="Modelo\ConfiguracionTema.cs" />
     <Compile Include="Modelo\DetallePlantel.cs" />
     <Compile Include="Modelo\Empleado.cs" />
+    <Compile Include="Modelo\EmpleadoPlantel.cs" />
     <Compile Include="Modelo\Estados.cs" />
     <Compile Include="Modelo\GrupoSeguridad.cs" />
     <Compile Include="Modelo\Historial.cs" />

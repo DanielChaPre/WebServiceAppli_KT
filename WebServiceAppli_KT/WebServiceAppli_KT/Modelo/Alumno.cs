@@ -97,7 +97,5 @@ namespace WebServiceAppli_KT.Modelo
         public string ActualizacionesOtroCiclo { get; set; }
         [DataMember]
         public string idResultado { get; set; }
-        [DataMember]
-        public string cve_persona { get; set; }
     }
 }

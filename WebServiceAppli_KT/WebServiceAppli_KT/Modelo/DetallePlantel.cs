@@ -14,8 +14,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string url_vinculacion { get; set; }
         [DataMember]
-        public string imiagen_plantel { get; set; }
-        [DataMember]
         public string logo_plantel { get; set; }
         [DataMember]
         public string costos { get; set; }
@@ -28,12 +26,10 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string ubicacion { get; set; }
         [DataMember]
-        public string latitud { get; set; }
-        [DataMember]
-        public string longitud { get; set; }
-        [DataMember]
         public string nivel_estudio { get; set; }
         [DataMember]
         public int cve_imagen_plantel{ get; set; }
+        [DataMember]
+        public int idPlantelesES { get; set; }
     }
 }

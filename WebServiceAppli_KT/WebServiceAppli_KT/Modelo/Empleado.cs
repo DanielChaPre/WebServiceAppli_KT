@@ -19,7 +19,5 @@ namespace WebServiceAppli_KT.Modelo
         public DateTime fecha_registro { get; set; }
         [DataMember]
         public Persona persona { get; set; }
-        [DataMember]
-        public Usuario usuario { get; set; }
     }
 }

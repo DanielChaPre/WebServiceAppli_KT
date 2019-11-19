@@ -19,7 +19,5 @@ namespace WebServiceAppli_KT.Modelo
         public string  estatus { get; set; }
         [DataMember]
         public string alias_redes { get; set; }
-        [DataMember]
-        public Persona persona { get; set; }
     }
 }
