@@ -37,7 +37,7 @@ namespace WebServiceAppli_KT.Datos
                         lstCarreras[i].Nivel = reader["Nivel"].ToString();
                         lstCarreras[i].CampoEspecifico2016 = reader["CampoEspecífico2016"].ToString();
                         lstCarreras[i].CampoEspecificoAnterior = reader["CampoEspecificoAnterior"].ToString();
-                        lstCarreras[i].PlantelES.idPlantelesES = Convert.ToInt16(reader["idPlantelesES"].ToString());
+                        lstCarreras[i].PlantelES.idPlantelES = Convert.ToInt16(reader["idPlantelES"].ToString());
                     }
                 }
                 return lstCarreras;

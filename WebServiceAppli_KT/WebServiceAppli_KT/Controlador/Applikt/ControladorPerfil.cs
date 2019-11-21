@@ -61,12 +61,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfill(string user, string pass)
+        public Persona ConsultarPerfill(string user, string pass)
         {
             try
             {
-                Usuario usuario = new Usuario();
-                usuario = perfilDAO.ConsultarPerfilUsuario(user, pass);
+                Persona usuario = new Persona();
+                usuario = perfilDAO.ConsultarPerfilPersona(1);
                 return usuario;
             }
             catch (Exception)
@@ -78,11 +78,11 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region Empleado
-        public bool CrearPerfilEmpleado(Usuario usuario)
+        public bool CrearPerfilEmpleado(Empleado empleado)
         {
             try
             {
-                perfilDAO.GuardarPerfilPersona(usuario);
+                perfilDAO.GuardarPerfilEmpleado(empleado);
                 return true;
             }
             catch (Exception)
@@ -92,11 +92,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfilEmpleado(Usuario usuario)
+        public bool ModificarPerfilEmpleado(Empleado empleado)
         {
             try
             {
-                perfilDAO.ModificarPerfil(usuario);
+                perfilDAO.ModificarPerfilEmpleado(empleado);
                 return true;
             }
             catch (Exception)
@@ -106,11 +106,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfilEmpleado(Usuario usuario)
+        public bool EliminarPerfilEmpleado(Empleado empleado)
         {
             try
             {
-                perfilDAO.EliminarPerfil(usuario);
+                perfilDAO.EliminarPerfilEmpleado(empleado);
                 return true;
             }
             catch (Exception)
@@ -120,13 +120,13 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfilEmpleado(string user, string pass)
+        public Empleado ConsultarPerfilEmpleado(string user, string pass)
         {
             try
             {
-                Usuario usuario = new Usuario();
-                usuario = perfilDAO.ConsultarPerfilUsuario(user, pass);
-                return usuario;
+                Empleado empleado = new Empleado();
+                empleado = perfilDAO.ConsultarPerfilEmpleado(1);
+                return empleado;
             }
             catch (Exception)
             {
@@ -137,11 +137,11 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region EmpleadoPlantel
-        public bool CrearPerfilEmpleadoPlantel(Usuario usuario)
+        public bool CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
             try
             {
-                perfilDAO.GuardarPerfilPersona(usuario);
+                perfilDAO.GuardarPerfilEmpleadoPlantel(empleadoPlantel);
                 return true;
             }
             catch (Exception)
@@ -151,11 +151,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfilEmpleadoPlantel(Usuario usuario)
+        public bool ModificarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
             try
             {
-                perfilDAO.ModificarPerfil(usuario);
+                perfilDAO.ModificarPerfilEmpleadoPlantel(empleadoPlantel);
                 return true;
             }
             catch (Exception)
@@ -165,11 +165,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfilEmpleadoPlantel(Usuario usuario)
+        public bool EliminarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
             try
             {
-                perfilDAO.EliminarPerfil(usuario);
+                perfilDAO.EliminarPerfilEmpleadoPlantel(empleadoPlantel);
                 return true;
             }
             catch (Exception)
@@ -179,13 +179,13 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfilEmpleadoPlantel(string user, string pass)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string user, string pass)
         {
             try
             {
-                Usuario usuario = new Usuario();
-                usuario = perfilDAO.ConsultarPerfilUsuario(user, pass);
-                return usuario;
+                EmpleadoPlantel empleadoPlantel = new EmpleadoPlantel();
+                empleadoPlantel = perfilDAO.ConsultarPerfilEmpleadoPlantel(1);
+                return empleadoPlantel;
             }
             catch (Exception)
             {
@@ -196,11 +196,11 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region PadreFamilia
-        public bool CrearPerfilPadreFamilia(Usuario usuario)
+        public bool CrearPerfilPadreFamilia(PadreFamilia padreFamilia)
         {
             try
             {
-                perfilDAO.GuardarPerfilPersona(usuario);
+                perfilDAO.GuardarPerfilPersonaPadreFamilia(padreFamilia);
                 return true;
             }
             catch (Exception)
@@ -210,11 +210,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarPerfilPadreFamilia(Usuario usuario)
+        public bool ModificarPerfilPadreFamilia(PadreFamilia padreFamilia)
         {
             try
             {
-                perfilDAO.ModificarPerfil(usuario);
+                perfilDAO.ModificarPerfilPadreFamilia(padreFamilia);
                 return true;
             }
             catch (Exception)
@@ -224,11 +224,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarPerfilPadreFamilia(Usuario usuario)
+        public bool EliminarPerfilPadreFamilia(PadreFamilia padreFamilia)
         {
             try
             {
-                perfilDAO.EliminarPerfil(usuario);
+                perfilDAO.EliminarPerfilPadreFamilia(padreFamilia);
                 return true;
             }
             catch (Exception)
@@ -238,13 +238,13 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Usuario ConsultarPerfilPadreFamilia(string user, string pass)
+        public PadreFamilia ConsultarPerfilPadreFamilia(string user, string pass)
         {
             try
             {
-                Usuario usuario = new Usuario();
-                usuario = perfilDAO.ConsultarPerfilUsuario(user, pass);
-                return usuario;
+                PadreFamilia  padreFamilia = new PadreFamilia();
+                padreFamilia = perfilDAO.ConsultarPerfilPadreFamilia(1);
+                return padreFamilia;
             }
             catch (Exception)
             {

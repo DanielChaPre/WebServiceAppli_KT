@@ -11,17 +11,18 @@ namespace WebServiceAppli_KT.Controlador
     {
         AlumnoDAO alumnoDAO;
         Alumno alumno;
+        Persona persona;
 
         public ControladorAlumno()
         {
             alumnoDAO = new AlumnoDAO();
         }
 
-        public bool GuardarAlumno(Alumno alumno)
+        public bool GuardarAlumno(Persona persona)
         {
             try
             {
-                if (!alumnoDAO.GuardarAlummo(alumno))
+                if (!alumnoDAO.GuardarAlummo(persona))
                 {
                     return false;
                 }
@@ -33,11 +34,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool EliminarAlumno()
+        public bool EliminarAlumno(Persona persona)
         {
             try
             {
-                if (!alumnoDAO.GuardarAlummo(alumno))
+                if (!alumnoDAO.GuardarAlummo(persona))
                 { 
                     return false;
                 }
@@ -49,7 +50,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ModificarAlumno()
+        public bool ModificarAlumno(Persona persona)
         {
             try
             {
@@ -61,11 +62,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Alumno ConsultarAlumno()
+        public Persona ConsultarAlumno()
         {
             try
             {
-                return alumno;
+                return persona;
             }
             catch (Exception)
             {

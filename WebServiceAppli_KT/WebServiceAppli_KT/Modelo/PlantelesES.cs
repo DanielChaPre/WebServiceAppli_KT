@@ -10,7 +10,7 @@ namespace WebServiceAppli_KT.Modelo
     public class PlantelesES
     {
         [DataMember]
-        public int idPlantelesES { get; set; }
+        public int idPlantelES { get; set; }
         [DataMember]
         public string ClavePlantel { get; set; }
         [DataMember]
@@ -31,9 +31,5 @@ namespace WebServiceAppli_KT.Modelo
         public string OPD { get; set; }
         [DataMember]
         public string NivelAgrupado { get; set; }
-        [DataMember]
-        public string CarreraES { get; set; }
-        [DataMember]
-        public DetallePlantel detalle_plantel { get; set; }
     }
 }

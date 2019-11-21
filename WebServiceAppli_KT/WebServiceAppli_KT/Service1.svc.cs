@@ -18,12 +18,16 @@ namespace WebServiceAppli_KT
         ControladorPerfil perfilController;
         ControladorGrupoSeguridad grupoSeguridadController;
         ControladorDireccion controladorDireccion;
+        ControladorAlumno controladorAlumno;   
         #endregion
 
         #region variables(Objetos)
         Notificaciones entNotificacion;
         Persona entPersona = new Persona();
         Usuario entUsuario = new Usuario();
+        Empleado ent_empleado = new Empleado();
+        EmpleadoPlantel ent_empleado_plantel = new EmpleadoPlantel();
+        PadreFamilia ent_padre_familia = new PadreFamilia();
         List<PlantelesES> lstPlanteles;
         List<CarrerasES> lstCarreras;
         List<Colonias> lst_colonias;
@@ -48,20 +52,52 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public Usuario ConsultarPerfilS(string user, string pass)
+        public Persona ConsultarPerfilAlumno(string user, string pass)
+        {
+            controladorAlumno = new ControladorAlumno();
+            entPersona = new Persona();
+            entPersona = controladorAlumno.ConsultarAlumno();
+            return entPersona;
+        }
+
+        public Empleado ConsultarPerfilEmpleado(string user, string pass)
+        {
+            perfilController = new ControladorPerfil();
+            ent_empleado = new Empleado();
+            ent_empleado = perfilController.ConsultarPerfilEmpleado(user,pass);
+            return ent_empleado;
+
+        }
+
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string user, string pass)
+        {
+            perfilController = new ControladorPerfil();
+            ent_empleado_plantel = new EmpleadoPlantel();
+            ent_empleado_plantel = perfilController.ConsultarPerfilEmpleadoPlantel(user, pass);
+            return ent_empleado_plantel;
+        }
+
+        public PadreFamilia ConsultarPerfilPadreFamilia(string user, string pass)
+        {
+            perfilController = new ControladorPerfil();
+            ent_padre_familia = new PadreFamilia();
+            ent_padre_familia = perfilController.ConsultarPerfilPadreFamilia(user, pass);
+            return ent_padre_familia;
+        }
+
+        public Persona ConsultarPerfilS(string user, string pass)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                entUsuario = perfilController.ConsultarPerfill(user,pass);
-                return entUsuario;
+                entPersona = perfilController.ConsultarPerfill(user,pass);
+                return entPersona;
             }
             catch (Exception)
             {
                 return null;
                 throw;
             }
-            
         }
 
         //public bool CrearCuenta(string usuario, string contrasenia)
@@ -98,6 +134,39 @@ namespace WebServiceAppli_KT
             }
         }
 
+        public bool CrearPerfilAlumno(Persona persona)
+        {
+            bool realizado;
+            controladorAlumno = new ControladorAlumno();
+            realizado = controladorAlumno.GuardarAlumno(persona);
+            return realizado;
+
+        }
+
+        public bool CrearPerfilEmpleado(Empleado empleado)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.CrearPerfilEmpleado(empleado);
+            return realizado;
+        }
+
+        public bool CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.CrearPerfilEmpleadoPlantel(empleadoPlantel);
+            return realizado;
+        }
+
+        public bool CrearPerfilPadreFamilia(PadreFamilia persona)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.CrearPerfilPadreFamilia(persona);
+            return realizado;
+        }
+
         public bool EliminarPerfil(Persona persona)
         {
             try
@@ -113,7 +182,37 @@ namespace WebServiceAppli_KT
             }
         }
 
-       
+        public bool EliminarPerfilAlumno(Persona persona)
+        {
+            bool realizado;
+            controladorAlumno = new ControladorAlumno();
+            realizado = controladorAlumno.EliminarAlumno(persona);
+            return realizado;
+        }
+
+        public bool EliminarPerfilEmpleado(Empleado empleado)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.EliminarPerfilEmpleado(empleado);
+            return realizado;
+        }
+
+        public bool EliminarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.EliminarPerfilEmpleadoPlantel(empleadoPlantel);
+            return realizado;
+        }
+
+        public bool EliminarPerfilPadreFamilia(PadreFamilia persona)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.EliminarPerfilPadreFamilia(persona);
+            return realizado;
+        }
 
         public bool ModificarPerfil(Persona persona)
         {
@@ -128,6 +227,38 @@ namespace WebServiceAppli_KT
                 return false;
                 throw;
             }
+        }
+
+        public bool ModificarPerfilAlumno(Persona persona)
+        {
+            bool realizado;
+            controladorAlumno = new ControladorAlumno();
+            realizado = controladorAlumno.ModificarAlumno(persona);
+            return realizado;
+        }
+
+        public bool ModificarPerfilEmpleado(Empleado empleado)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.ModificarPerfilEmpleado(empleado);
+            return realizado;
+        }
+
+        public bool ModificarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.ModificarPerfilEmpleadoPlantel(empleadoPlantel);
+            return realizado;
+        }
+
+        public bool ModificarPerfilPadreFamilia(PadreFamilia persona)
+        {
+            bool realizado;
+            perfilController = new ControladorPerfil();
+            realizado = perfilController.ModificarPerfilPadreFamilia(persona);
+            return realizado;
         }
 
         public List<CarrerasES> ObtenerCarreras()

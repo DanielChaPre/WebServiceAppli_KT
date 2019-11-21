@@ -58,6 +58,12 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string ClavePlantelESEC { get; set; }
         [DataMember]
+        public int idCarreraES1 { get; set; }
+        [DataMember]
+        public int idCarreraES2 { get; set; }
+        [DataMember]
+        public int idCarreraES3 { get; set; }
+        [DataMember]
         public string Nacionalidad { get; set; }
         [DataMember]
         public string TEMP_CP { get; set; }
@@ -78,24 +84,16 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int idPais { get; set; }
         [DataMember]
-        public string OtrColonia { get; set; }
+        public string OtraColonia { get; set; }
         [DataMember]
         public string idMunicipioPlantel { get; set; }
         [DataMember]
         public string idPaisPlantel { get; set; }
         [DataMember]
-        public string OtroPlanteel { get; set; }
+        public string OtroPlantel { get; set; }
         [DataMember]
         public string FechaRegistro { get; set; }
         [DataMember]
         public string EmailValido { get; set; }
-        [DataMember]
-        public string AutoriNotificaciones { get; set; }
-        [DataMember]
-        public string ManeraVirtual { get; set; }
-        [DataMember]
-        public string ActualizacionesOtroCiclo { get; set; }
-        [DataMember]
-        public string idResultado { get; set; }
     }
 }

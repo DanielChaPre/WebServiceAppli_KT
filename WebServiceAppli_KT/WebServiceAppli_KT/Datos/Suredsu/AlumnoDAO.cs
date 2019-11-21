@@ -14,7 +14,7 @@ namespace WebServiceAppli_KT.Datos
         MySqlConnection con;
         Alumno alumno;
 
-        public bool GuardarAlummo(Alumno alumno)
+        public bool GuardarAlummo(Persona persona)
         {
             try
             {
@@ -90,12 +90,10 @@ namespace WebServiceAppli_KT.Datos
                 {
                     alumno = new Alumno();
                 }
-
                 return alumno;
             }
             catch (Exception)
             {
-
                 throw;
             }
         }

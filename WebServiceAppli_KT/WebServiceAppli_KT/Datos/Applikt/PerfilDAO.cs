@@ -9,10 +9,14 @@ namespace WebServiceAppli_KT.Datos
 {
     public class PerfilDAO
     {
+        int cve_usuario;
         ConexionAppliktDAO conexion = new ConexionAppliktDAO();
         MySqlConnection con;
         Usuario usuario;
         Persona persona;
+        Empleado ent_empleado;
+        EmpleadoPlantel ent_empleado_plantel;
+        PadreFamilia ent_padre_familia;
 
         #region Persona
         public bool GuardarPerfilPersona(Persona persona)
@@ -22,6 +26,10 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
+             /*   cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                MySqlParameter hola = new MySqlParameter("hola", MySqlDbType.Int16);
+                hola.Direction = System.Data.ParameterDirection.Output;
+                cmd.Parameters.Add("",);*/
                 cmd.CommandText = "Call p_crear_perfil(@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
                     ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
                     ", @contrasenia, @fechaRegUser, @aliasRedes)";
@@ -69,7 +77,7 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_crear_perfil(@cvePersona, @nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
+                cmd.CommandText = "Call p_modificar_perfil(@cvePersona, @nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
                     ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
                     ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes)";
                 //Datos de la persona
@@ -193,29 +201,36 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_crear_perfil(@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaReg, @numTelefono, @correo, @estadoCivil, @nacionalidad, @municipio, @fechaNac, @colonia, @nombreUser" +
-                    ", @contrasenia, @fechaRegUser, @rol)";
+                cmd.CommandText = "Call p_crear_perfilEmpleado(@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
+                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
+                    ", @contrasenia, @fechaRegUser, @aliasRedes" +
+                    ", @numero_empleado, @fecha_registro)";
                 //Datos de la persona
                 #region Datos de la persona
-                cmd.Parameters.AddWithValue("@nombre", usuario.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", usuario.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", usuario.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", usuario.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", usuario.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", usuario.persona.sexo);
-                cmd.Parameters.AddWithValue("@numTelefono", usuario.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", usuario.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", usuario.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@municipio", usuario.persona.municipio);
-                cmd.Parameters.AddWithValue("@fechaNac", usuario.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@colonia", usuario.persona.idColonia);
+                cmd.Parameters.AddWithValue("@nombre", empleado.persona.nombre);
+                cmd.Parameters.AddWithValue("@apePaterno", empleado.persona.apellido_paterno);
+                cmd.Parameters.AddWithValue("@apeMaterno", empleado.persona.apellido_materno);
+                cmd.Parameters.AddWithValue("@rfc", empleado.persona.rfc);
+                cmd.Parameters.AddWithValue("@curp", empleado.persona.curp);
+                cmd.Parameters.AddWithValue("@sexo", empleado.persona.sexo);
+                cmd.Parameters.AddWithValue("@fechaNac", empleado.persona.fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@numTelefono", empleado.persona.numero_telefono);
+                cmd.Parameters.AddWithValue("@estadoCivil", empleado.persona.estado_civil);
+                cmd.Parameters.AddWithValue("@nacionalidad", empleado.persona.nacionalidad);
+                cmd.Parameters.AddWithValue("@idAlumno", empleado.persona.idAlumno);
+                cmd.Parameters.AddWithValue("@municipio", empleado.persona.municipio);
+                cmd.Parameters.AddWithValue("@idColonia", empleado.persona.idColonia);
                 #endregion
                 //Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
+                #region Datos del usuario
+                cmd.Parameters.AddWithValue("@contrasenia", empleado.persona.usuario.contrasena);
+                cmd.Parameters.AddWithValue("@fechaRegUSer", empleado.persona.usuario.fecha_registro);
+                cmd.Parameters.AddWithValue("@aliasRedes", empleado.persona.usuario.alias_red);
+                #endregion
+                #region Datos del empleado
+                cmd.Parameters.AddWithValue("@numero_empleado", empleado.numero_empleado);
+                cmd.Parameters.AddWithValue("@fecha_registro", empleado.fecha_registro);
+                #endregion
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -238,30 +253,39 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfil(@cvePersona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaReg, @numTelefono, @correo, @estadoCivil, @nacionalidad, @municipio, @fechaNac, @colonia, @cveUsuario, @nombreUser" +
-                    ",@estatus ,@contrasenia, @fechaRegUser, @rol)";
+                cmd.CommandText = "Call p_modificar_perfilEmpleado(@cve_persona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
+                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
+                    ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes" +
+                    ",@cve_empleado, @numero_empleado, @estatus ,@fecha_registro)";
                 //Datos de la persona
                 #region Datos de la persona
-                cmd.Parameters.AddWithValue("@cvePersona", usuario.persona.cve_persona);
-                cmd.Parameters.AddWithValue("@nombre", usuario.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", usuario.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", usuario.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", usuario.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", usuario.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", usuario.persona.sexo);
-                cmd.Parameters.AddWithValue("@numTelefono", usuario.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", usuario.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", usuario.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@municipio", usuario.persona.municipio);
-                cmd.Parameters.AddWithValue("@fechaNac", usuario.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@colonia", usuario.persona.idColonia);
+                cmd.Parameters.AddWithValue("@cve_persona", empleado.persona.cve_persona);
+                cmd.Parameters.AddWithValue("@nombre", empleado.persona.nombre);
+                cmd.Parameters.AddWithValue("@apePaterno", empleado.persona.apellido_paterno);
+                cmd.Parameters.AddWithValue("@apeMaterno", empleado.persona.apellido_materno);
+                cmd.Parameters.AddWithValue("@rfc", empleado.persona.rfc);
+                cmd.Parameters.AddWithValue("@curp", empleado.persona.curp);
+                cmd.Parameters.AddWithValue("@sexo", empleado.persona.sexo);
+                cmd.Parameters.AddWithValue("@fechaNac", empleado.persona.fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@numTelefono", empleado.persona.numero_telefono);
+                cmd.Parameters.AddWithValue("@estadoCivil", empleado.persona.estado_civil);
+                cmd.Parameters.AddWithValue("@nacionalidad", empleado.persona.nacionalidad);
+                cmd.Parameters.AddWithValue("@idAlumno", empleado.persona.idAlumno);
+                cmd.Parameters.AddWithValue("@municipio", empleado.persona.municipio);
+                cmd.Parameters.AddWithValue("@idColonia", empleado.persona.idColonia);
                 #endregion
                 //Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
+                #region Datos del usuario
+                cmd.Parameters.AddWithValue("@contrasenia", empleado.persona.usuario.contrasena);
+                cmd.Parameters.AddWithValue("@fechaRegUSer", empleado.persona.usuario.fecha_registro);
+                cmd.Parameters.AddWithValue("@aliasRedes", empleado.persona.usuario.alias_red);
+                #endregion
+                #region Datos del empleado
+                cmd.Parameters.AddWithValue("@cve_empleado", empleado.cve_empleado);
+                cmd.Parameters.AddWithValue("@numero_empleado", empleado.numero_empleado);
+                cmd.Parameters.AddWithValue("@estatus", empleado.estatus);
+                cmd.Parameters.AddWithValue("@fecha_registro", empleado.fecha_registro);
+                #endregion
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -273,10 +297,61 @@ namespace WebServiceAppli_KT.Datos
             }
             finally
             {
-
+                con.Close();
             }
         }
 
+        public Empleado ConsultarPerfilEmpleado(int cveUsuario)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select * from usuario u, persona p , empleado e where u.cve_usuario = @cveUsuario";
+                cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    ent_empleado = new Empleado();
+                    ent_empleado.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
+                    ent_empleado.persona.usuario.contrasena = reader["contrasena"].ToString();
+                    ent_empleado.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_empleado.persona.usuario.estatus = reader["estatus"].ToString();
+                    ent_empleado.persona.usuario.alias_red = reader["alias_red"].ToString();
+                    ent_empleado.persona.cve_persona = Convert.ToInt16(reader["cve_persona"].ToString());
+                    ent_empleado.persona.nombre = reader["nombre"].ToString();
+                    ent_empleado.persona.apellido_paterno = reader["apellido_paterno"].ToString();
+                    ent_empleado.persona.apellido_materno = reader["apellido_materno"].ToString();
+                    ent_empleado.persona.rfc = reader["rfc"].ToString();
+                    ent_empleado.persona.curp = reader["curp"].ToString();
+                    ent_empleado.persona.sexo = reader["sexo"].ToString();
+                    ent_empleado.persona.fecha_nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    ent_empleado.persona.numero_telefono = reader["numero_telefono"].ToString();
+                    ent_empleado.persona.estado_civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    ent_empleado.persona.nacionalidad = reader["nacionalidad"].ToString();
+                    ent_empleado.persona.idAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
+                    ent_empleado.persona.municipio = reader["municipio"].ToString();
+                    ent_empleado.persona.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
+                    ent_empleado.cve_empleado = Convert.ToInt32(reader["cve_empleado"].ToString());
+                    ent_empleado.numero_empleado = reader["numero_empleado"].ToString();
+                    ent_empleado.estatus = reader["estatus"].ToString();
+                    ent_empleado.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                }
+                return ent_empleado;
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+        /*
         public Usuario ConsultarPerfilUsuarioEmpleado(string user, string password)
         {
             try
@@ -343,7 +418,7 @@ namespace WebServiceAppli_KT.Datos
                 return null;
                 throw;
             }
-        }
+        } */
 
         public bool EliminarPerfilEmpleado(Empleado empleado)
         {
@@ -352,7 +427,9 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "";
+                cmd.CommandText = "update usuario set estatus = @estatus where cve_usuario = @cve_usuario";
+                cmd.Parameters.AddWithValue("@estatus", "Inactivo");
+                cmd.Parameters.AddWithValue("@cve_usuario", empleado.persona.usuario.cve_usuario);
                 //Datos de la persona
                 //cmd.Parameters.AddWithValue("", cveUsuario);
                 //cmd.Parameters.AddWithValue("", cvePalabra);
@@ -372,36 +449,44 @@ namespace WebServiceAppli_KT.Datos
         }
         #endregion
         #region EmpleadoPlantel
-        public bool GuardarPerfilEmpleadoPlantel(Usuario usuario)
+        public bool GuardarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_crear_perfil(@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaReg, @numTelefono, @correo, @estadoCivil, @nacionalidad, @municipio, @fechaNac, @colonia, @nombreUser" +
-                    ", @contrasenia, @fechaRegUser, @rol)";
+                cmd.CommandText = "Call p_crear_perfilEmpleadoPlantel(@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
+                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
+                    ", @contrasenia, @fechaRegUser, @aliasRedes" +
+                    ", @idPlantelES, @tipo, @fecha_registro)";
                 //Datos de la persona
                 #region Datos de la persona
-                cmd.Parameters.AddWithValue("@nombre", usuario.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", usuario.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", usuario.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", usuario.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", usuario.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", usuario.persona.sexo);
-                cmd.Parameters.AddWithValue("@numTelefono", usuario.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", usuario.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", usuario.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@municipio", usuario.persona.municipio);
-                cmd.Parameters.AddWithValue("@fechaNac", usuario.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@colonia", usuario.persona.idColonia);
+                cmd.Parameters.AddWithValue("@nombre", empleadoPlantel.persona.nombre);
+                cmd.Parameters.AddWithValue("@apePaterno", empleadoPlantel.persona.apellido_paterno);
+                cmd.Parameters.AddWithValue("@apeMaterno", empleadoPlantel.persona.apellido_materno);
+                cmd.Parameters.AddWithValue("@rfc", empleadoPlantel.persona.rfc);
+                cmd.Parameters.AddWithValue("@curp", empleadoPlantel.persona.curp);
+                cmd.Parameters.AddWithValue("@sexo", empleadoPlantel.persona.sexo);
+                cmd.Parameters.AddWithValue("@fechaNac", empleadoPlantel.persona.fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@numTelefono", empleadoPlantel.persona.numero_telefono);
+                cmd.Parameters.AddWithValue("@estadoCivil", empleadoPlantel.persona.estado_civil);
+                cmd.Parameters.AddWithValue("@nacionalidad", empleadoPlantel.persona.nacionalidad);
+                cmd.Parameters.AddWithValue("@idAlumno", empleadoPlantel.persona.idAlumno);
+                cmd.Parameters.AddWithValue("@municipio", empleadoPlantel.persona.municipio);
+                cmd.Parameters.AddWithValue("@idColonia", empleadoPlantel.persona.idColonia);
                 #endregion
                 //Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
+                #region Datos del usuario
+                cmd.Parameters.AddWithValue("@contrasenia", empleadoPlantel.persona.usuario.contrasena);
+                cmd.Parameters.AddWithValue("@fechaRegUSer", empleadoPlantel.persona.usuario.fecha_registro);
+                cmd.Parameters.AddWithValue("@aliasRedes", empleadoPlantel.persona.usuario.alias_red);
+                #endregion
+                #region Datos del empleado Plantel
+                cmd.Parameters.AddWithValue("@idPlantelES", empleadoPlantel.idPlantelesES);
+                cmd.Parameters.AddWithValue("@tipo", empleadoPlantel.tipo);
+                cmd.Parameters.AddWithValue("@fecha_registro", empleadoPlantel.fecha_registro);
+                #endregion
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -417,37 +502,45 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool ModificarPerfilEmpleadoPlantel(Usuario usuario)
+        public bool ModificarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfil(@cvePersona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaReg, @numTelefono, @correo, @estadoCivil, @nacionalidad, @municipio, @fechaNac, @colonia, @cveUsuario, @nombreUser" +
-                    ",@estatus ,@contrasenia, @fechaRegUser, @rol)";
+                cmd.CommandText = "Call p_modificar_perfilEmpleadoPlantel(@cve_persona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
+                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
+                    ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes" +
+                    ",@cve_empleado_empleado, @idplantelES, @tipo ,@fecha_registro)";
                 //Datos de la persona
                 #region Datos de la persona
-                cmd.Parameters.AddWithValue("@cvePersona", usuario.persona.cve_persona);
-                cmd.Parameters.AddWithValue("@nombre", usuario.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", usuario.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", usuario.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", usuario.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", usuario.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", usuario.persona.sexo);
-                cmd.Parameters.AddWithValue("@numTelefono", usuario.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", usuario.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", usuario.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@municipio", usuario.persona.municipio);
-                cmd.Parameters.AddWithValue("@fechaNac", usuario.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@colonia", usuario.persona.idColonia);
+                cmd.Parameters.AddWithValue("@cve_persona", empleadoPlantel.persona.cve_persona);
+                cmd.Parameters.AddWithValue("@nombre", empleadoPlantel.persona.nombre);
+                cmd.Parameters.AddWithValue("@apePaterno", empleadoPlantel.persona.apellido_paterno);
+                cmd.Parameters.AddWithValue("@apeMaterno", empleadoPlantel.persona.apellido_materno);
+                cmd.Parameters.AddWithValue("@rfc", empleadoPlantel.persona.rfc);
+                cmd.Parameters.AddWithValue("@curp", empleadoPlantel.persona.curp);
+                cmd.Parameters.AddWithValue("@sexo", empleadoPlantel.persona.sexo);
+                cmd.Parameters.AddWithValue("@fechaNac", empleadoPlantel.persona.fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@numTelefono", empleadoPlantel.persona.numero_telefono);
+                cmd.Parameters.AddWithValue("@estadoCivil", empleadoPlantel.persona.estado_civil);
+                cmd.Parameters.AddWithValue("@nacionalidad", empleadoPlantel.persona.nacionalidad);
+                cmd.Parameters.AddWithValue("@idAlumno", empleadoPlantel.persona.idAlumno);
+                cmd.Parameters.AddWithValue("@municipio", empleadoPlantel.persona.municipio);
+                cmd.Parameters.AddWithValue("@idColonia", empleadoPlantel.persona.idColonia);
                 #endregion
                 //Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
+                #region Datos del usuario
+                cmd.Parameters.AddWithValue("@contrasenia", empleadoPlantel.persona.usuario.contrasena);
+                cmd.Parameters.AddWithValue("@fechaRegUSer", empleadoPlantel.persona.usuario.fecha_registro);
+                cmd.Parameters.AddWithValue("@aliasRedes", empleadoPlantel.persona.usuario.alias_red);
+                #endregion
+                #region Datos del empleado
+                cmd.Parameters.AddWithValue("@cve_empleado_empleado", empleadoPlantel.cve_empleado_plantel);
+                cmd.Parameters.AddWithValue("@idplantelES", empleadoPlantel.idPlantelesES);
+                cmd.Parameters.AddWithValue("@tipo", empleadoPlantel.tipo);
+                cmd.Parameters.AddWithValue("@fecha_registro", empleadoPlantel.fecha_registro);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -459,90 +552,70 @@ namespace WebServiceAppli_KT.Datos
             }
             finally
             {
-
+                con.Close();
             }
         }
 
-        public Usuario ConsultarPerfilUsuarioEmpleadoPlantel(string user, string password)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(int cveUsuario)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where nombre_usuario = @user and contraseña = @pass";
-                cmd.Parameters.AddWithValue("@user", user);
-                cmd.Parameters.AddWithValue("@pass", password);
+                cmd.CommandText = "Select * from usuario u, persona p , empleado_plantel ep where u.cve_usuario = @cveUsuario";
+                cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    usuario = new Usuario();
-                    usuario.cve_usuario = Convert.ToInt32(reader["cve_usuario"].ToString());
-                    cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                    cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                    cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                    cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
-                    usuario.persona = ConsultarPerfilPersonaEmpleadoPlantel(Convert.ToInt32(reader["cve_personas"].ToString()));
+                    ent_empleado_plantel = new EmpleadoPlantel();
+                    ent_empleado_plantel.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
+                    ent_empleado_plantel.persona.usuario.contrasena = reader["contrasena"].ToString();
+                    ent_empleado_plantel.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_empleado_plantel.persona.usuario.estatus = reader["estatus"].ToString();
+                    ent_empleado_plantel.persona.usuario.alias_red = reader["alias_red"].ToString();
+                    ent_empleado_plantel.persona.cve_persona = Convert.ToInt16(reader["cve_persona"].ToString());
+                    ent_empleado_plantel.persona.nombre = reader["nombre"].ToString();
+                    ent_empleado_plantel.persona.apellido_paterno = reader["apellido_paterno"].ToString();
+                    ent_empleado_plantel.persona.apellido_materno = reader["apellido_materno"].ToString();
+                    ent_empleado_plantel.persona.rfc = reader["rfc"].ToString();
+                    ent_empleado_plantel.persona.curp = reader["curp"].ToString();
+                    ent_empleado_plantel.persona.sexo = reader["sexo"].ToString();
+                    ent_empleado_plantel.persona.fecha_nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    ent_empleado_plantel.persona.numero_telefono = reader["numero_telefono"].ToString();
+                    ent_empleado_plantel.persona.estado_civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    ent_empleado_plantel.persona.nacionalidad = reader["nacionalidad"].ToString();
+                    ent_empleado_plantel.persona.idAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
+                    ent_empleado_plantel.persona.municipio = reader["municipio"].ToString();
+                    ent_empleado_plantel.persona.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
+                    ent_empleado_plantel.cve_empleado_plantel = Convert.ToInt32(reader["cve_empleado_plantel"].ToString());
+                    ent_empleado_plantel.idPlantelesES = Convert.ToInt16(reader["idPlantelesES"].ToString());
+                    ent_empleado_plantel.tipo = Convert.ToInt16(reader["tipo"].ToString());
+                    ent_empleado_plantel.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                 }
-
-                return usuario;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public Persona ConsultarPerfilPersonaEmpleadoPlantel(int cvePersona)
-        {
-            try
-            {
-                var conn = conexion.Builder;
-                con = new MySqlConnection(conn.ToString());
-                MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From persona where cvePersona = @cvePersona";
-                cmd.Parameters.AddWithValue("@cvePersona", cvePersona);
-                con.Open();
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    persona = new Persona();
-                    persona.cve_persona = Convert.ToInt16(reader["cve_persona"].ToString());
-                    persona.nombre = reader["nombre"].ToString();
-                    persona.apellido_paterno = reader["apellido_paterno"].ToString();
-                    persona.apellido_materno = reader["apellido_materno"].ToString();
-                    persona.rfc = reader["rfc"].ToString();
-                    persona.curp = reader["curp"].ToString();
-                    persona.sexo = reader["sexo"].ToString();
-                    persona.fecha_nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
-                    persona.numero_telefono = reader["numero_telefono"].ToString();
-                    persona.estado_civil = Convert.ToInt16(reader["estado_civil"].ToString());
-                    persona.nacionalidad = reader["nacionalidad"].ToString();
-                    persona.municipio = reader["municipio"].ToString();
-                    persona.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
-                }
-                return persona;
+                return ent_empleado_plantel;
             }
             catch (Exception)
             {
                 return null;
                 throw;
             }
+            finally
+            {
+                con.Close();
+            }
         }
-
-        public bool EliminarPerfilEmpleadoPlantel(Usuario usuario)
+        public bool EliminarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "";
-                //Datos de la persona
-                //cmd.Parameters.AddWithValue("", cveUsuario);
-                //cmd.Parameters.AddWithValue("", cvePalabra);
+                cmd.CommandText = "update usuario set estatus = @estatus where cve_usuario = @cve_usuario";
+                cmd.Parameters.AddWithValue("@estatus", "Inactivo");
+                cmd.Parameters.AddWithValue("@cve_usuario", empleadoPlantel.persona.usuario.cve_usuario);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -557,38 +630,45 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
+        #endregion
         #endregion
         #region PadreFamilia
-        public bool GuardarPerfilPersonaPadreFamilia(Usuario usuario)
+        public bool GuardarPerfilPersonaPadreFamilia(PadreFamilia padreFamilia)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_crear_perfil(@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaReg, @numTelefono, @correo, @estadoCivil, @nacionalidad, @municipio, @fechaNac, @colonia, @nombreUser" +
-                    ", @contrasenia, @fechaRegUser, @rol)";
+                cmd.CommandText = "Call p_crear_perfilEmpleadoPlantel(@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
+                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
+                    ", @contrasenia, @fechaRegUser, @aliasRedes" +
+                    ", @idAlumno, @fecha_registro)";
                 //Datos de la persona
                 #region Datos de la persona
-                cmd.Parameters.AddWithValue("@nombre", usuario.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", usuario.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", usuario.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", usuario.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", usuario.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", usuario.persona.sexo);
-                cmd.Parameters.AddWithValue("@numTelefono", usuario.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", usuario.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", usuario.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@municipio", usuario.persona.municipio);
-                cmd.Parameters.AddWithValue("@fechaNac", usuario.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@colonia", usuario.persona.idColonia);
+                cmd.Parameters.AddWithValue("@nombre", padreFamilia.persona.nombre);
+                cmd.Parameters.AddWithValue("@apePaterno", padreFamilia.persona.apellido_paterno);
+                cmd.Parameters.AddWithValue("@apeMaterno", padreFamilia.persona.apellido_materno);
+                cmd.Parameters.AddWithValue("@rfc", padreFamilia.persona.rfc);
+                cmd.Parameters.AddWithValue("@curp", padreFamilia.persona.curp);
+                cmd.Parameters.AddWithValue("@sexo", padreFamilia.persona.sexo);
+                cmd.Parameters.AddWithValue("@fechaNac", padreFamilia.persona.fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@numTelefono", padreFamilia.persona.numero_telefono);
+                cmd.Parameters.AddWithValue("@estadoCivil", padreFamilia.persona.estado_civil);
+                cmd.Parameters.AddWithValue("@nacionalidad", padreFamilia.persona.nacionalidad);
+                cmd.Parameters.AddWithValue("@idAlumno", padreFamilia.persona.idAlumno);
+                cmd.Parameters.AddWithValue("@municipio", padreFamilia.persona.municipio);
+                cmd.Parameters.AddWithValue("@idColonia", padreFamilia.persona.idColonia);
                 #endregion
                 //Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
+                #region Datos del usuario
+                cmd.Parameters.AddWithValue("@contrasenia", padreFamilia.persona.usuario.contrasena);
+                cmd.Parameters.AddWithValue("@fechaRegUSer", padreFamilia.persona.usuario.fecha_registro);
+                cmd.Parameters.AddWithValue("@aliasRedes", padreFamilia.persona.usuario.alias_red);
+                #endregion
+                #region Datos del empleado Plantel
+                cmd.Parameters.AddWithValue("@idAlumno", padreFamilia.idAlumno);
+                cmd.Parameters.AddWithValue("@fecha_registro", padreFamilia.fecha_registro);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -604,38 +684,44 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool ModificarPerfilPadreFamilia(Usuario usuario)
+        public bool ModificarPerfilPadreFamilia(PadreFamilia padreFamilia)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfil(@cvePersona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaReg, @numTelefono, @correo, @estadoCivil, @nacionalidad, @municipio, @fechaNac, @colonia, @cveUsuario, @nombreUser" +
-                    ",@estatus ,@contrasenia, @fechaRegUser, @rol)";
+                cmd.CommandText = "Call p_modificar_perfilPadreFamilia(@cve_persona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
+                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
+                    ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes" +
+                   ",@cve_padre_familia, @idAlumno, @fecha_registro)";
                 //Datos de la persona
                 #region Datos de la persona
-                cmd.Parameters.AddWithValue("@cvePersona", usuario.persona.cve_persona);
-                cmd.Parameters.AddWithValue("@nombre", usuario.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", usuario.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", usuario.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", usuario.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", usuario.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", usuario.persona.sexo);
-                cmd.Parameters.AddWithValue("@numTelefono", usuario.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", usuario.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", usuario.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@municipio", usuario.persona.municipio);
-                cmd.Parameters.AddWithValue("@fechaNac", usuario.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@colonia", usuario.persona.idColonia);
+                cmd.Parameters.AddWithValue("@cve_persona", padreFamilia.persona.cve_persona);
+                cmd.Parameters.AddWithValue("@nombre", padreFamilia.persona.nombre);
+                cmd.Parameters.AddWithValue("@apePaterno", padreFamilia.persona.apellido_paterno);
+                cmd.Parameters.AddWithValue("@apeMaterno", padreFamilia.persona.apellido_materno);
+                cmd.Parameters.AddWithValue("@rfc", padreFamilia.persona.rfc);
+                cmd.Parameters.AddWithValue("@curp", padreFamilia.persona.curp);
+                cmd.Parameters.AddWithValue("@sexo", padreFamilia.persona.sexo);
+                cmd.Parameters.AddWithValue("@fechaNac", padreFamilia.persona.fecha_nacimiento);
+                cmd.Parameters.AddWithValue("@numTelefono", padreFamilia.persona.numero_telefono);
+                cmd.Parameters.AddWithValue("@estadoCivil", padreFamilia.persona.estado_civil);
+                cmd.Parameters.AddWithValue("@nacionalidad", padreFamilia.persona.nacionalidad);
+                cmd.Parameters.AddWithValue("@idAlumno", padreFamilia.persona.idAlumno);
+                cmd.Parameters.AddWithValue("@municipio", padreFamilia.persona.municipio);
+                cmd.Parameters.AddWithValue("@idColonia", padreFamilia.persona.idColonia);
                 #endregion
                 //Datos del usuario
-                cmd.Parameters.AddWithValue("@cveUsuario", usuario.cve_usuario);
-                cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
+                #region Datos del usuario
+                cmd.Parameters.AddWithValue("@contrasenia", padreFamilia.persona.usuario.contrasena);
+                cmd.Parameters.AddWithValue("@fechaRegUSer", padreFamilia.persona.usuario.fecha_registro);
+                cmd.Parameters.AddWithValue("@aliasRedes", padreFamilia.persona.usuario.alias_red);
+                #endregion
+                #region Datos del empleado
+                cmd.Parameters.AddWithValue("@cve_padre_familia", padreFamilia.cve_padre_familia);
+                cmd.Parameters.AddWithValue("@idAlumno", padreFamilia.idAlumno);
+                cmd.Parameters.AddWithValue("@fecha_registro", padreFamilia.fecha_registro);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -647,90 +733,70 @@ namespace WebServiceAppli_KT.Datos
             }
             finally
             {
-
+                con.Close();
             }
         }
 
-        public Usuario ConsultarPerfilUsuarioPadreFamilia(string user, string password)
+        public PadreFamilia ConsultarPerfilPadreFamilia(int cveUsuario)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where nombre_usuario = @user and contraseña = @pass";
-                cmd.Parameters.AddWithValue("@user", user);
-                cmd.Parameters.AddWithValue("@pass", password);
+                cmd.CommandText = "Select * from usuario u, persona p , empleado_plantel ep where u.cve_usuario = @cveUsuario";
+                cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    usuario = new Usuario();
-                    usuario.cve_usuario = Convert.ToInt32(reader["cve_usuario"].ToString());
-                    cmd.Parameters.AddWithValue("@contrasenia", usuario.contrasena);
-                    cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.fecha_registro);
-                    cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.estatus);
-                    cmd.Parameters.AddWithValue("@fechaRegUSer", usuario.alias_redes);
-                    usuario.persona = ConsultarPerfilPersonaPadreFamilia(Convert.ToInt32(reader["cve_personas"].ToString()));
+                    ent_padre_familia = new PadreFamilia();
+                    ent_padre_familia.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
+                    ent_padre_familia.persona.usuario.contrasena = reader["contrasena"].ToString();
+                    ent_padre_familia.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_padre_familia.persona.usuario.estatus = reader["estatus"].ToString();
+                    ent_padre_familia.persona.usuario.alias_red = reader["alias_red"].ToString();
+                    ent_padre_familia.persona.cve_persona = Convert.ToInt16(reader["cve_persona"].ToString());
+                    ent_padre_familia.persona.nombre = reader["nombre"].ToString();
+                    ent_padre_familia.persona.apellido_paterno = reader["apellido_paterno"].ToString();
+                    ent_padre_familia.persona.apellido_materno = reader["apellido_materno"].ToString();
+                    ent_padre_familia.persona.rfc = reader["rfc"].ToString();
+                    ent_padre_familia.persona.curp = reader["curp"].ToString();
+                    ent_padre_familia.persona.sexo = reader["sexo"].ToString();
+                    ent_padre_familia.persona.fecha_nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    ent_padre_familia.persona.numero_telefono = reader["numero_telefono"].ToString();
+                    ent_padre_familia.persona.estado_civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    ent_padre_familia.persona.nacionalidad = reader["nacionalidad"].ToString();
+                    ent_padre_familia.persona.idAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
+                    ent_padre_familia.persona.municipio = reader["municipio"].ToString();
+                    ent_padre_familia.persona.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
+                    ent_padre_familia.cve_padre_familia = Convert.ToInt32(reader["cve_padre_familia"].ToString());
+                    ent_padre_familia.idAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
+                    ent_padre_familia.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                 }
-
-                return usuario;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
-        public Persona ConsultarPerfilPersonaPadreFamilia(int cvePersona)
-        {
-            try
-            {
-                var conn = conexion.Builder;
-                con = new MySqlConnection(conn.ToString());
-                MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From persona where cvePersona = @cvePersona";
-                cmd.Parameters.AddWithValue("@cvePersona", cvePersona);
-                con.Open();
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    persona = new Persona();
-                    persona.cve_persona = Convert.ToInt16(reader["cve_persona"].ToString());
-                    persona.nombre = reader["nombre"].ToString();
-                    persona.apellido_paterno = reader["apellido_paterno"].ToString();
-                    persona.apellido_materno = reader["apellido_materno"].ToString();
-                    persona.rfc = reader["rfc"].ToString();
-                    persona.curp = reader["curp"].ToString();
-                    persona.sexo = reader["sexo"].ToString();
-                    persona.fecha_nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
-                    persona.numero_telefono = reader["numero_telefono"].ToString();
-                    persona.estado_civil = Convert.ToInt16(reader["estado_civil"].ToString());
-                    persona.nacionalidad = reader["nacionalidad"].ToString();
-                    persona.municipio = reader["municipio"].ToString();
-                    persona.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
-                }
-                return persona;
+                return ent_padre_familia;
             }
             catch (Exception)
             {
                 return null;
                 throw;
             }
+            finally
+            {
+                con.Close();
+            }
         }
 
-        public bool EliminarPerfilPadreFamilia(Usuario usuario)
+        public bool EliminarPerfilPadreFamilia(PadreFamilia padre)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "";
-                //Datos de la persona
-                //cmd.Parameters.AddWithValue("", cveUsuario);
-                //cmd.Parameters.AddWithValue("", cvePalabra);
+                cmd.CommandText = "update usuario set estatus = @estatus where cve_usuario = @cve_usuario";
+                cmd.Parameters.AddWithValue("@estatus", "Inactivo");
+                cmd.Parameters.AddWithValue("@cve_usuario", padre.persona.usuario.cve_usuario);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -746,5 +812,20 @@ namespace WebServiceAppli_KT.Datos
             }
         }
         #endregion
+        #endregion
+        #endregion
+
+        public int consultarUsuario()
+        {
+            try
+            {
+                return cve_usuario;
+            }
+            catch (Exception)
+            {
+                return 0;
+                throw;
+            }
+        }
     }
 }
