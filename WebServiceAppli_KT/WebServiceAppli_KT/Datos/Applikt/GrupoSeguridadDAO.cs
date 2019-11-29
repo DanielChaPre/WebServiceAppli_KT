@@ -24,14 +24,20 @@ namespace WebServiceAppli_KT.Datos
                 cmd.CommandText = "Select nombre From grupo_seguridad";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                lstgruposeguridad = new List<string>();
+                while (reader.Read())
                 {
-                    lstgruposeguridad = new List<string>();
-                    for (int i = 0; i < reader.FieldCount; i++)
-                    {
-                        lstgruposeguridad[i] = reader["nombre"].ToString();
-                    }
+                   
+                    lstgruposeguridad.Add(reader["nombre"].ToString());
                 }
+                //if (reader.Read())
+                //{
+                //    lstgruposeguridad = new List<string>();
+                //    for (int i = 0; i < reader.FieldCount; i++)
+                //    {
+                //        lstgruposeguridad[i] = reader["nombre"].ToString();
+                //    }
+                //}
 
                 return lstgruposeguridad;
             }

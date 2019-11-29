@@ -24,23 +24,24 @@ namespace WebServiceAppli_KT.Datos
                 cmd.CommandText = "select * from vistaPlanteles";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                lstPlanteles = new List<PlantelesES>();
+                while (reader.Read())
                 {
-                    lstPlanteles = new List<PlantelesES>();
-                    for (int i = 0; i < reader.FieldCount; i++)
+                  
+                    lstPlanteles.Add(new PlantelesES()
                     {
-                        lstPlanteles[i].idPlantelES = Convert.ToInt16(reader["idPlantelEs"].ToString());
-                        lstPlanteles[i].ClavePlantel = reader["ClavePlantel"].ToString();
-                        lstPlanteles[i].NombrePlantelES= reader["NombrePlantelES"].ToString();
-                        lstPlanteles[i].Subsistema= reader["Subsistema"].ToString();
-                        lstPlanteles[i].Sostenimiento= reader["Sostenimiento"].ToString();
-                        lstPlanteles[i].Municipio= reader["NombreMunicipio"].ToString();
-                        lstPlanteles[i].Activo= Convert.ToInt32( reader["Activo"].ToString());
-                        lstPlanteles[i].ClaveInstitucion= reader["ClaveInstitucion"].ToString();
-                        lstPlanteles[i].NombreInstitucionES= reader["NombreInstitucionEs"].ToString();
-                        lstPlanteles[i].OPD= reader["OPD"].ToString();
-                        lstPlanteles[i].NivelAgrupado= reader["NivelAgrupado"].ToString();
-                    }
+                        idPlantelES = Convert.ToInt16(reader["idPlantelEs"].ToString()),
+                        ClavePlantel = reader["ClavePlantel"].ToString(),
+                        NombrePlantelES = reader["NombrePlantelES"].ToString(),
+                        Subsistema = reader["Subsistema"].ToString(),
+                        Sostenimiento = reader["Sostenimiento"].ToString(),
+                        Municipio = reader["NombreMunicipio"].ToString(),
+                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
+                        ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
+                        NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
+                        OPD = reader["OPD"].ToString(),
+                        NivelAgrupado = reader["NivelAgrupado"].ToString()
+                     });
                 }
 
                 return lstPlanteles;

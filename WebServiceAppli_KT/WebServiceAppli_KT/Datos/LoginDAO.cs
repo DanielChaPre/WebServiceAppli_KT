@@ -78,7 +78,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.CommandText = "Insert into usuario(cve_usuario,nombre_usuario,contraseña,fecha_registro,estatus,rol,cve_personas) " +
                     "values(@cve_usuario , @user, @password, '', '', '', 0); ";
                 cmd.Parameters.AddWithValue("@cve_usuario", persona.usuario.cve_usuario);
-                cmd.Parameters.AddWithValue("@user", persona.usuario.alias_redes);
+                cmd.Parameters.AddWithValue("@user", persona.usuario.alias_red);
                 cmd.Parameters.AddWithValue("@password", persona.usuario.contrasena);
                 con.Open();
                 cmd.ExecuteNonQuery();

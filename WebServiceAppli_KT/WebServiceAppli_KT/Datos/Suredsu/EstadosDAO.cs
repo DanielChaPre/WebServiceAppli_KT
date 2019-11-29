@@ -23,15 +23,16 @@ namespace WebServiceAppli_KT.Datos
                 cmd.CommandText = "select * from estados";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                lst_estados = new List<Estados>();
+                while (reader.Read())
                 {
-                    lst_estados = new List<Estados>();
-                    for (int i = 0; i < reader.FieldCount; i++)
+                    
+                    lst_estados.Add(new Estados()
                     {
-                        lst_estados[i].IdEstado = Convert.ToInt32(reader["IdEstado"].ToString());
-                        lst_estados[i].NombreEstado = reader["NombreEstado"].ToString();
-                        lst_estados[i].idPais = Convert.ToInt32(reader["idPais"].ToString());
-                    }
+                        IdEstado = Convert.ToInt32(reader["IdEstado"].ToString()),
+                        NombreEstado = reader["NombreEstado"].ToString(),
+                        idPais = Convert.ToInt32(reader["idPais"].ToString())
+                });
                 }
                 return lst_estados;
             }

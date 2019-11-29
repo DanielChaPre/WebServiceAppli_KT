@@ -23,23 +23,25 @@ namespace WebServiceAppli_KT.Datos
                 cmd.CommandText = "select * from vistaCarreras";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                lstCarreras = new List<CarrerasES>();
+                while (reader.Read())
                 {
-                    lstCarreras = new List<CarrerasES>();
-                    for (int i = 0; i < reader.FieldCount; i++)
+                   
+                    lstCarreras.Add(new CarrerasES()
                     {
-                        lstCarreras[i].idCarreraES = Convert.ToInt32(reader["idCarreraEs"].ToString());
-                        lstCarreras[i].NombreCarreraES = reader["NombreCarreraES"].ToString();
-                        lstCarreras[i].Activa = Convert.ToInt16(reader["Activa"].ToString());
-                        lstCarreras[i].ClaveCarrera = reader["ClaveCarrera"].ToString();
-                        lstCarreras[i].CampoAmplio2016 = reader["CampoAmplio2016"].ToString();
-                        lstCarreras[i].CampoAmplioAnterior = reader["CampoAmplioAnterior"].ToString();
-                        lstCarreras[i].Nivel = reader["Nivel"].ToString();
-                        lstCarreras[i].CampoEspecifico2016 = reader["CampoEspecífico2016"].ToString();
-                        lstCarreras[i].CampoEspecificoAnterior = reader["CampoEspecificoAnterior"].ToString();
-                        lstCarreras[i].PlantelES.idPlantelES = Convert.ToInt16(reader["idPlantelES"].ToString());
-                    }
+                            idCarreraES = Convert.ToInt32(reader["idCarreraEs"].ToString()),
+                            NombreCarreraES = reader["NombreCarreraES"].ToString(),
+                            Activa = Convert.ToInt16(reader["Activa"].ToString()),
+                            ClaveCarrera = reader["ClaveCarrera"].ToString(),
+                            CampoAmplio2016 = reader["CampoAmplio2016"].ToString(),
+                            CampoAmplioAnterior = reader["CampoAmplioAnterior"].ToString(),
+                            Nivel = reader["Nivel"].ToString(),
+                            CampoEspecifico2016 = reader["CampoEspecífico2016"].ToString(),
+                            CampoEspecificoAnterior = reader["CampoEspecificoAnterior"].ToString(),
+                            IdPlantelesES = Convert.ToInt16(reader["idPlantelES"].ToString())
+                    });
                 }
+               
                 return lstCarreras;
             }
             catch (MySqlException ex)

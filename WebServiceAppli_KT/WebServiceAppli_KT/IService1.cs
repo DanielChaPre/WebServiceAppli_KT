@@ -42,7 +42,7 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "POST",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool CrearPerfil(Persona persona);
+        int CrearPerfil(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
@@ -58,12 +58,12 @@ namespace WebServiceAppli_KT
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfil(Persona persona);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/perfil/{user}/{pass}",
+        [WebInvoke(UriTemplate = "/perfil/{cve_usuario}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Persona ConsultarPerfilS(string user, string pass);
+        Persona ConsultarPerfilS(string cve_usuario);
         #endregion
         #region Empleado
         [OperationContract]
@@ -88,12 +88,12 @@ namespace WebServiceAppli_KT
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilEmpleado(Empleado empleado);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/empleado/{user}/{pass}",
+        [WebInvoke(UriTemplate = "/empleado/{cve_usuario}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Empleado ConsultarPerfilEmpleado(string user, string pass);
+        Empleado ConsultarPerfilEmpleado(string cve_usuario);
         #endregion
         #region EmpleadoPlantel
         [OperationContract]
@@ -118,12 +118,12 @@ namespace WebServiceAppli_KT
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/empleadoplantel/{user}/{pass}",
+        [WebInvoke(UriTemplate = "/empleadoplantel/{cve_usuario}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string user, string pass);
+        EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string cve_usuario);
         #endregion
         #region PadreFamilia
         [OperationContract]
@@ -148,42 +148,42 @@ namespace WebServiceAppli_KT
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilPadreFamilia(PadreFamilia persona);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/padrefamilia/{user}/{pass}",
+        [WebInvoke(UriTemplate = "/padrefamilia/{cve_usuario}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        PadreFamilia ConsultarPerfilPadreFamilia(string user, string pass);
+        PadreFamilia ConsultarPerfilPadreFamilia(string cve_usuario);
         #endregion
         #region Alumno
         [OperationContract]
-        [WebInvoke(UriTemplate = "/padrefamilia",
+        [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "POST",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool CrearPerfilAlumno(Persona persona);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/padrefamilia",
+        [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "UPDATE",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilAlumno(Persona persona);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/padrefamilia",
+        [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "DELETE",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilAlumno(Persona persona);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/padrefamilia/{user}/{pass}",
+        [WebInvoke(UriTemplate = "/alumno/{cve_usuario}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
-        Persona ConsultarPerfilAlumno(string user, string pass);
+        Persona ConsultarPerfilAlumno(string cve_usuario);
         #endregion
         //Notificaciones
         [OperationContract]

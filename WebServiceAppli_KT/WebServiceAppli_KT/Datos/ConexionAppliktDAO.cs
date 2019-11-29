@@ -27,10 +27,11 @@ namespace WebServiceAppli_KT.Datos
             try
             {
                 this.builder = new MySqlConnectionStringBuilder();
-                this.builder.Server = "localhost";
-                this.builder.UserID = "root";
-                this.builder.Password = "";
-                this.builder.Database = "appli-kt";
+                this.builder.Server = "s-applikt.utleon.edu.mx";
+                this.builder.UserID = "dev";
+                this.builder.Password = "applikt19";
+                ///this.builder.Database = "appli-kt";
+                this.builder.Database = "BD_AppliKT";
             }
             catch (MySqlException ex)
             {

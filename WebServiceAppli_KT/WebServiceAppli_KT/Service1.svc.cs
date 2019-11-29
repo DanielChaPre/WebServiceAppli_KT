@@ -52,45 +52,45 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public Persona ConsultarPerfilAlumno(string user, string pass)
+        public Persona ConsultarPerfilAlumno(string cve_usuario)
         {
             controladorAlumno = new ControladorAlumno();
             entPersona = new Persona();
-            entPersona = controladorAlumno.ConsultarAlumno();
+            entPersona = controladorAlumno.ConsultarAlumno(Convert.ToInt16(cve_usuario));
             return entPersona;
         }
 
-        public Empleado ConsultarPerfilEmpleado(string user, string pass)
+        public Empleado ConsultarPerfilEmpleado(string cve_usuario)
         {
             perfilController = new ControladorPerfil();
             ent_empleado = new Empleado();
-            ent_empleado = perfilController.ConsultarPerfilEmpleado(user,pass);
+            ent_empleado = perfilController.ConsultarPerfilEmpleado(Convert.ToInt16(cve_usuario));
             return ent_empleado;
 
         }
 
-        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string user, string pass)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string cve_usuario)
         {
             perfilController = new ControladorPerfil();
             ent_empleado_plantel = new EmpleadoPlantel();
-            ent_empleado_plantel = perfilController.ConsultarPerfilEmpleadoPlantel(user, pass);
+            ent_empleado_plantel = perfilController.ConsultarPerfilEmpleadoPlantel(Convert.ToInt16(cve_usuario));
             return ent_empleado_plantel;
         }
 
-        public PadreFamilia ConsultarPerfilPadreFamilia(string user, string pass)
+        public PadreFamilia ConsultarPerfilPadreFamilia(string cve_usuario)
         {
             perfilController = new ControladorPerfil();
             ent_padre_familia = new PadreFamilia();
-            ent_padre_familia = perfilController.ConsultarPerfilPadreFamilia(user, pass);
+            ent_padre_familia = perfilController.ConsultarPerfilPadreFamilia(Convert.ToInt16(cve_usuario));
             return ent_padre_familia;
         }
 
-        public Persona ConsultarPerfilS(string user, string pass)
+        public Persona ConsultarPerfilS(string cve_usuario)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                entPersona = perfilController.ConsultarPerfill(user,pass);
+                entPersona = perfilController.ConsultarPerfill(Convert.ToInt16(cve_usuario));
                 return entPersona;
             }
             catch (Exception)
@@ -119,17 +119,16 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool CrearPerfil(Persona persona)
+        public int CrearPerfil(Persona persona)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                perfilController.CrearPerfill(persona);
-                return true;
+                return perfilController.CrearPerfill(persona);
             }
             catch (Exception)
             {
-                return false;
+                return 0;
                 throw;
             }
         }

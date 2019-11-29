@@ -62,7 +62,7 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Persona ConsultarAlumno()
+        public Persona ConsultarAlumno(int cve_usuario)
         {
             try
             {

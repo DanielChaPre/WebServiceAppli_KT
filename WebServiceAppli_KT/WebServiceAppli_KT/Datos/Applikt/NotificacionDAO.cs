@@ -27,8 +27,8 @@ namespace WebServiceAppli_KT.Datos
                 if (reader.Read())
                 {
                     entNotificacion = new Notificaciones();
-                    entNotificacion.cve_notificaciones = int.Parse(reader["cve_notificaciones"].ToString());
-                    entNotificacion.tipo_notificaciones = reader["tipo_notificacion"].ToString();
+                    entNotificacion.cve_notificacion = int.Parse(reader["cve_notificaciones"].ToString());
+                    entNotificacion.tipo_notificacion = reader["tipo_notificacion"].ToString();
                     entNotificacion.texto = reader["texto"].ToString();
                     entNotificacion.responsable = reader["responsable"].ToString();
                     entNotificacion.cve_categoria = reader["categorizacion"].ToString();
