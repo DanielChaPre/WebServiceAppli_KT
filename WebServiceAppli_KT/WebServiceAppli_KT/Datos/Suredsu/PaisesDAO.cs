@@ -12,7 +12,6 @@ namespace WebServiceAppli_KT.Datos
         ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
         MySqlConnection con;
         List<Paises> lst_paises;
-
         public List<Paises> ObtenerPaises()
         {
             try
@@ -26,7 +25,6 @@ namespace WebServiceAppli_KT.Datos
                 lst_paises = new List<Paises>();
                 while (reader.Read())
                 {
-                   
                     lst_paises.Add(new Paises()
                     {
                         IdPais = Convert.ToInt32(reader["IdPais"].ToString()),
@@ -42,6 +40,5 @@ namespace WebServiceAppli_KT.Datos
                 throw;
             }
         }
-
     }
 }

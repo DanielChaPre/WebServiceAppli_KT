@@ -52,7 +52,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public Persona ConsultarPerfilAlumno(string cve_usuario)
+        public Persona ConsultarPerfilAlumno(string cve_usuario, string cve_persona)
         {
             controladorAlumno = new ControladorAlumno();
             entPersona = new Persona();
@@ -60,32 +60,32 @@ namespace WebServiceAppli_KT
             return entPersona;
         }
 
-        public Empleado ConsultarPerfilEmpleado(string cve_usuario)
+        public Empleado ConsultarPerfilEmpleado(string cve_usuario, string cve_persona)
         {
             perfilController = new ControladorPerfil();
             ent_empleado = new Empleado();
-            ent_empleado = perfilController.ConsultarPerfilEmpleado(Convert.ToInt16(cve_usuario));
+            ent_empleado = perfilController.ConsultarPerfilEmpleado(Convert.ToInt16(cve_usuario), Convert.ToInt16(cve_persona));
             return ent_empleado;
 
         }
 
-        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string cve_usuario)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string cve_usuario, string cve_persona)
         {
             perfilController = new ControladorPerfil();
             ent_empleado_plantel = new EmpleadoPlantel();
-            ent_empleado_plantel = perfilController.ConsultarPerfilEmpleadoPlantel(Convert.ToInt16(cve_usuario));
+            ent_empleado_plantel = perfilController.ConsultarPerfilEmpleadoPlantel(Convert.ToInt16(cve_usuario), Convert.ToInt16(cve_persona));
             return ent_empleado_plantel;
         }
 
-        public PadreFamilia ConsultarPerfilPadreFamilia(string cve_usuario)
+        public PadreFamilia ConsultarPerfilPadreFamilia(string cve_usuario, string cve_persona)
         {
             perfilController = new ControladorPerfil();
             ent_padre_familia = new PadreFamilia();
-            ent_padre_familia = perfilController.ConsultarPerfilPadreFamilia(Convert.ToInt16(cve_usuario));
+            ent_padre_familia = perfilController.ConsultarPerfilPadreFamilia(Convert.ToInt16(cve_usuario), Convert.ToInt16(cve_persona));
             return ent_padre_familia;
         }
 
-        public Persona ConsultarPerfilS(string cve_usuario)
+        public Persona ConsultarPerfilS(string cve_usuario, string cve_persona)
         {
             try
             {
@@ -119,7 +119,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public int CrearPerfil(Persona persona)
+        public List<int> CrearPerfil(Persona persona)
         {
             try
             {
@@ -128,42 +128,34 @@ namespace WebServiceAppli_KT
             }
             catch (Exception)
             {
-                return 0;
+                return null;
                 throw;
             }
         }
 
-        public bool CrearPerfilAlumno(Persona persona)
+        public List<int> CrearPerfilAlumno(Persona persona)
         {
-            bool realizado;
             controladorAlumno = new ControladorAlumno();
-            realizado = controladorAlumno.GuardarAlumno(persona);
-            return realizado;
+            return controladorAlumno.GuardarAlumno(persona);
 
         }
 
-        public bool CrearPerfilEmpleado(Empleado empleado)
+        public List<int> CrearPerfilEmpleado(Empleado empleado)
         {
-            bool realizado;
             perfilController = new ControladorPerfil();
-            realizado = perfilController.CrearPerfilEmpleado(empleado);
-            return realizado;
+            return perfilController.CrearPerfilEmpleado(empleado);
         }
 
-        public bool CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
+        public List<int> CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
-            bool realizado;
             perfilController = new ControladorPerfil();
-            realizado = perfilController.CrearPerfilEmpleadoPlantel(empleadoPlantel);
-            return realizado;
+            return perfilController.CrearPerfilEmpleadoPlantel(empleadoPlantel);
         }
 
-        public bool CrearPerfilPadreFamilia(PadreFamilia persona)
+        public List<int> CrearPerfilPadreFamilia(PadreFamilia persona)
         {
-            bool realizado;
             perfilController = new ControladorPerfil();
-            realizado = perfilController.CrearPerfilPadreFamilia(persona);
-            return realizado;
+            return perfilController.CrearPerfilPadreFamilia(persona);
         }
 
         public bool EliminarPerfil(Persona persona)

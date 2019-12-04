@@ -19,7 +19,7 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region Usuario
-        public int CrearPerfill(Persona persona)
+        public List<int> CrearPerfill(Persona persona)
         {
             try
             {
@@ -28,7 +28,7 @@ namespace WebServiceAppli_KT.Controlador
             }
             catch (Exception)
             {
-                return 0;
+                return null;
                 throw;
             }
         }
@@ -78,16 +78,15 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region Empleado
-        public bool CrearPerfilEmpleado(Empleado empleado)
+        public List<int> CrearPerfilEmpleado(Empleado empleado)
         {
             try
             {
-                perfilDAO.GuardarPerfilEmpleado(empleado);
-                return true;
+                return perfilDAO.GuardarPerfilEmpleado(empleado);
             }
             catch (Exception)
             {
-                return false;
+                return null;
                 throw;
             }
         }
@@ -120,12 +119,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Empleado ConsultarPerfilEmpleado(int cve_usuario)
+        public Empleado ConsultarPerfilEmpleado(int cve_usuario, int cve_persona)
         {
             try
             {
                 Empleado empleado = new Empleado();
-                empleado = perfilDAO.ConsultarPerfilEmpleado(cve_usuario);
+                empleado = perfilDAO.ConsultarPerfilEmpleado(cve_usuario, cve_persona);
                 return empleado;
             }
             catch (Exception)
@@ -137,16 +136,15 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region EmpleadoPlantel
-        public bool CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
+        public List<int> CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
             try
             {
-                perfilDAO.GuardarPerfilEmpleadoPlantel(empleadoPlantel);
-                return true;
+                return perfilDAO.GuardarPerfilEmpleadoPlantel(empleadoPlantel);
             }
             catch (Exception)
             {
-                return false;
+                return null;
                 throw;
             }
         }
@@ -179,12 +177,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(int cve_usuario)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(int cve_usuario, int cve_persona)
         {
             try
             {
                 EmpleadoPlantel empleadoPlantel = new EmpleadoPlantel();
-                empleadoPlantel = perfilDAO.ConsultarPerfilEmpleadoPlantel(cve_usuario);
+                empleadoPlantel = perfilDAO.ConsultarPerfilEmpleadoPlantel(cve_usuario, cve_persona);
                 return empleadoPlantel;
             }
             catch (Exception)
@@ -196,16 +194,15 @@ namespace WebServiceAppli_KT.Controlador
         #endregion
 
         #region PadreFamilia
-        public bool CrearPerfilPadreFamilia(PadreFamilia padreFamilia)
+        public List<int> CrearPerfilPadreFamilia(PadreFamilia padreFamilia)
         {
             try
             {
-                perfilDAO.GuardarPerfilPersonaPadreFamilia(padreFamilia);
-                return true;
+                return perfilDAO.GuardarPerfilPersonaPadreFamilia(padreFamilia);
             }
             catch (Exception)
             {
-                return false;
+                return null;
                 throw;
             }
         }
@@ -238,12 +235,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public PadreFamilia ConsultarPerfilPadreFamilia(int cve_usuario)
+        public PadreFamilia ConsultarPerfilPadreFamilia(int cve_usuario, int cve_persona)
         {
             try
             {
                 PadreFamilia  padreFamilia = new PadreFamilia();
-                padreFamilia = perfilDAO.ConsultarPerfilPadreFamilia(cve_usuario);
+                padreFamilia = perfilDAO.ConsultarPerfilPadreFamilia(cve_usuario, cve_persona);
                 return padreFamilia;
             }
             catch (Exception)

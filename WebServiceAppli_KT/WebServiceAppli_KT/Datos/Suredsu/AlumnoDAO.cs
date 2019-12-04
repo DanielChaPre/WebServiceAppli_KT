@@ -14,7 +14,7 @@ namespace WebServiceAppli_KT.Datos
         MySqlConnection con;
         Alumno alumno;
 
-        public bool GuardarAlummo(Persona persona)
+        public List<int> GuardarAlummo(Persona persona)
         {
             try
             {
@@ -25,12 +25,12 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.AddWithValue("@", alumno);
                 con.Open();
                 cmd.ExecuteNonQuery();
-                return true;
+                return null;
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error: "+ex.Message);
-                return false;
+                return null;
             }
         }
 
