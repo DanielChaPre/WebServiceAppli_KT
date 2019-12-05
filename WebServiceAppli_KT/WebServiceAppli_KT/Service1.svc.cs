@@ -52,6 +52,28 @@ namespace WebServiceAppli_KT
             }
         }
 
+       
+
+        //public bool CrearCuenta(string usuario, string contrasenia)
+        public bool CrearCuenta(Persona persona)
+        {
+            try
+            {
+                loginController = new ControladorLogin();
+                //if (loginController.CrearCuenta(usuario, contrasenia))
+                if (loginController.CrearCuenta(persona))
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+        #region perfiles
+        #region consultar perfiles
         public Persona ConsultarPerfilAlumno(string cve_usuario, string cve_persona)
         {
             controladorAlumno = new ControladorAlumno();
@@ -99,26 +121,9 @@ namespace WebServiceAppli_KT
                 throw;
             }
         }
+        #endregion
 
-        //public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(Persona persona)
-        {
-            try
-            {
-                loginController = new ControladorLogin();
-                //if (loginController.CrearCuenta(usuario, contrasenia))
-                if (loginController.CrearCuenta(persona))
-                    return true;
-                else
-                    return false;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-        }
-
+        #region crear perfil
         public List<int> CrearPerfil(Persona persona)
         {
             try
@@ -157,7 +162,9 @@ namespace WebServiceAppli_KT
             perfilController = new ControladorPerfil();
             return perfilController.CrearPerfilPadreFamilia(persona);
         }
+        #endregion
 
+        #region Eliminar perfiles
         public bool EliminarPerfil(Persona persona)
         {
             try
@@ -204,53 +211,40 @@ namespace WebServiceAppli_KT
             realizado = perfilController.EliminarPerfilPadreFamilia(persona);
             return realizado;
         }
+        #endregion
 
+        #region Modificar perfiles
         public bool ModificarPerfil(Persona persona)
         {
-            try
-            {
                 perfilController = new ControladorPerfil();
-                perfilController.ModificarPerfill(persona);
-                return true;
-            }
-            catch (Exception)
-            {
-                return false;
-                throw;
-            }
+                return perfilController.ModificarPerfill(persona);
         }
 
         public bool ModificarPerfilAlumno(Persona persona)
         {
-            bool realizado;
             controladorAlumno = new ControladorAlumno();
-            realizado = controladorAlumno.ModificarAlumno(persona);
-            return realizado;
+            return controladorAlumno.ModificarAlumno(persona);
         }
 
         public bool ModificarPerfilEmpleado(Empleado empleado)
         {
-            bool realizado;
             perfilController = new ControladorPerfil();
-            realizado = perfilController.ModificarPerfilEmpleado(empleado);
-            return realizado;
+            return perfilController.ModificarPerfilEmpleado(empleado);
         }
 
         public bool ModificarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel)
         {
-            bool realizado;
             perfilController = new ControladorPerfil();
-            realizado = perfilController.ModificarPerfilEmpleadoPlantel(empleadoPlantel);
-            return realizado;
+            return perfilController.ModificarPerfilEmpleadoPlantel(empleadoPlantel);
         }
 
         public bool ModificarPerfilPadreFamilia(PadreFamilia persona)
         {
-            bool realizado;
             perfilController = new ControladorPerfil();
-            realizado = perfilController.ModificarPerfilPadreFamilia(persona);
-            return realizado;
+            return perfilController.ModificarPerfilPadreFamilia(persona);
         }
+        #endregion 
+        #endregion
 
         public List<CarrerasES> ObtenerCarreras()
         {

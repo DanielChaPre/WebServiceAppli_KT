@@ -47,7 +47,7 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "UPDATE",
+                    Method = "PUT",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfil(Persona persona);
         [OperationContract]
@@ -77,7 +77,7 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/empleado",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "UPDATE",
+                    Method = "PUT",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilEmpleado(Empleado empleado);
         [OperationContract]
@@ -107,7 +107,7 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/empleadoplantel",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "UPDATE",
+                    Method = "PUT",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
@@ -137,7 +137,7 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/padrefamilia",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "UPDATE",
+                    Method = "PUT",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
@@ -167,7 +167,7 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "UPDATE",
+                    Method = "PUT",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilAlumno(Persona persona);
         [OperationContract]

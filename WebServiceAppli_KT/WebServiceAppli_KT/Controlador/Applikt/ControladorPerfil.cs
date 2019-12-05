@@ -37,8 +37,7 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.ModificarPerfil(persona);
-                return true;
+                return perfilDAO.ModificarPerfil(persona);
             }
             catch (Exception)
             {
@@ -51,8 +50,8 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.EliminarPerfil(persona);
-                return true;
+                
+                return perfilDAO.EliminarPerfil(persona);
             }
             catch (Exception)
             {
@@ -95,8 +94,8 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.ModificarPerfilEmpleado(empleado);
-                return true;
+
+                return perfilDAO.ModificarPerfilEmpleado(empleado);
             }
             catch (Exception)
             {
@@ -109,8 +108,8 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.EliminarPerfilEmpleado(empleado);
-                return true;
+
+                return perfilDAO.EliminarPerfilEmpleado(empleado);
             }
             catch (Exception)
             {
@@ -153,8 +152,7 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.ModificarPerfilEmpleadoPlantel(empleadoPlantel);
-                return true;
+                return perfilDAO.ModificarPerfilEmpleadoPlantel(empleadoPlantel);
             }
             catch (Exception)
             {
@@ -167,8 +165,7 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.EliminarPerfilEmpleadoPlantel(empleadoPlantel);
-                return true;
+                return perfilDAO.EliminarPerfilEmpleadoPlantel(empleadoPlantel);
             }
             catch (Exception)
             {
@@ -211,8 +208,7 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.ModificarPerfilPadreFamilia(padreFamilia);
-                return true;
+                return perfilDAO.ModificarPerfilPadreFamilia(padreFamilia);
             }
             catch (Exception)
             {
@@ -225,8 +221,7 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                perfilDAO.EliminarPerfilPadreFamilia(padreFamilia);
-                return true;
+                return perfilDAO.EliminarPerfilPadreFamilia(padreFamilia);
             }
             catch (Exception)
             {

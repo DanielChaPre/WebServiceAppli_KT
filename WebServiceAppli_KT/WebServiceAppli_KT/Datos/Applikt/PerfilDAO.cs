@@ -88,35 +88,27 @@ namespace WebServiceAppli_KT.Datos
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-                MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfil(@cvePersona, @nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
-                    ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes)";
-                //Datos de la persona
-                #region Datos de la persona
-                cmd.Parameters.AddWithValue("@cvePersona", persona.cve_persona);
-                cmd.Parameters.AddWithValue("@nombre", persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", persona.sexo);
-                cmd.Parameters.AddWithValue("@fechaNac", persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@numTelefono", persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@idAlumno", persona.idAlumno);
-                cmd.Parameters.AddWithValue("@municipio", persona.municipio);
-                cmd.Parameters.AddWithValue("@idColonia", persona.idColonia);
-                #endregion
-                //Datos del usuario
-                #region Datos del usuario
-                cmd.Parameters.AddWithValue("@cveUsuario", persona.usuario.cve_usuario);
-                cmd.Parameters.AddWithValue("@contrasenia", persona.usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", persona.usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@estatus", persona.usuario.estatus);
-                cmd.Parameters.AddWithValue("@aliasRedes", persona.usuario.alias_red);
-                #endregion
+                MySqlCommand cmd = new MySqlCommand("p_modificar_perfil", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_cve_persona", persona.cve_persona));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre", persona.nombre));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_paterno", persona.apellido_paterno));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_materno", persona.apellido_materno));
+                cmd.Parameters.Add(new MySqlParameter("p_rfc", persona.rfc));
+                cmd.Parameters.Add(new MySqlParameter("p_curp", persona.curp));
+                cmd.Parameters.Add(new MySqlParameter("p_sexo", persona.sexo));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_nacimiento", persona.fecha_nacimiento));
+                cmd.Parameters.Add(new MySqlParameter("p_numero_telefono", persona.numero_telefono));
+                cmd.Parameters.Add(new MySqlParameter("p_estado_civil", persona.estado_civil));
+                cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", persona.nacionalidad));
+                cmd.Parameters.Add(new MySqlParameter("p_idAlumno", persona.idAlumno));
+                cmd.Parameters.Add(new MySqlParameter("p_municipio", persona.municipio));
+                cmd.Parameters.Add(new MySqlParameter("p_idColonia", persona.idColonia));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_contraseña", persona.usuario.contrasena));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.usuario.fecha_registro));
+                cmd.Parameters.Add(new MySqlParameter("p_estatus", persona.usuario.estatus));
+                cmd.Parameters.Add(new MySqlParameter("p_alias_redes", persona.usuario.alias_red));
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -274,40 +266,31 @@ namespace WebServiceAppli_KT.Datos
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-                MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfilEmpleado(@cve_persona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
-                    ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes" +
-                    ",@cve_empleado, @numero_empleado, @estatus ,@fecha_registro)";
-                //Datos de la persona
-                #region Datos de la persona
-                cmd.Parameters.AddWithValue("@cve_persona", empleado.persona.cve_persona);
-                cmd.Parameters.AddWithValue("@nombre", empleado.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", empleado.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", empleado.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", empleado.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", empleado.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", empleado.persona.sexo);
-                cmd.Parameters.AddWithValue("@fechaNac", empleado.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@numTelefono", empleado.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", empleado.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", empleado.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@idAlumno", empleado.persona.idAlumno);
-                cmd.Parameters.AddWithValue("@municipio", empleado.persona.municipio);
-                cmd.Parameters.AddWithValue("@idColonia", empleado.persona.idColonia);
-                #endregion
-                //Datos del usuario
-                #region Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", empleado.persona.usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", empleado.persona.usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@aliasRedes", empleado.persona.usuario.alias_red);
-                #endregion
-                #region Datos del empleado
-                cmd.Parameters.AddWithValue("@cve_empleado", empleado.cve_empleado);
-                cmd.Parameters.AddWithValue("@numero_empleado", empleado.numero_empleado);
-                cmd.Parameters.AddWithValue("@estatus", empleado.estatus);
-                cmd.Parameters.AddWithValue("@fecha_registro", empleado.fecha_registro);
-                #endregion
+                MySqlCommand cmd = new MySqlCommand("p_modificar_perfilEmpleado", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_cve_persona", empleado.persona.cve_persona));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre", empleado.persona.nombre));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_paterno", empleado.persona.apellido_paterno));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_materno", empleado.persona.apellido_materno));
+                cmd.Parameters.Add(new MySqlParameter("p_rfc", empleado.persona.rfc));
+                cmd.Parameters.Add(new MySqlParameter("p_curp", empleado.persona.curp));
+                cmd.Parameters.Add(new MySqlParameter("p_sexo", empleado.persona.sexo));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_nacimiento", empleado.persona.fecha_nacimiento));
+                cmd.Parameters.Add(new MySqlParameter("p_numero_telefono", empleado.persona.numero_telefono));
+                cmd.Parameters.Add(new MySqlParameter("p_estado_civil", empleado.persona.estado_civil));
+                cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", empleado.persona.nacionalidad));
+                cmd.Parameters.Add(new MySqlParameter("p_idAlumno", empleado.persona.idAlumno));
+                cmd.Parameters.Add(new MySqlParameter("p_municipio", empleado.persona.municipio));
+                cmd.Parameters.Add(new MySqlParameter("p_idColonia", empleado.persona.idColonia));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", empleado.persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_contraseña", empleado.persona.usuario.contrasena));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", empleado.persona.usuario.fecha_registro));
+                cmd.Parameters.Add(new MySqlParameter("p_estatus", empleado.persona.usuario.estatus));
+                cmd.Parameters.Add(new MySqlParameter("p_alias_redes", empleado.persona.usuario.alias_red));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_empleado", empleado.cve_empleado));
+                cmd.Parameters.Add(new MySqlParameter("p_numero_empleado", empleado.numero_empleado));
+                cmd.Parameters.Add(new MySqlParameter("p_estatusE", empleado.estatus));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro", empleado.fecha_registro));
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -331,7 +314,7 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "Select * from usuario u, persona p, empleado e where p.cve_usuario = @cve_usuarioP and u.cve_usuario = @cve_usuarioU" +
-                    " and e.cve_empleado = @cve_persona";
+                    " and e.cve_persona = @cve_persona";
                 cmd.Parameters.AddWithValue("@cve_usuarioP", cveUsuario);
                 cmd.Parameters.AddWithValue("@cve_usuarioU", cveUsuario);
                 cmd.Parameters.AddWithValue("@cve_persona", cvePersona);
@@ -340,6 +323,8 @@ namespace WebServiceAppli_KT.Datos
                 if (reader.Read())
                 {
                     ent_empleado = new Empleado();
+                    ent_empleado.persona = new Persona();
+                    ent_empleado.persona.usuario = new Usuario();
                     ent_empleado.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
                     ent_empleado.persona.usuario.contrasena = reader["contrasena"].ToString();
                     ent_empleado.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
@@ -366,8 +351,9 @@ namespace WebServiceAppli_KT.Datos
                 }
                 return ent_empleado;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                Console.WriteLine("Error: " + ex.Message);
                 return null;
                 throw;
             }
@@ -540,39 +526,31 @@ namespace WebServiceAppli_KT.Datos
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-                MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfilEmpleadoPlantel(@cve_persona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
-                    ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes" +
-                    ",@cve_empleado_empleado, @idplantelES, @tipo ,@fecha_registro)";
-                //Datos de la persona
-                #region Datos de la persona
-                cmd.Parameters.AddWithValue("@cve_persona", empleadoPlantel.persona.cve_persona);
-                cmd.Parameters.AddWithValue("@nombre", empleadoPlantel.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", empleadoPlantel.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", empleadoPlantel.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", empleadoPlantel.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", empleadoPlantel.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", empleadoPlantel.persona.sexo);
-                cmd.Parameters.AddWithValue("@fechaNac", empleadoPlantel.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@numTelefono", empleadoPlantel.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", empleadoPlantel.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", empleadoPlantel.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@idAlumno", empleadoPlantel.persona.idAlumno);
-                cmd.Parameters.AddWithValue("@municipio", empleadoPlantel.persona.municipio);
-                cmd.Parameters.AddWithValue("@idColonia", empleadoPlantel.persona.idColonia);
-                #endregion
-                //Datos del usuario
-                #region Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", empleadoPlantel.persona.usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", empleadoPlantel.persona.usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@aliasRedes", empleadoPlantel.persona.usuario.alias_red);
-                #endregion
-                #region Datos del empleado
-                cmd.Parameters.AddWithValue("@cve_empleado_empleado", empleadoPlantel.cve_empleado_plantel);
-                cmd.Parameters.AddWithValue("@idplantelES", empleadoPlantel.idPlantelesES);
-                cmd.Parameters.AddWithValue("@tipo", empleadoPlantel.tipo);
-                cmd.Parameters.AddWithValue("@fecha_registro", empleadoPlantel.fecha_registro);
+                MySqlCommand cmd = new MySqlCommand("p_modificar_perfilEmpleado", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_cve_persona", empleadoPlantel.persona.cve_persona));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre", empleadoPlantel.persona.nombre));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_paterno", empleadoPlantel.persona.apellido_paterno));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_materno", empleadoPlantel.persona.apellido_materno));
+                cmd.Parameters.Add(new MySqlParameter("p_rfc", empleadoPlantel.persona.rfc));
+                cmd.Parameters.Add(new MySqlParameter("p_curp", empleadoPlantel.persona.curp));
+                cmd.Parameters.Add(new MySqlParameter("p_sexo", empleadoPlantel.persona.sexo));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_nacimiento", empleadoPlantel.persona.fecha_nacimiento));
+                cmd.Parameters.Add(new MySqlParameter("p_numero_telefono", empleadoPlantel.persona.numero_telefono));
+                cmd.Parameters.Add(new MySqlParameter("p_estado_civil", empleadoPlantel.persona.estado_civil));
+                cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", empleadoPlantel.persona.nacionalidad));
+                cmd.Parameters.Add(new MySqlParameter("p_idAlumno", empleadoPlantel.persona.idAlumno));
+                cmd.Parameters.Add(new MySqlParameter("p_municipio", empleadoPlantel.persona.municipio));
+                cmd.Parameters.Add(new MySqlParameter("p_idColonia", empleadoPlantel.persona.idColonia));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", empleadoPlantel.persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_contraseña", empleadoPlantel.persona.usuario.contrasena));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", empleadoPlantel.persona.usuario.fecha_registro));
+                cmd.Parameters.Add(new MySqlParameter("p_estatus", empleadoPlantel.persona.usuario.estatus));
+                cmd.Parameters.Add(new MySqlParameter("p_alias_redes", empleadoPlantel.persona.usuario.alias_red));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_empleado_plantel", empleadoPlantel.cve_empleado_plantel));
+                cmd.Parameters.Add(new MySqlParameter("p_idPlantelES", empleadoPlantel.idPlantelesES));
+                cmd.Parameters.Add(new MySqlParameter("p_tipo", empleadoPlantel.tipo));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro", empleadoPlantel.fecha_registro));
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -667,7 +645,6 @@ namespace WebServiceAppli_KT.Datos
             }
         }
         #endregion
-        #endregion
         #region PadreFamilia
         public List<int> GuardarPerfilPersonaPadreFamilia(PadreFamilia padreFamilia)
         {
@@ -733,38 +710,30 @@ namespace WebServiceAppli_KT.Datos
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-                MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Call p_modificar_perfilPadreFamilia(@cve_persona,@nombre, @apePaterno, @apeMaterno, @rfc, @curp, @sexo" +
-                    ", @fechaNac, @numTelefono, @estadoCivil, @nacionalidad, @idAlumno ,@municipio, @idColonia " +
-                    ", @cveUsuario, @contrasenia, @fechaRegUser, @estatus,@aliasRedes" +
-                   ",@cve_padre_familia, @idAlumno, @fecha_registro)";
-                //Datos de la persona
-                #region Datos de la persona
-                cmd.Parameters.AddWithValue("@cve_persona", padreFamilia.persona.cve_persona);
-                cmd.Parameters.AddWithValue("@nombre", padreFamilia.persona.nombre);
-                cmd.Parameters.AddWithValue("@apePaterno", padreFamilia.persona.apellido_paterno);
-                cmd.Parameters.AddWithValue("@apeMaterno", padreFamilia.persona.apellido_materno);
-                cmd.Parameters.AddWithValue("@rfc", padreFamilia.persona.rfc);
-                cmd.Parameters.AddWithValue("@curp", padreFamilia.persona.curp);
-                cmd.Parameters.AddWithValue("@sexo", padreFamilia.persona.sexo);
-                cmd.Parameters.AddWithValue("@fechaNac", padreFamilia.persona.fecha_nacimiento);
-                cmd.Parameters.AddWithValue("@numTelefono", padreFamilia.persona.numero_telefono);
-                cmd.Parameters.AddWithValue("@estadoCivil", padreFamilia.persona.estado_civil);
-                cmd.Parameters.AddWithValue("@nacionalidad", padreFamilia.persona.nacionalidad);
-                cmd.Parameters.AddWithValue("@idAlumno", padreFamilia.persona.idAlumno);
-                cmd.Parameters.AddWithValue("@municipio", padreFamilia.persona.municipio);
-                cmd.Parameters.AddWithValue("@idColonia", padreFamilia.persona.idColonia);
-                #endregion
-                //Datos del usuario
-                #region Datos del usuario
-                cmd.Parameters.AddWithValue("@contrasenia", padreFamilia.persona.usuario.contrasena);
-                cmd.Parameters.AddWithValue("@fechaRegUSer", padreFamilia.persona.usuario.fecha_registro);
-                cmd.Parameters.AddWithValue("@aliasRedes", padreFamilia.persona.usuario.alias_red);
-                #endregion
-                #region Datos del empleado
-                cmd.Parameters.AddWithValue("@cve_padre_familia", padreFamilia.cve_padre_familia);
-                cmd.Parameters.AddWithValue("@idAlumno", padreFamilia.idAlumno);
-                cmd.Parameters.AddWithValue("@fecha_registro", padreFamilia.fecha_registro);
+                MySqlCommand cmd = new MySqlCommand("p_modificar_perfilEmpleado", con);
+                cmd.CommandType = System.Data.CommandType.StoredProcedure;
+                cmd.Parameters.Add(new MySqlParameter("p_cve_persona", padreFamilia.persona.cve_persona));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre", padreFamilia.persona.nombre));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_paterno", padreFamilia.persona.apellido_paterno));
+                cmd.Parameters.Add(new MySqlParameter("p_apellido_materno", padreFamilia.persona.apellido_materno));
+                cmd.Parameters.Add(new MySqlParameter("p_rfc", padreFamilia.persona.rfc));
+                cmd.Parameters.Add(new MySqlParameter("p_curp", padreFamilia.persona.curp));
+                cmd.Parameters.Add(new MySqlParameter("p_sexo", padreFamilia.persona.sexo));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_nacimiento", padreFamilia.persona.fecha_nacimiento));
+                cmd.Parameters.Add(new MySqlParameter("p_numero_telefono", padreFamilia.persona.numero_telefono));
+                cmd.Parameters.Add(new MySqlParameter("p_estado_civil", padreFamilia.persona.estado_civil));
+                cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", padreFamilia.persona.nacionalidad));
+                cmd.Parameters.Add(new MySqlParameter("p_idAlumno", padreFamilia.persona.idAlumno));
+                cmd.Parameters.Add(new MySqlParameter("p_municipio", padreFamilia.persona.municipio));
+                cmd.Parameters.Add(new MySqlParameter("p_idColonia", padreFamilia.persona.idColonia));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", padreFamilia.persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_contraseña", padreFamilia.persona.usuario.contrasena));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", padreFamilia.persona.usuario.fecha_registro));
+                cmd.Parameters.Add(new MySqlParameter("p_estatus", padreFamilia.persona.usuario.estatus));
+                cmd.Parameters.Add(new MySqlParameter("p_alias_redes", padreFamilia.persona.usuario.alias_red));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_padre_familia", padreFamilia.persona.usuario.alias_red));
+                cmd.Parameters.Add(new MySqlParameter("p_idAlumnoP", padreFamilia.persona.usuario.alias_red));
+                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro", padreFamilia.persona.usuario.alias_red));
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
@@ -788,7 +757,7 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "Select * from usuario u, persona p, padre_familia pf where p.cve_usuario = @cve_usuarioP and u.cve_usuario = @cve_usuarioU" +
-      "         and pf.cve_persona = @cve_persona";
+                "and pf.cve_persona = @cve_persona";
                 cmd.Parameters.AddWithValue("@cve_usuarioP", cveUsuario);
                 cmd.Parameters.AddWithValue("@cve_usuarioU", cveUsuario);
                 cmd.Parameters.AddWithValue("@cve_persona", cvePersona);
@@ -797,6 +766,8 @@ namespace WebServiceAppli_KT.Datos
                 if (reader.Read())
                 {
                     ent_padre_familia = new PadreFamilia();
+                    ent_padre_familia.persona = new Persona();
+                    ent_padre_familia.persona.usuario = new Usuario();
                     ent_padre_familia.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
                     ent_padre_familia.persona.usuario.contrasena = reader["contrasena"].ToString();
                     ent_padre_familia.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
@@ -857,7 +828,6 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
-        #endregion
         #endregion
     }
 }
