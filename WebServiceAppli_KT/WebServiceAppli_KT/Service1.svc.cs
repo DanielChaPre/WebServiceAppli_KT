@@ -52,8 +52,6 @@ namespace WebServiceAppli_KT
             }
         }
 
-       
-
         //public bool CrearCuenta(string usuario, string contrasenia)
         public bool CrearCuenta(Persona persona)
         {
@@ -72,6 +70,7 @@ namespace WebServiceAppli_KT
                 throw;
             }
         }
+
         #region perfiles
         #region consultar perfiles
         public Persona ConsultarPerfilAlumno(string cve_usuario, string cve_persona)

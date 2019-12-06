@@ -32,8 +32,6 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string nacionalidad { get; set; }
         [DataMember]
-        public int idAlumno { get; set; }
-        [DataMember]
         public string municipio { get; set; }
         [DataMember]
         public int idColonia { get; set; }

@@ -34,7 +34,7 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                if (!alumnoDAO.EliminarAlumno(persona.idAlumno))
+                if (!alumnoDAO.EliminarAlumno(persona.usuario.idAlumno))
                 { 
                     return false;
                 }
