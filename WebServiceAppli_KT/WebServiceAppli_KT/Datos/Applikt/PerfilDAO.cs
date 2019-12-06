@@ -9,6 +9,7 @@ namespace WebServiceAppli_KT.Datos
 {
     public class PerfilDAO
     {
+
         ConexionAppliktDAO conexion = new ConexionAppliktDAO();
         MySqlConnection con;
         Persona persona;
