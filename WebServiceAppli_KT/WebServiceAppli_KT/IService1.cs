@@ -194,6 +194,7 @@ namespace WebServiceAppli_KT
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         Notificaciones ConsultarNotificaciones();
         //Atlas
+        #region Planteles
         [OperationContract]
         [WebInvoke(UriTemplate = "/planteles",
                     RequestFormat = WebMessageFormat.Json,
@@ -201,6 +202,31 @@ namespace WebServiceAppli_KT
                     Method = "GET",
                     BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<PlantelesES> ObtenerPlanteles();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/buscarplantelmunicipio/{municipio}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET",
+                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+        PlantelesES BuscarPlantelesMunicipio(string municipio);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/buscarplantelid/{carrera}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET",
+                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+        PlantelesES BuscarPlantelesId(string carrera);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/buscarplantel/{plantel}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET",
+                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+        PlantelesES BuscarPlanteles(string plantel);
+        #endregion
         [OperationContract]
         [WebInvoke(UriTemplate = "/carreras",
                     RequestFormat = WebMessageFormat.Json,

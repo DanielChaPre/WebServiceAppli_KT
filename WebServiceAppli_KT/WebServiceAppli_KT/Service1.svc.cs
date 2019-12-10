@@ -28,6 +28,7 @@ namespace WebServiceAppli_KT
         Empleado ent_empleado = new Empleado();
         EmpleadoPlantel ent_empleado_plantel = new EmpleadoPlantel();
         PadreFamilia ent_padre_familia = new PadreFamilia();
+        PlantelesES planteles;
         List<PlantelesES> lstPlanteles;
         List<CarrerasES> lstCarreras;
         List<Colonias> lst_colonias;
@@ -339,21 +340,6 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<PlantelesES> ObtenerPlanteles()
-        {
-            try
-            {
-                escuelaESController = new ControladorEscuelasES();
-                lstPlanteles = new List<PlantelesES>();
-                lstPlanteles = escuelaESController.ObtenerPlanteles();
-                return lstPlanteles;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
         public bool ValidarContrasenia(string contrasenia)
         {
             try
@@ -376,10 +362,7 @@ namespace WebServiceAppli_KT
             try
             {
                 loginController = new ControladorLogin();
-                if (loginController.ValidarUsuario(usuario))
-                    return true;
-                else
-                    return false;
+                return loginController.ValidarUsuario(usuario);
             }
             catch (Exception)
             {
@@ -387,5 +370,46 @@ namespace WebServiceAppli_KT
                 throw;
             }
         }
+
+        #region Plantel
+        public List<PlantelesES> ObtenerPlanteles()
+        {
+            try
+            {
+                escuelaESController = new ControladorEscuelasES();
+                lstPlanteles = new List<PlantelesES>();
+                lstPlanteles = escuelaESController.ObtenerPlanteles();
+                return lstPlanteles;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public PlantelesES BuscarPlantelesMunicipio(string municipio)
+        {
+            escuelaESController = new ControladorEscuelasES();
+            planteles = new PlantelesES();
+            planteles = escuelaESController.BuscarPlantelMunicipio(municipio);
+            return planteles;
+        }
+
+        public PlantelesES BuscarPlantelesId(string carrera)
+        {
+            escuelaESController = new ControladorEscuelasES();
+            planteles = new PlantelesES();
+            planteles = escuelaESController.BuscarPlantelCarrera(carrera);
+            return planteles;
+        }
+
+        public PlantelesES BuscarPlanteles(string plantel)
+        {
+            escuelaESController = new ControladorEscuelasES();
+            planteles = new PlantelesES();
+            planteles = escuelaESController.BuscarPlantel(plantel);
+            return planteles;
+        } 
+        #endregion
     }
 }

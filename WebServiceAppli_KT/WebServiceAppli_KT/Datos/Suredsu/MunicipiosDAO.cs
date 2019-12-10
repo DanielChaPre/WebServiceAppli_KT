@@ -12,6 +12,7 @@ namespace WebServiceAppli_KT.Datos
         ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
         MySqlConnection con;
         List<Municipios> lst_municipios;
+        Municipios municipios;
 
         public List<Municipios> ObtenerMunicipios()
         {
@@ -40,6 +41,31 @@ namespace WebServiceAppli_KT.Datos
             catch (Exception)
             {
                 return null;
+            }
+        }
+
+        public int BuscarMunicipio(string municipio)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "select idMunicipio from municipios where NombreMunicipio = @municipio";
+                cmd.Parameters.AddWithValue("@municipio", municipio);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                int idMunicipio=0;
+                while (reader.Read())
+                {
+                    idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString());
+                }
+
+                return idMunicipio;
+            }
+            catch (Exception)
+            {
+                return 0;
             }
         }
     }

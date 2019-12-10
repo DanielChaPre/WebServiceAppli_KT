@@ -56,5 +56,32 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
+        public int BuscarPlantelesId(string carrera)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "select idCarreraEs from carrerases";
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                int idPlantelES = 0;
+                while (reader.Read())
+                {
+                    idPlantelES = Convert.ToInt16(reader["idPlantelES"].ToString());
+                }
+                return idPlantelES;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en la consulta: " + ex.Message);
+                return 0;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

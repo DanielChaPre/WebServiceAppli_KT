@@ -1,8 +1,5 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Datos
@@ -21,12 +18,14 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where nombre_usuario = @user";
+                cmd.CommandText = "Select * From usuario where usuario = @user";
                 cmd.Parameters.AddWithValue("@user", usuario);
                 con.Open();
-                cmd.ExecuteNonQuery();
-
-                return true;
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                    return true;
+                else
+                    return false;
             }
             catch (MySqlException ex)
             {
@@ -47,12 +46,14 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where contraseña = @pass";
+                cmd.CommandText = "Select * From usuario where contrasena = @pass";
                 cmd.Parameters.AddWithValue("@pass", contrasenia);
                 con.Open();
-                cmd.ExecuteNonQuery();
-
-                return true;
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                    return true;
+                else
+                    return false;
             }
             catch (MySqlException ex)
             {

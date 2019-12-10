@@ -39,6 +39,7 @@ namespace WebServiceAppli_KT.Datos
                   cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", persona.nacionalidad));
                   cmd.Parameters.Add(new MySqlParameter("p_municipio", persona.municipio));
                   cmd.Parameters.Add(new MySqlParameter("p_idColonia", persona.idColonia));
+                  cmd.Parameters.Add(new MySqlParameter("p_usuario", persona.usuario.usuario));
                   cmd.Parameters.Add(new MySqlParameter("p_contraseña", persona.usuario.contrasena));
                   cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.usuario.fecha_registro));
                   cmd.Parameters.Add(new MySqlParameter("p_alias_redes", persona.usuario.alias_red));
@@ -105,6 +106,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", persona.idColonia));
                 cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_usuario", persona.usuario.usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_estatus", persona.usuario.estatus));
@@ -155,6 +157,7 @@ namespace WebServiceAppli_KT.Datos
                     persona.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     persona.usuario = new Usuario();
                     persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
+                    persona.usuario.usuario = reader["usuario"].ToString();
                     persona.usuario.contrasena = reader["contrasena"].ToString();
                     persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                     persona.usuario.estatus = reader["estatus"].ToString();

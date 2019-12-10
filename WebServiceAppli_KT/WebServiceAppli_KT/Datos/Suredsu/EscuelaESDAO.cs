@@ -12,6 +12,7 @@ namespace WebServiceAppli_KT.Datos
         ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
         MySqlConnection con;
         List<PlantelesES> lstPlanteles;
+        PlantelesES planteles;
 
         public List<PlantelesES> ObtenerPlnateles()
         {
@@ -49,6 +50,132 @@ namespace WebServiceAppli_KT.Datos
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error en la consulta escuela: "+ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public PlantelesES BuscarPlantelMunicipio(int idMunicipio)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                //Queda pendiente la consulta en vista
+                cmd.CommandText = "select * from planteleses where idMunicipio = @idMunicipio";
+                cmd.Parameters.AddWithValue("@idMunicipio", idMunicipio);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    planteles = new PlantelesES()
+                    {
+                        idPlantelES = Convert.ToInt16(reader["idPlantelEs"].ToString()),
+                        ClavePlantel = reader["ClavePlantel"].ToString(),
+                        NombrePlantelES = reader["NombrePlantelES"].ToString(),
+                        Subsistema = reader["Subsistema"].ToString(),
+                        Sostenimiento = reader["Sostenimiento"].ToString(),
+                        Municipio = reader["NombreMunicipio"].ToString(),
+                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
+                        ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
+                        NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
+                        OPD = reader["OPD"].ToString(),
+                        NivelAgrupado = reader["NivelAgrupado"].ToString()
+                    };
+                }
+                return planteles;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en la consulta escuela: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public PlantelesES BuscarPlantelId(int idPlanteles)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                //Queda pendiente la consulta en vista
+                cmd.CommandText = "select * from planteleses where idPlantelES = @idPlanteles";
+                cmd.Parameters.AddWithValue("@idPlanteles", idPlanteles);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    planteles = new PlantelesES()
+                    {
+                        idPlantelES = Convert.ToInt16(reader["idPlantelEs"].ToString()),
+                        ClavePlantel = reader["ClavePlantel"].ToString(),
+                        NombrePlantelES = reader["NombrePlantelES"].ToString(),
+                        Subsistema = reader["Subsistema"].ToString(),
+                        Sostenimiento = reader["Sostenimiento"].ToString(),
+                        Municipio = reader["NombreMunicipio"].ToString(),
+                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
+                        ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
+                        NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
+                        OPD = reader["OPD"].ToString(),
+                        NivelAgrupado = reader["NivelAgrupado"].ToString()
+                    };
+                }
+                return planteles;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en la consulta escuela: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public PlantelesES BuscarPlantel(string plantel)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                //Queda pendiente la consulta en vista
+                cmd.CommandText = "select * from planteleses where NombrePlantelES = @plantel";
+                cmd.Parameters.AddWithValue("@plantel", plantel);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    planteles = new PlantelesES()
+                    {
+                        idPlantelES = Convert.ToInt16(reader["idPlantelEs"].ToString()),
+                        ClavePlantel = reader["ClavePlantel"].ToString(),
+                        NombrePlantelES = reader["NombrePlantelES"].ToString(),
+                        Subsistema = reader["Subsistema"].ToString(),
+                        Sostenimiento = reader["Sostenimiento"].ToString(),
+                        Municipio = reader["NombreMunicipio"].ToString(),
+                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
+                        ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
+                        NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
+                        OPD = reader["OPD"].ToString(),
+                        NivelAgrupado = reader["NivelAgrupado"].ToString()
+                    };
+                }
+                return planteles;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en la consulta escuela: " + ex.Message);
                 return null;
             }
             finally

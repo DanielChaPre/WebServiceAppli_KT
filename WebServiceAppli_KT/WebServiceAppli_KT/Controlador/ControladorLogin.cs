@@ -12,7 +12,7 @@ namespace WebServiceAppli_KT.Controlador
         LoginDAO loginDAO;
         public ControladorLogin()
         {
-            loginDAO = new LoginDAO(); 
+            loginDAO = new LoginDAO();
 
         }
 
@@ -20,8 +20,7 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                loginDAO.ValidarUsuario(usuario);
-                return true;
+                return loginDAO.ValidarUsuario(usuario);
             }
             catch (Exception)
             {
@@ -33,21 +32,18 @@ namespace WebServiceAppli_KT.Controlador
         {
             try
             {
-                loginDAO.ValidarContrasenia(contrasenia);
-                return true;
+                return loginDAO.ValidarContrasenia(contrasenia);
             }
             catch (Exception)
             {
                 return false;
             }
-        }
+        } 
 
-       // public bool CrearCuenta(string usuario, string contrasenia)
         public bool CrearCuenta(Persona persona)
         {
             try
             {
-               // if (loginDAO.CrearCuenta(usuario, contrasenia))
                 if (loginDAO.CrearCuenta(persona))
                     return true;
                 else
