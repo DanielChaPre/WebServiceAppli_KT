@@ -15,54 +15,53 @@ namespace WebServiceAppli_KT
     {
         //Cuenta
         [OperationContract]
+        [WebGet(UriTemplate = "/recuperarContrasena/{usuario}/{nuevaContrasena}",
+                ResponseFormat = WebMessageFormat.Json)]
+        bool RecuperarContrasena(string usuario, string nuevaContrasena);
+        [OperationContract]
         [WebGet(UriTemplate = "/validarUsuario/{usuario}",
-                ResponseFormat = WebMessageFormat.Json, 
-                BodyStyle = WebMessageBodyStyle.Wrapped)]
+                ResponseFormat = WebMessageFormat.Json)]
         bool ValidarUsuario(string usuario);
         [OperationContract]
         [WebInvoke(UriTemplate = "/validarContrasenia/{contrasenia}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         bool ValidarContrasenia(string contrasenia);
+
         [OperationContract]
-        [WebInvoke(UriTemplate = "/crearCuenta",
+        [WebInvoke(UriTemplate = "/crearCuenta/{usuario}/{contrasena}/{idAlumno}",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json, 
-            Method = "POST", 
-            BodyStyle = WebMessageBodyStyle.Wrapped)]
+            Method = "GET")]
        // bool CrearCuenta(string usuario, string contrasenia);
-        bool CrearCuenta(Persona persona);
+        bool CrearCuenta(string usuario, string contrasena, string idAlumno);
+
         //Perfil
         #region Persona
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "POST")]
         List<int> CrearPerfil(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "PUT")]
         bool ModificarPerfil(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "DELETE")]
         bool EliminarPerfil(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil/{cve_usuario}/{cve_persona}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         Persona ConsultarPerfilS(string cve_usuario, string cve_persona);
         #endregion
         #region Empleado
@@ -70,29 +69,25 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/empleado",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "POST")]
         List<int> CrearPerfilEmpleado(Empleado empleado);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleado",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "PUT")]
         bool ModificarPerfilEmpleado(Empleado empleado);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleado",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "DELETE")]
         bool EliminarPerfilEmpleado(Empleado empleado);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleado/{cve_usuario}/{cve_persona}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         Empleado ConsultarPerfilEmpleado(string cve_usuario, string cve_persona);
         #endregion
         #region EmpleadoPlantel
@@ -100,29 +95,25 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/empleadoplantel",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "POST")]
         List<int> CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleadoplantel",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "PUT")]
         bool ModificarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleadoplantel",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "DELETE")]
         bool EliminarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleadoplantel/{cve_usuario}/{cve_persona}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string cve_usuario, string cve_persona);
         #endregion
         #region PadreFamilia
@@ -130,29 +121,25 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/padrefamilia",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "POST")]
         List<int> CrearPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
         [WebInvoke(UriTemplate = "/padrefamilia",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "PUT")]
         bool ModificarPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
         [WebInvoke(UriTemplate = "/padrefamilia",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "DELETE")]
         bool EliminarPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
         [WebInvoke(UriTemplate = "/padrefamilia/{cve_usuario}/{cve_persona}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         PadreFamilia ConsultarPerfilPadreFamilia(string cve_usuario, string cve_persona);
         #endregion
         #region Alumno
@@ -160,38 +147,39 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "POST")]
         List<int> CrearPerfilAlumno(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "PUT")]
         bool ModificarPerfilAlumno(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "DELETE")]
         bool EliminarPerfilAlumno(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno/{cve_usuario}/{cve_persona}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         Persona ConsultarPerfilAlumno(string cve_usuario, string cve_persona);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/alumnocurp/{curp}",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET")]
+        int BuscarAlumnoCurp(string curp);
         #endregion
         //Notificaciones
         [OperationContract]
         [WebInvoke(UriTemplate = "/notificacion",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         Notificaciones ConsultarNotificaciones();
         //Atlas
         #region Planteles
@@ -199,72 +187,73 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/planteles",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         List<PlantelesES> ObtenerPlanteles();
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/buscarplantelmunicipio/{municipio}",
                    RequestFormat = WebMessageFormat.Json,
                    ResponseFormat = WebMessageFormat.Json,
-                   Method = "GET",
-                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+                   Method = "GET")]
         PlantelesES BuscarPlantelesMunicipio(string municipio);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/buscarplantelid/{carrera}",
                    RequestFormat = WebMessageFormat.Json,
                    ResponseFormat = WebMessageFormat.Json,
-                   Method = "GET",
-                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+                   Method = "GET")]
         PlantelesES BuscarPlantelesId(string carrera);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/buscarplantel/{plantel}",
                    RequestFormat = WebMessageFormat.Json,
                    ResponseFormat = WebMessageFormat.Json,
-                   Method = "GET",
-                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+                   Method = "GET")]
         PlantelesES BuscarPlanteles(string plantel);
         #endregion
         [OperationContract]
         [WebInvoke(UriTemplate = "/carreras",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "GET",
-                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+                    Method = "GET")]
         List<CarrerasES> ObtenerCarreras();
         [OperationContract]
         [WebInvoke(UriTemplate = "/gruposeguridad",
                    RequestFormat = WebMessageFormat.Json,
                    ResponseFormat = WebMessageFormat.Json,
-                   Method = "GET",
-                   BodyStyle = WebMessageBodyStyle.Wrapped)]
+                   Method = "GET")]
         List<string> ObtenerGrupos();
         //Direccion
-        [WebInvoke(UriTemplate = "/colonia",
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/colonia/{cp}",
                    RequestFormat = WebMessageFormat.Json,
                    ResponseFormat = WebMessageFormat.Json,
-                   Method = "GET",
-                   BodyStyle = WebMessageBodyStyle.Wrapped)]
-        List<Colonias> ObtenerColonias();
-        [WebInvoke(UriTemplate = "/municipios",
+                   Method = "GET")]
+        List<Colonias> ObtenerColonias(string cp);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/coloniaid/{colonia}",
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json,
+           Method = "GET")]
+        int BuscarColonia(string colonia);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/municipios/{estado}",
                   RequestFormat = WebMessageFormat.Json,
                   ResponseFormat = WebMessageFormat.Json,
-                  Method = "GET",
-                  BodyStyle = WebMessageBodyStyle.Wrapped)]
-        List<Municipios> ObtenerMunicipios();
-        [WebInvoke(UriTemplate = "/estados",
+                  Method = "GET")]
+        List<Municipios> ObtenerMunicipios(string estado);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/estados",
                   RequestFormat = WebMessageFormat.Json,
-                  ResponseFormat = WebMessageFormat.Json,
-                  Method = "GET",
-                  BodyStyle = WebMessageBodyStyle.Wrapped)]
-        List<Estados> ObtenerEstados();
+                  ResponseFormat = WebMessageFormat.Json)]
+        List < Estados> ObtenerEstados();
+
+        [OperationContract]
         [WebInvoke(UriTemplate = "/paises",
                   RequestFormat = WebMessageFormat.Json,
                   ResponseFormat = WebMessageFormat.Json,
-                  Method = "GET",
-                  BodyStyle = WebMessageBodyStyle.Wrapped)]
+                  Method = "GET")]
         List<Paises> ObtenerPaises();
         //Historial
 

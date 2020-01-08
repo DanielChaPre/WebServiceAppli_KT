@@ -14,14 +14,15 @@ namespace WebServiceAppli_KT.Datos
         List<Municipios> lst_municipios;
         Municipios municipios;
 
-        public List<Municipios> ObtenerMunicipios()
+        public List<Municipios> ObtenerMunicipios(string estado)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "select * from municipios";
+                cmd.CommandText = "Select * from municipios where idEstado = (Select idEstado from estados where NombreEstado = @estado)";
+                cmd.Parameters.AddWithValue("@estado", estado);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 lst_municipios = new List<Municipios>();

@@ -69,5 +69,10 @@ namespace WebServiceAppli_KT.Controlador
                 return null;
             }
         }
+
+        public int BuscarAlumnoCurp(string curp)
+        {
+            return alumnoDAO.BuscarIdAlumnoCurp(curp);
+        }
     }
 }

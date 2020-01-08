@@ -97,5 +97,33 @@ namespace WebServiceAppli_KT.Datos
                 throw;
             }
         }
+
+        public int BuscarIdAlumnoCurp(string curp)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select idAlumno From alumnos where CURP = @curp";
+                cmd.Parameters.AddWithValue("@curp", curp);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                int idAlumno = 0;
+                if (reader.Read())
+                {
+                    idAlumno = Convert.ToInt32(reader["idAlumno"].ToString());
+                }
+                return idAlumno;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ namespace WebServiceAppli_KT.Datos
         MySqlConnection con;
 
 
+
         public bool ValidarUsuario(string usuario)
         {
             try
@@ -18,7 +19,7 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where usuario = @user";
+                cmd.CommandText = "Select * From usuario where nombre_usuario = @user";
                 cmd.Parameters.AddWithValue("@user", usuario);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -67,7 +68,7 @@ namespace WebServiceAppli_KT.Datos
         }
 
        // public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(Persona persona)
+        public bool CrearCuenta(string usuario, string contrasena, string idAlumno)
         {
             try
             {
@@ -76,23 +77,45 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "Insert into usuario(cve_usuario,nombre_usuario,contraseña,fecha_registro,estatus,rol,cve_personas) " +
-                    "values(@cve_usuario , @user, @password, '', '', '', 0); ";
-                cmd.Parameters.AddWithValue("@cve_usuario", persona.usuario.cve_usuario);
-                cmd.Parameters.AddWithValue("@user", persona.usuario.alias_red);
-                cmd.Parameters.AddWithValue("@password", persona.usuario.contrasena);
+                cmd.CommandText = "Insert into usuario(nombre_usuario,contrasena, idAlumno, tipo_usuario) " +
+                    "values(@usuario, @contrasena,@idAlumno,1) ";
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error en la creación de la base de datos, " + ex.Message);
+                Console.WriteLine("Error al insertar la cuenta " + ex.Message);
                 return false;
             }
             finally
             {
                 con.Close();
+            }
+        }
+
+        public bool RecuperarContraseña(string usuario, string nuevaContrasena)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "UPDATE usuario SET contrasena = @contrasena where nombre_usuario = @nombre_usuario";
+                cmd.Parameters.AddWithValue("@contrasena", nuevaContrasena);
+                cmd.Parameters.AddWithValue("@nombre_usuario", usuario);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+                throw;
             }
         }
     }

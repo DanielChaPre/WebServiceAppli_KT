@@ -14,7 +14,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int idAlumno { get; set; }
         [DataMember]
-        public string usuario { get; set; }
+        public string nombre_usuario { get; set; }
         [DataMember]
         public string contrasena { get; set; }
         [DataMember]

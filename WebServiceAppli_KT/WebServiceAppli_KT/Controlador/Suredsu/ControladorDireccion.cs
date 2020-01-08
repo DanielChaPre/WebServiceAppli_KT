@@ -26,12 +26,12 @@ namespace WebServiceAppli_KT.Controlador.Suredsu
             paisesDAO = new PaisesDAO();
         }
 
-        public List<Colonias> ConsultarColonia()
+        public List<Colonias> ConsultarColonia(string cp)
         {
             try
             {
                 lst_colonias = new List<Colonias>();
-                lst_colonias = coloniasDAO.ConsultarColonia();
+                lst_colonias = coloniasDAO.ConsultarColonia(cp);
                 return lst_colonias;
             }
             catch (Exception)
@@ -39,6 +39,11 @@ namespace WebServiceAppli_KT.Controlador.Suredsu
                 return null;
                 throw;
             }
+        }
+
+        public int BuscarColonia(string colonia)
+        {
+            return coloniasDAO.BuscarColonia(colonia);
         }
 
         public List<Estados> ConsultarEstados()
@@ -56,12 +61,12 @@ namespace WebServiceAppli_KT.Controlador.Suredsu
             }
         }
 
-        public List<Municipios> ConsultarMunicipios()
+        public List<Municipios> ConsultarMunicipios(string estado)
         {
             try
             {
                 lst_municipios = new List<Municipios>();
-                lst_municipios = municipiosDAO.ObtenerMunicipios();
+                lst_municipios = municipiosDAO.ObtenerMunicipios(estado);
                 return lst_municipios;
             }
             catch (Exception)

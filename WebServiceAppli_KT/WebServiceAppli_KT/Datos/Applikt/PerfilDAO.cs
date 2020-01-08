@@ -22,7 +22,6 @@ namespace WebServiceAppli_KT.Datos
         {
             try
             {
-               
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = new MySqlCommand("p_crear_perfil",con);
@@ -39,7 +38,7 @@ namespace WebServiceAppli_KT.Datos
                   cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", persona.nacionalidad));
                   cmd.Parameters.Add(new MySqlParameter("p_municipio", persona.municipio));
                   cmd.Parameters.Add(new MySqlParameter("p_idColonia", persona.idColonia));
-                  cmd.Parameters.Add(new MySqlParameter("p_usuario", persona.usuario.usuario));
+                  cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", persona.usuario.nombre_usuario));
                   cmd.Parameters.Add(new MySqlParameter("p_contraseña", persona.usuario.contrasena));
                   cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.usuario.fecha_registro));
                   cmd.Parameters.Add(new MySqlParameter("p_alias_redes", persona.usuario.alias_red));
@@ -84,6 +83,7 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
+
         public bool ModificarPerfil(Persona persona)
         {
             try
@@ -106,7 +106,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", persona.idColonia));
                 cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", persona.usuario.cve_usuario));
-                cmd.Parameters.Add(new MySqlParameter("p_usuario", persona.usuario.usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", persona.usuario.nombre_usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_estatus", persona.usuario.estatus));
@@ -157,7 +157,7 @@ namespace WebServiceAppli_KT.Datos
                     persona.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     persona.usuario = new Usuario();
                     persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
-                    persona.usuario.usuario = reader["usuario"].ToString();
+                    persona.usuario.nombre_usuario = reader["nombre_usuario"].ToString();
                     persona.usuario.contrasena = reader["contrasena"].ToString();
                     persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                     persona.usuario.estatus = reader["estatus"].ToString();
@@ -177,6 +177,7 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
+
         public bool EliminarPerfil(Persona persona)
         {
             try
@@ -227,6 +228,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", empleado.persona.nacionalidad));
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", empleado.persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", empleado.persona.idColonia));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", empleado.persona.usuario.nombre_usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", empleado.persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", empleado.persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_alias_redes", empleado.persona.usuario.alias_red));
@@ -287,6 +289,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", empleado.persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", empleado.persona.idColonia));
                 cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", empleado.persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", empleado.persona.usuario.nombre_usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", empleado.persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", empleado.persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_estatus", empleado.persona.usuario.estatus));
@@ -331,6 +334,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado.persona = new Persona();
                     ent_empleado.persona.usuario = new Usuario();
                     ent_empleado.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
+                    ent_empleado.persona.usuario.nombre_usuario = reader["nombre_usuario"].ToString();
                     ent_empleado.persona.usuario.contrasena = reader["contrasena"].ToString();
                     ent_empleado.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                     ent_empleado.persona.usuario.estatus = reader["estatus"].ToString();
@@ -418,6 +422,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", empleadoPlantel.persona.nacionalidad));
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", empleadoPlantel.persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", empleadoPlantel.persona.idColonia));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", empleadoPlantel.persona.usuario.nombre_usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", empleadoPlantel.persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", empleadoPlantel.persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_alias_redes", empleadoPlantel.persona.usuario.alias_red));
@@ -480,6 +485,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", empleadoPlantel.persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", empleadoPlantel.persona.idColonia));
                 cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", empleadoPlantel.persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", empleadoPlantel.persona.usuario.nombre_usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", empleadoPlantel.persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", empleadoPlantel.persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_estatus", empleadoPlantel.persona.usuario.estatus));
@@ -523,6 +529,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado_plantel.persona = new Persona();
                     ent_empleado_plantel.persona.usuario = new Usuario();
                     ent_empleado_plantel.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
+                    ent_empleado_plantel.persona.usuario.nombre_usuario = reader["nombre_usuario"].ToString();
                     ent_empleado_plantel.persona.usuario.contrasena = reader["contrasena"].ToString();
                     ent_empleado_plantel.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                     ent_empleado_plantel.persona.usuario.estatus = reader["estatus"].ToString();
@@ -607,6 +614,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", padreFamilia.persona.nacionalidad));
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", padreFamilia.persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", padreFamilia.persona.idColonia));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", padreFamilia.persona.usuario.nombre_usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", padreFamilia.persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", padreFamilia.persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_alias_redes", padreFamilia.persona.usuario.alias_red));
@@ -667,6 +675,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", padreFamilia.persona.municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", padreFamilia.persona.idColonia));
                 cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", padreFamilia.persona.usuario.cve_usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", padreFamilia.persona.usuario.nombre_usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", padreFamilia.persona.usuario.contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", padreFamilia.persona.usuario.fecha_registro));
                 cmd.Parameters.Add(new MySqlParameter("p_estatus", padreFamilia.persona.usuario.estatus));
@@ -710,6 +719,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_padre_familia.persona = new Persona();
                     ent_padre_familia.persona.usuario = new Usuario();
                     ent_padre_familia.persona.usuario.cve_usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
+                    ent_padre_familia.persona.usuario.nombre_usuario = reader["nombre_usuario"].ToString();
                     ent_padre_familia.persona.usuario.contrasena = reader["contrasena"].ToString();
                     ent_padre_familia.persona.usuario.fecha_registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
                     ent_padre_familia.persona.usuario.estatus = reader["estatus"].ToString();

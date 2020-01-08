@@ -12,6 +12,7 @@ namespace WebServiceAppli_KT.Datos
         ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
         MySqlConnection con;
         List<Estados> lst_estados;
+        Estados entEstados;
 
         public List<Estados> ConsultarEstados()
         {
@@ -26,19 +27,31 @@ namespace WebServiceAppli_KT.Datos
                 lst_estados = new List<Estados>();
                 while (reader.Read())
                 {
-                    
-                    lst_estados.Add(new Estados()
+                    entEstados = new Estados()
                     {
                         IdEstado = Convert.ToInt32(reader["IdEstado"].ToString()),
                         NombreEstado = reader["NombreEstado"].ToString(),
                         idPais = Convert.ToInt32(reader["idPais"].ToString())
-                });
+                    };
+
+                    lst_estados.Add(entEstados);
+
+                //    lst_estados.Add(new Estados()
+                //    {
+                //        IdEstado = Convert.ToInt32(reader["IdEstado"].ToString()),
+                //        NombreEstado = reader["NombreEstado"].ToString(),
+                //        idPais = Convert.ToInt32(reader["idPais"].ToString())
+                //});
                 }
                 return lst_estados;
             }
             catch (Exception)
             {
                 return null;
+            }
+            finally
+            {
+                con.Close();
             }
         }
     }

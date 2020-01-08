@@ -40,11 +40,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         } 
 
-        public bool CrearCuenta(Persona persona)
+        public bool CrearCuenta(string usuario, string contrasena, string idAlumno)
         {
             try
             {
-                if (loginDAO.CrearCuenta(persona))
+                if (loginDAO.CrearCuenta(usuario, contrasena, idAlumno))
                     return true;
                 else
                     return false;
@@ -53,6 +53,11 @@ namespace WebServiceAppli_KT.Controlador
             {
                 return false;
             }
+        }
+
+        public bool RecuperarContrasena(string usuario, string nuevaContrasena)
+        {
+            return loginDAO.RecuperarContraseña(usuario, nuevaContrasena);
         }
     }
 }

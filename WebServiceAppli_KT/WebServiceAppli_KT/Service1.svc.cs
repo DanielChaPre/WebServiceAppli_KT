@@ -54,13 +54,13 @@ namespace WebServiceAppli_KT
         }
 
         //public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(Persona persona)
+        public bool CrearCuenta(string usuario, string contrasena, string idAlumno)
         {
             try
             {
                 loginController = new ControladorLogin();
                 //if (loginController.CrearCuenta(usuario, contrasenia))
-                if (loginController.CrearCuenta(persona))
+                if (loginController.CrearCuenta(usuario, contrasena, idAlumno))
                     return true;
                 else
                     return false;
@@ -261,13 +261,13 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<Colonias> ObtenerColonias()
+        public List<Colonias> ObtenerColonias(string cp)
         {
             try
             {
                 controladorDireccion = new ControladorDireccion();
                 lst_colonias = new List<Colonias>();
-                lst_colonias = controladorDireccion.ConsultarColonia();
+                lst_colonias = controladorDireccion.ConsultarColonia(cp);
                 return lst_colonias;
             }
             catch (Exception)
@@ -308,13 +308,13 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<Municipios> ObtenerMunicipios()
+        public List<Municipios> ObtenerMunicipios(string estado)
         {
             try
             {
                 controladorDireccion = new ControladorDireccion();
                 lst_municipios = new List<Municipios>();
-                lst_municipios = controladorDireccion.ConsultarMunicipios();
+                lst_municipios = controladorDireccion.ConsultarMunicipios(estado);
                 return lst_municipios;
             }
             catch (Exception)
@@ -409,7 +409,26 @@ namespace WebServiceAppli_KT
             planteles = new PlantelesES();
             planteles = escuelaESController.BuscarPlantel(plantel);
             return planteles;
-        } 
+        }
+
+        public int BuscarAlumnoCurp(string curp)
+        {
+            controladorAlumno = new ControladorAlumno();
+            return controladorAlumno.BuscarAlumnoCurp(curp);
+        }
+        
+
+        public int BuscarColonia(string colonia)
+        {
+            controladorDireccion = new ControladorDireccion();
+            return controladorDireccion.BuscarColonia(colonia);
+        }
+
+        public bool RecuperarContrasena(string usuario, string nuevaContrasena)
+        {
+            return loginController.RecuperarContrasena(usuario, nuevaContrasena);
+        }
         #endregion
+
     }
 }
