@@ -40,11 +40,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         } 
 
-        public bool CrearCuenta(string usuario, string contrasena, string idAlumno)
+        public bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario)
         {
             try
             {
-                if (loginDAO.CrearCuenta(usuario, contrasena, idAlumno))
+                if (loginDAO.CrearCuenta(usuario, contrasena, idAlumno, tipoUsuario))
                     return true;
                 else
                     return false;

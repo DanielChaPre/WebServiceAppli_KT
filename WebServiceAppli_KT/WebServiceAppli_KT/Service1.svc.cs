@@ -54,13 +54,13 @@ namespace WebServiceAppli_KT
         }
 
         //public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(string usuario, string contrasena, string idAlumno)
+        public bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario)
         {
             try
             {
                 loginController = new ControladorLogin();
                 //if (loginController.CrearCuenta(usuario, contrasenia))
-                if (loginController.CrearCuenta(usuario, contrasena, idAlumno))
+                if (loginController.CrearCuenta(usuario, contrasena, idAlumno, tipoUsuario))
                     return true;
                 else
                     return false;
@@ -426,6 +426,7 @@ namespace WebServiceAppli_KT
 
         public bool RecuperarContrasena(string usuario, string nuevaContrasena)
         {
+            loginController = new ControladorLogin();
             return loginController.RecuperarContrasena(usuario, nuevaContrasena);
         }
         #endregion

@@ -30,12 +30,11 @@ namespace WebServiceAppli_KT
         bool ValidarContrasenia(string contrasenia);
 
         [OperationContract]
-        [WebInvoke(UriTemplate = "/crearCuenta/{usuario}/{contrasena}/{idAlumno}",
+        [WebInvoke(UriTemplate = "/crearCuenta/{usuario}/{contrasena}/{idAlumno}/{tipoUsuario}",
             RequestFormat = WebMessageFormat.Json,
             ResponseFormat = WebMessageFormat.Json, 
             Method = "GET")]
-       // bool CrearCuenta(string usuario, string contrasenia);
-        bool CrearCuenta(string usuario, string contrasena, string idAlumno);
+        bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario);
 
         //Perfil
         #region Persona

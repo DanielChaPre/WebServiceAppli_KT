@@ -68,7 +68,7 @@ namespace WebServiceAppli_KT.Datos
         }
 
        // public bool CrearCuenta(string usuario, string contrasenia)
-        public bool CrearCuenta(string usuario, string contrasena, string idAlumno)
+        public bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario)
         {
             try
             {
@@ -78,10 +78,11 @@ namespace WebServiceAppli_KT.Datos
                 MySqlCommand cmd = con.CreateCommand();
 
                 cmd.CommandText = "Insert into usuario(nombre_usuario,contrasena, idAlumno, tipo_usuario) " +
-                    "values(@usuario, @contrasena,@idAlumno,1) ";
+                    "values(@usuario, @contrasena,@idAlumno, @tipoUsuario) ";
                 cmd.Parameters.AddWithValue("@usuario", usuario);
                 cmd.Parameters.AddWithValue("@contrasena", contrasena);
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                cmd.Parameters.AddWithValue("@tipoUsuario", Convert.ToInt16(tipoUsuario));
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;
