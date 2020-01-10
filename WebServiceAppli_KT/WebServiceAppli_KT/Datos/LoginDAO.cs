@@ -122,6 +122,8 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
+
+
         public bool VerificarRegistroAlumno(string contrasena, string idAlumno)
         {
             try
@@ -130,7 +132,8 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
 
-                cmd.CommandText = "Select * from usuario where contrasena = @contrasena and idAlumno = @idAlumno";
+                //cmd.CommandText = "Select * from usuario where contrasena = @contrasena and idAlumno = @idAlumno";
+                cmd.CommandText = "Select * from usuario where idAlumno = @idAlumno";
                 cmd.Parameters.AddWithValue("@contrasena", contrasena);
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
