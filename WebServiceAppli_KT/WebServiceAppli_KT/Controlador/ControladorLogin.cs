@@ -28,11 +28,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool ValidarContrasenia(string contrasenia)
+        public bool ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
-                return loginDAO.ValidarContrasenia(contrasenia);
+                return loginDAO.ValidarContrasenia(contrasenia, usuario, idAlumno);
             }
             catch (Exception)
             {
@@ -58,6 +58,12 @@ namespace WebServiceAppli_KT.Controlador
         public bool RecuperarContrasena(string usuario, string nuevaContrasena)
         {
             return loginDAO.RecuperarContraseña(usuario, nuevaContrasena);
+        }
+
+        public bool VerificarRegistroAlumno(string contrasen, string idAlumno)
+        {
+            loginDAO = new LoginDAO();
+            return loginDAO.VerificarRegistroAlumno(contrasen, idAlumno);
         }
     }
 }

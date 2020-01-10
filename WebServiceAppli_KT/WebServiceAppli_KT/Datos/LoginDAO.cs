@@ -39,7 +39,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool ValidarContrasenia(string contrasenia)
+        public bool ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
@@ -47,8 +47,10 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where contrasena = @pass";
+                cmd.CommandText = "Select * From usuario where contrasena = @pass and nombre_usuario = @usuario and idAlumno = @idAlumno";
                 cmd.Parameters.AddWithValue("@pass", contrasenia);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -114,6 +116,31 @@ namespace WebServiceAppli_KT.Datos
                 return true;
             }
             catch (Exception)
+            {
+                return false;
+                throw;
+            }
+        }
+
+        public bool VerificarRegistroAlumno(string contrasena, string idAlumno)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "Select * from usuario where contrasena = @contrasena and idAlumno = @idAlumno";
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
             {
                 return false;
                 throw;

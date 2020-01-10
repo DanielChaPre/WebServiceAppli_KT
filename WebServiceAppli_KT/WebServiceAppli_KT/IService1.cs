@@ -23,11 +23,11 @@ namespace WebServiceAppli_KT
                 ResponseFormat = WebMessageFormat.Json)]
         bool ValidarUsuario(string usuario);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/validarContrasenia/{contrasenia}",
+        [WebInvoke(UriTemplate = "/validarContrasenia/{contrasenia}/{usuario}/{idAlumno}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        bool ValidarContrasenia(string contrasenia);
+        bool ValidarContrasenia(string contrasenia, string usuario, string idAlumno);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/crearCuenta/{usuario}/{contrasena}/{idAlumno}/{tipoUsuario}",
@@ -35,6 +35,13 @@ namespace WebServiceAppli_KT
             ResponseFormat = WebMessageFormat.Json, 
             Method = "GET")]
         bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/verificarAlumno/{contrasena}/{idAlumno}",
+           RequestFormat = WebMessageFormat.Json,
+           ResponseFormat = WebMessageFormat.Json,
+           Method = "GET")]
+        bool VerificarRegistroAlumno(string contrasena, string idAlumno);
 
         //Perfil
         #region Persona

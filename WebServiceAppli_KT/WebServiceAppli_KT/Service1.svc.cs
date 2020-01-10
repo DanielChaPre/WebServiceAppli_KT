@@ -340,12 +340,12 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool ValidarContrasenia(string contrasenia)
+        public bool ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
                 loginController = new ControladorLogin();
-                if (loginController.ValidarContrasenia(contrasenia))
+                if (loginController.ValidarContrasenia(contrasenia, usuario, idAlumno))
                     return true;
                 else
                     return false;
@@ -428,6 +428,12 @@ namespace WebServiceAppli_KT
         {
             loginController = new ControladorLogin();
             return loginController.RecuperarContrasena(usuario, nuevaContrasena);
+        }
+
+        public bool VerificarRegistroAlumno(string contrasena, string idAlumno)
+        {
+            loginController = new ControladorLogin();
+            return loginController.VerificarRegistroAlumno(contrasena, idAlumno);
         }
         #endregion
 
