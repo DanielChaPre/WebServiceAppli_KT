@@ -60,13 +60,13 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Persona ConsultarPerfill(int cve_usuario)
+        public Persona ConsultarPerfill(string usuario, string contrasenia)
         {
             try
             {
-                Persona usuario = new Persona();
-                usuario = perfilDAO.ConsultarPerfilPersona(cve_usuario);
-                return usuario;
+                Persona persona = new Persona();
+                persona = perfilDAO.ConsultarPerfilPersona(usuario, contrasenia);
+                return persona;
             }
             catch (Exception)
             {
@@ -118,12 +118,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Empleado ConsultarPerfilEmpleado(int cve_usuario, int cve_persona)
+        public Empleado ConsultarPerfilEmpleado(string usuario, string contrasenia)
         {
             try
             {
                 Empleado empleado = new Empleado();
-                empleado = perfilDAO.ConsultarPerfilEmpleado(cve_usuario, cve_persona);
+                empleado = perfilDAO.ConsultarPerfilEmpleado(usuario, contrasenia);
                 return empleado;
             }
             catch (Exception)
@@ -174,12 +174,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(int cve_usuario, int cve_persona)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string usuario, string contrasenia)
         {
             try
             {
                 EmpleadoPlantel empleadoPlantel = new EmpleadoPlantel();
-                empleadoPlantel = perfilDAO.ConsultarPerfilEmpleadoPlantel(cve_usuario, cve_persona);
+                empleadoPlantel = perfilDAO.ConsultarPerfilEmpleadoPlantel(usuario, contrasenia);
                 return empleadoPlantel;
             }
             catch (Exception)
@@ -230,12 +230,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public PadreFamilia ConsultarPerfilPadreFamilia(int cve_usuario, int cve_persona)
+        public PadreFamilia ConsultarPerfilPadreFamilia(string usuario, string contrasenia)
         {
             try
             {
                 PadreFamilia  padreFamilia = new PadreFamilia();
-                padreFamilia = perfilDAO.ConsultarPerfilPadreFamilia(cve_usuario, cve_persona);
+                padreFamilia = perfilDAO.ConsultarPerfilPadreFamilia(usuario, contrasenia);
                 return padreFamilia;
             }
             catch (Exception)

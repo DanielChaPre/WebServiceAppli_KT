@@ -29,7 +29,7 @@ namespace WebServiceAppli_KT.Datos
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error: "+ex.Message);
+                Console.WriteLine("Error: " + ex.Message);
                 return null;
             }
         }
@@ -74,27 +74,48 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public Alumno ConsultarAlumno(string usuario, string contraseña)
+        public Alumno ConsultarAlumno(int idAlumno)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From Alumno where  = @user and  = @pass";
-                cmd.Parameters.AddWithValue("@user", usuario);
-                cmd.Parameters.AddWithValue("@pass", contraseña);
+                cmd.CommandText = "Select Nombre, ApellidoPaterno, ApellidoMaterno, CURP, Sexo, Calle, NumeroExterior, NumeroInterior," +
+                    " Email, Celular, Telefono, FOLIOSUREDSU, FolioSUREMS, idColonia, Nacionalidad, idMunicipio, idPais, ClavePlantelESEC," +
+                    " idPlantelEMS from alumnos where idAlumno = @idAlumno";
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
                     alumno = new Alumno();
+                    alumno.idAlumno = idAlumno;
+                    alumno.Nombre = reader["Nombre"].ToString();
+                    alumno.ApellidoPaterno = reader["ApellidoPaterno"].ToString();
+                    alumno.ApellidoMaterno = reader["ApellidoMaterno"].ToString();
+                    alumno.CURP = reader["CURP"].ToString();
+                    alumno.Sexo = reader["Sexo"].ToString();
+                    alumno.Calle = reader["Calle"].ToString();
+                    alumno.NumeroExterior = reader["NumeroExterior"].ToString();
+                    alumno.NumeroInterior = reader["NumeroInterior"].ToString();
+                    alumno.Email = reader["Email"].ToString();
+                    alumno.Celular = reader["Celular"].ToString();
+                    alumno.Telefono = reader["Telefono"].ToString();
+                    alumno.FOLIOSUREDSU = reader["FOLIOSUREDSU"].ToString();
+                    alumno.FolioSUREMS = reader["FolioSUREMS"].ToString();
+                    alumno.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
+                    alumno.idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString());
+                    alumno.idPais = Convert.ToInt32(reader["idPais"].ToString());
+                    alumno.ClavePlantelESEC = reader["ClavePlantelESEC"].ToString();
+                    alumno.idPlantelEMS = Convert.ToInt32(reader["idPlantelEMS"].ToString());
+                    alumno.Nacionalidad = reader["Nacionalidad"].ToString();
                 }
                 return alumno;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                return null;
             }
         }
 

@@ -23,6 +23,7 @@ namespace WebServiceAppli_KT
 
         #region variables(Objetos)
         Notificaciones entNotificacion;
+        Alumno entAlumno = new Alumno();
         Persona entPersona = new Persona();
         Usuario entUsuario = new Usuario();
         Empleado ent_empleado = new Empleado();
@@ -74,45 +75,44 @@ namespace WebServiceAppli_KT
 
         #region perfiles
         #region consultar perfiles
-        public Persona ConsultarPerfilAlumno(string cve_usuario, string cve_persona)
+        public Alumno ConsultarPerfilAlumno(string idAlumno)
         {
             controladorAlumno = new ControladorAlumno();
-            entPersona = new Persona();
-            entPersona = controladorAlumno.ConsultarAlumno(Convert.ToInt16(cve_usuario));
-            return entPersona;
+            //entPersona = controladorAlumno.ConsultarAlumno(Convert.ToInt32(idAlumno));
+            return controladorAlumno.ConsultarAlumno(Convert.ToInt32(idAlumno));
         }
 
-        public Empleado ConsultarPerfilEmpleado(string cve_usuario, string cve_persona)
+        public Empleado ConsultarPerfilEmpleado(string usuario, string contrasenia)
         {
             perfilController = new ControladorPerfil();
             ent_empleado = new Empleado();
-            ent_empleado = perfilController.ConsultarPerfilEmpleado(Convert.ToInt16(cve_usuario), Convert.ToInt16(cve_persona));
+            ent_empleado = perfilController.ConsultarPerfilEmpleado(usuario, contrasenia);
             return ent_empleado;
 
         }
 
-        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string cve_usuario, string cve_persona)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string usuario, string contrasenia)
         {
             perfilController = new ControladorPerfil();
             ent_empleado_plantel = new EmpleadoPlantel();
-            ent_empleado_plantel = perfilController.ConsultarPerfilEmpleadoPlantel(Convert.ToInt16(cve_usuario), Convert.ToInt16(cve_persona));
+            ent_empleado_plantel = perfilController.ConsultarPerfilEmpleadoPlantel(usuario, contrasenia);
             return ent_empleado_plantel;
         }
 
-        public PadreFamilia ConsultarPerfilPadreFamilia(string cve_usuario, string cve_persona)
+        public PadreFamilia ConsultarPerfilPadreFamilia(string usuario, string contrasenia)
         {
             perfilController = new ControladorPerfil();
             ent_padre_familia = new PadreFamilia();
-            ent_padre_familia = perfilController.ConsultarPerfilPadreFamilia(Convert.ToInt16(cve_usuario), Convert.ToInt16(cve_persona));
+            ent_padre_familia = perfilController.ConsultarPerfilPadreFamilia(usuario, contrasenia);
             return ent_padre_familia;
         }
 
-        public Persona ConsultarPerfilS(string cve_usuario, string cve_persona)
+        public Persona ConsultarPerfilS(string usuario, string contrasenia)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                entPersona = perfilController.ConsultarPerfill(Convert.ToInt16(cve_usuario));
+                entPersona = perfilController.ConsultarPerfill(usuario, contrasenia);
                 return entPersona;
             }
             catch (Exception)
@@ -340,19 +340,16 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
+        public int ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
                 loginController = new ControladorLogin();
-                if (loginController.ValidarContrasenia(contrasenia, usuario, idAlumno))
-                    return true;
-                else
-                    return false;
+                return loginController.ValidarContrasenia(contrasenia, usuario, idAlumno);
             }
             catch (Exception)
             {
-                return false;
+                return 0;
                 throw;
             }
         }
@@ -434,6 +431,12 @@ namespace WebServiceAppli_KT
         {
             loginController = new ControladorLogin();
             return loginController.VerificarRegistroAlumno(contrasena, idAlumno);
+        }
+
+        public Usuario ConsultarUsuarioAlumno(string idAlumno)
+        {
+            loginController = new ControladorLogin();
+            return loginController.ConsultarUsuarioAlumno(idAlumno);
         }
         #endregion
 

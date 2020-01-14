@@ -27,7 +27,7 @@ namespace WebServiceAppli_KT
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        bool ValidarContrasenia(string contrasenia, string usuario, string idAlumno);
+        int ValidarContrasenia(string contrasenia, string usuario, string idAlumno);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/crearCuenta/{usuario}/{contrasena}/{idAlumno}/{tipoUsuario}",
@@ -64,11 +64,11 @@ namespace WebServiceAppli_KT
                     Method = "DELETE")]
         bool EliminarPerfil(Persona persona);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/perfil/{cve_usuario}/{cve_persona}",
+        [WebInvoke(UriTemplate = "/perfil/{usuario}/{contrasenia}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        Persona ConsultarPerfilS(string cve_usuario, string cve_persona);
+        Persona ConsultarPerfilS(string usuario, string contrasenia);
         #endregion
         #region Empleado
         [OperationContract]
@@ -90,11 +90,11 @@ namespace WebServiceAppli_KT
                     Method = "DELETE")]
         bool EliminarPerfilEmpleado(Empleado empleado);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/empleado/{cve_usuario}/{cve_persona}",
+        [WebInvoke(UriTemplate = "/empleado/{usuario}/{contrasenia}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        Empleado ConsultarPerfilEmpleado(string cve_usuario, string cve_persona);
+        Empleado ConsultarPerfilEmpleado(string usuario, string contrasenia);
         #endregion
         #region EmpleadoPlantel
         [OperationContract]
@@ -116,11 +116,11 @@ namespace WebServiceAppli_KT
                     Method = "DELETE")]
         bool EliminarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/empleadoplantel/{cve_usuario}/{cve_persona}",
+        [WebInvoke(UriTemplate = "/empleadoplantel/{usuario}/{contrasenia}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string cve_usuario, string cve_persona);
+        EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string usuario, string contrasenia);
         #endregion
         #region PadreFamilia
         [OperationContract]
@@ -142,11 +142,11 @@ namespace WebServiceAppli_KT
                     Method = "DELETE")]
         bool EliminarPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/padrefamilia/{cve_usuario}/{cve_persona}",
+        [WebInvoke(UriTemplate = "/padrefamilia/{usuario}/{contrasenia}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        PadreFamilia ConsultarPerfilPadreFamilia(string cve_usuario, string cve_persona);
+        PadreFamilia ConsultarPerfilPadreFamilia(string usuario, string contrasenia);
         #endregion
         #region Alumno
         [OperationContract]
@@ -168,11 +168,18 @@ namespace WebServiceAppli_KT
                     Method = "DELETE")]
         bool EliminarPerfilAlumno(Persona persona);
         [OperationContract]
-        [WebInvoke(UriTemplate = "/alumno/{cve_usuario}/{cve_persona}",
+        [WebInvoke(UriTemplate = "/alumno/{idAlumno}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        Persona ConsultarPerfilAlumno(string cve_usuario, string cve_persona);
+        Alumno ConsultarPerfilAlumno(string idAlumno);
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/usuarioalumno/{idAlumno}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET")]
+        Usuario ConsultarUsuarioAlumno(string idAlumno);
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumnocurp/{curp}",
                     RequestFormat = WebMessageFormat.Json,

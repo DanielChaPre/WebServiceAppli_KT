@@ -126,7 +126,7 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
-        public Persona ConsultarPerfilPersona(int cveUsuario)
+        public Persona ConsultarPerfilPersona(string usuario, string contrasenia)
         {
             try
             {
@@ -134,8 +134,8 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "Select * from usuario u, persona p where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU";
-                cmd.Parameters.AddWithValue("@cveUsuarioP", cveUsuario);
-                cmd.Parameters.AddWithValue("@cveUsuarioU", cveUsuario);
+                cmd.Parameters.AddWithValue("@cveUsuarioP", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuarioU", ByUsuarioCve(usuario, contrasenia));
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
              //   object o = reader.GetValue(1);
@@ -314,18 +314,18 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public Empleado ConsultarPerfilEmpleado(int cveUsuario, int cvePersona)
+        public Empleado ConsultarPerfilEmpleado(string usuario, string contrasenia)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * from usuario u, persona p, empleado e where p.cve_usuario = @cve_usuarioP and u.cve_usuario = @cve_usuarioU" +
-                    " and e.cve_persona = @cve_persona";
-                cmd.Parameters.AddWithValue("@cve_usuarioP", cveUsuario);
-                cmd.Parameters.AddWithValue("@cve_usuarioU", cveUsuario);
-                cmd.Parameters.AddWithValue("@cve_persona", cvePersona);
+                cmd.CommandText = "Select * from usuario u, persona p, empleado e where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU and " +
+                    "e.cve_persona = (Select cve_persona from persona where cve_usuario = @cveUsuario)";
+                cmd.Parameters.AddWithValue("@cveUsuarioP", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuarioU", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuario", ByUsuarioCve(usuario, contrasenia));
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -510,17 +510,18 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(int cveUsuario, int cvePersona)
+        public EmpleadoPlantel ConsultarPerfilEmpleadoPlantel(string usuario, string contrasenia)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * from usuario u, persona p, empleado_plantel ep where p.cve_usuario = @cve_usuarioP and u.cve_usuario = @cve_usuarioU and ep.cve_persona = @cve_persona";
-                cmd.Parameters.AddWithValue("@cve_usuarioP", cveUsuario);
-                cmd.Parameters.AddWithValue("@cve_usuarioU", cveUsuario);
-                cmd.Parameters.AddWithValue("@cve_persona", cvePersona);
+                cmd.CommandText = "Select * from usuario u, persona p, empleado_plantel e where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU and " +
+                                   "e.cve_persona = (Select cve_persona from persona where cve_usuario = @cveUsuario)";
+                cmd.Parameters.AddWithValue("@cveUsuarioP", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuarioU", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuario", ByUsuarioCve(usuario, contrasenia));
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -699,18 +700,18 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public PadreFamilia ConsultarPerfilPadreFamilia(int cveUsuario, int cvePersona)
+        public PadreFamilia ConsultarPerfilPadreFamilia(string usuario, string contrasenia)
         {
             try
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * from usuario u, persona p, padre_familia pf where p.cve_usuario = @cve_usuarioP and u.cve_usuario = @cve_usuarioU " +
-                "and pf.cve_persona = @cve_persona";
-                cmd.Parameters.AddWithValue("@cve_usuarioP", cveUsuario);
-                cmd.Parameters.AddWithValue("@cve_usuarioU", cveUsuario);
-                cmd.Parameters.AddWithValue("@cve_persona", cvePersona);
+                cmd.CommandText = "Select * from usuario u, persona p, padre_familia pf where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU and " +
+                      "pf.cve_persona = (Select cve_persona from persona where cve_usuario = @cveUsuario)";
+                cmd.Parameters.AddWithValue("@cveUsuarioP", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuarioU", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuario", ByUsuarioCve(usuario, contrasenia));
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -780,5 +781,35 @@ namespace WebServiceAppli_KT.Datos
             }
         }
         #endregion
+
+        public int ByUsuarioCve(string usuario, string contrasena)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select cve_usuario from usuario where nombre_usuario = @usuario" +
+                    "  and contrasena = @contrasenia";
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@contrasenia", contrasena);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    return Convert.ToInt32(reader["cve_usuario"].ToString());
+                }
+                return 0;
+            }
+            catch (MySqlException ex)
+            {
+                return 0;
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

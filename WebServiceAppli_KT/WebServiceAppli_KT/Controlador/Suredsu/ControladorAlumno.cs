@@ -58,11 +58,12 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public Persona ConsultarAlumno(int cve_usuario)
+        public Alumno ConsultarAlumno(int idAlumno)
         {
             try
             {
-                return persona;
+                alumnoDAO = new AlumnoDAO();
+                return alumnoDAO.ConsultarAlumno(idAlumno);
             }
             catch (Exception)
             {

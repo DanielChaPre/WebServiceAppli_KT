@@ -39,7 +39,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
+        public int ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
@@ -54,14 +54,16 @@ namespace WebServiceAppli_KT.Datos
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
-                    return true;
+                {
+                    return Convert.ToInt32(reader["tipo_usuario"].ToString());
+                }
                 else
-                    return false;
+                    return 0;
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error en el logeo, " + ex.Message);
-                return false;
+                return 0;
             }
             finally
             {
@@ -122,8 +124,6 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-
-
         public bool VerificarRegistroAlumno(string contrasena, string idAlumno)
         {
             try
@@ -147,6 +147,37 @@ namespace WebServiceAppli_KT.Datos
             {
                 return false;
                 throw;
+            }
+        }
+
+        public Usuario ConsultarUsuarioAlumno(string idAlumno)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "Select * from usuario where idAlumno = @idAlumno";
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                con.Open();
+                var usuario = new Usuario();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    usuario.cve_usuario = Convert.ToInt32(reader["cve_usuario"].ToString());
+                    usuario.idAlumno = Convert.ToInt32(reader["idAlumno"].ToString());
+                    usuario.nombre_usuario = reader["nombre_usuario"].ToString();
+                    usuario.contrasena = reader["contrasena"].ToString();
+                    usuario.fecha_registro =Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    usuario.estatus = reader["estatus"].ToString();
+                    usuario.alias_red = reader["alias_red"].ToString();
+                }
+                return usuario;
+            }
+            catch (MySqlException ex)
+            {
+                return null;
             }
         }
     }
