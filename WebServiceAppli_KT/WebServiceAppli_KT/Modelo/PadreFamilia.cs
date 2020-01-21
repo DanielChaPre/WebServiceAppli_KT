@@ -9,13 +9,20 @@ namespace WebServiceAppli_KT.Modelo
     [DataContract]
     public class PadreFamilia
     {
+        private int cve_padre_familia;
+        private int idAlumno;
+        private DateTime fecha_registro;
+        private Persona persona;
+
         [DataMember]
-        public int cve_padre_familia { get; set; }
+        public int Cve_Padre_Familia { get => cve_padre_familia; set => cve_padre_familia = value; }
         [DataMember]
-        public int idAlumno { get; set; }
+        public int IdAlumno { get => idAlumno; set => idAlumno = value; }
         [DataMember]
-        public DateTime fecha_registro { get; set; }
+        public DateTime Fecha_Registro { get => fecha_registro; set => fecha_registro = value; }
         [DataMember]
-        public Persona persona { get; set; }
+        public Persona Persona { get => persona; set => persona = value; }
+
+
     }
 }

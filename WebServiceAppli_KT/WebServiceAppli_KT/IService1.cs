@@ -47,10 +47,11 @@ namespace WebServiceAppli_KT
         #region Persona
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
-                    RequestFormat = WebMessageFormat.Json,
-                    ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST")]
-        List<int> CrearPerfil(Persona persona);
+                  RequestFormat = WebMessageFormat.Json, 
+                  ResponseFormat = WebMessageFormat.Json, 
+                  Method = "POST", 
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
+        List<int> CrearPerfil(Persona entpersona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
@@ -61,6 +62,7 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
+                    BodyStyle = WebMessageBodyStyle.Wrapped,
                     Method = "DELETE")]
         bool EliminarPerfil(Persona persona);
         [OperationContract]

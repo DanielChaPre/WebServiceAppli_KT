@@ -9,19 +9,27 @@ namespace WebServiceAppli_KT.Modelo
     [DataContract]
     public class Usuario
     {
+        private int cve_usuario;
+        private int idAlumno;
+        private string nombre_usuario;
+        private string contrasena;
+        private DateTime fecha_registro;
+        private string  estatus;
+        private string alias_red;
+
         [DataMember]
-        public int cve_usuario { get; set; }
+        public int Cve_Usuario { get => cve_usuario; set => cve_usuario = value; }
         [DataMember]
-        public int idAlumno { get; set; }
+        public int IdAlumno { get => idAlumno; set => idAlumno = value; }
         [DataMember]
-        public string nombre_usuario { get; set; }
+        public string Nombre_Usuario { get => nombre_usuario; set => nombre_usuario = value; }
         [DataMember]
-        public string contrasena { get; set; }
+        public string Contrasena { get => contrasena; set => contrasena = value; }
         [DataMember]
-        public DateTime fecha_registro { get; set; }
+        public DateTime Fecha_Registro { get => fecha_registro; set => fecha_registro = value; }
         [DataMember]
-        public string  estatus { get; set; }
+        public string Estatus { get => estatus; set => estatus = value; }
         [DataMember]
-        public string alias_red { get; set; }
+        public string Alias_Red { get => alias_red; set => alias_red = value; }
     }
 }

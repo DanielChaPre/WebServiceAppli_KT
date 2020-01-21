@@ -47,7 +47,7 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where contrasena = @pass and nombre_usuario = @usuario and idAlumno = @idAlumno";
+                cmd.CommandText = "Select tipo_usuario from usuario where contrasena = @pass and (nombre_usuario = @usuario or idAlumno = @idAlumno)";
                 cmd.Parameters.AddWithValue("@pass", contrasenia);
                 cmd.Parameters.AddWithValue("@usuario", usuario);
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
@@ -165,13 +165,13 @@ namespace WebServiceAppli_KT.Datos
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
                 {
-                    usuario.cve_usuario = Convert.ToInt32(reader["cve_usuario"].ToString());
-                    usuario.idAlumno = Convert.ToInt32(reader["idAlumno"].ToString());
-                    usuario.nombre_usuario = reader["nombre_usuario"].ToString();
-                    usuario.contrasena = reader["contrasena"].ToString();
-                    usuario.fecha_registro =Convert.ToDateTime(reader["fecha_registro"].ToString());
-                    usuario.estatus = reader["estatus"].ToString();
-                    usuario.alias_red = reader["alias_red"].ToString();
+                    usuario.Cve_Usuario = Convert.ToInt32(reader["cve_usuario"].ToString());
+                    usuario.IdAlumno = Convert.ToInt32(reader["idAlumno"].ToString());
+                    usuario.Nombre_Usuario = reader["nombre_usuario"].ToString();
+                    usuario.Contrasena = reader["contrasena"].ToString();
+                    usuario.Fecha_Registro =Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    usuario.Estatus = reader["estatus"].ToString();
+                    usuario.Alias_Red = reader["alias_red"].ToString();
                 }
                 return usuario;
             }

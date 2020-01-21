@@ -90,26 +90,26 @@ namespace WebServiceAppli_KT.Datos
                 if (reader.Read())
                 {
                     alumno = new Alumno();
-                    alumno.idAlumno = idAlumno;
-                    alumno.Nombre = reader["Nombre"].ToString();
-                    alumno.ApellidoPaterno = reader["ApellidoPaterno"].ToString();
-                    alumno.ApellidoMaterno = reader["ApellidoMaterno"].ToString();
-                    alumno.CURP = reader["CURP"].ToString();
-                    alumno.Sexo = reader["Sexo"].ToString();
-                    alumno.Calle = reader["Calle"].ToString();
-                    alumno.NumeroExterior = reader["NumeroExterior"].ToString();
-                    alumno.NumeroInterior = reader["NumeroInterior"].ToString();
-                    alumno.Email = reader["Email"].ToString();
-                    alumno.Celular = reader["Celular"].ToString();
-                    alumno.Telefono = reader["Telefono"].ToString();
-                    alumno.FOLIOSUREDSU = reader["FOLIOSUREDSU"].ToString();
-                    alumno.FolioSUREMS = reader["FolioSUREMS"].ToString();
-                    alumno.idColonia = Convert.ToInt32(reader["idColonia"].ToString());
-                    alumno.idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString());
-                    alumno.idPais = Convert.ToInt32(reader["idPais"].ToString());
-                    alumno.ClavePlantelESEC = reader["ClavePlantelESEC"].ToString();
-                    alumno.idPlantelEMS = Convert.ToInt32(reader["idPlantelEMS"].ToString());
-                    alumno.Nacionalidad = reader["Nacionalidad"].ToString();
+                    alumno.IdAlumno = idAlumno;
+                    alumno.Nombre1 = reader["Nombre"].ToString();
+                    alumno.ApellidoPaterno1 = reader["ApellidoPaterno"].ToString();
+                    alumno.ApellidoMaterno1 = reader["ApellidoMaterno"].ToString();
+                    alumno.CURP1 = reader["CURP"].ToString();
+                    alumno.Sexo1 = reader["Sexo"].ToString();
+                    alumno.Calle1 = reader["Calle"].ToString();
+                    alumno.NumeroExterior1 = reader["NumeroExterior"].ToString();
+                    alumno.NumeroInterior1 = reader["NumeroInterior"].ToString();
+                    alumno.Email1 = reader["Email"].ToString();
+                    alumno.Celular1 = reader["Celular"].ToString();
+                    alumno.Telefono1 = reader["Telefono"].ToString();
+                    alumno.FOLIOSUREDSU1 = reader["FOLIOSUREDSU"].ToString();
+                    alumno.FolioSUREMS1 = reader["FolioSUREMS"].ToString();
+                    alumno.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
+                    alumno.IdMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString());
+                    alumno.IdPais = Convert.ToInt32(reader["idPais"].ToString());
+                    alumno.ClavePlantelESEC1 = reader["ClavePlantelESEC"].ToString();
+                    alumno.IdPlantelEMS = Convert.ToInt32(reader["idPlantelEMS"].ToString());
+                    alumno.Nacionalidad1 = reader["Nacionalidad"].ToString();
                 }
                 return alumno;
             }
