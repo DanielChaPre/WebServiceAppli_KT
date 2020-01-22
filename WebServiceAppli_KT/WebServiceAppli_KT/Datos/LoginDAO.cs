@@ -169,7 +169,7 @@ namespace WebServiceAppli_KT.Datos
                     usuario.IdAlumno = Convert.ToInt32(reader["idAlumno"].ToString());
                     usuario.Nombre_Usuario = reader["nombre_usuario"].ToString();
                     usuario.Contrasena = reader["contrasena"].ToString();
-                    usuario.Fecha_Registro =Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    usuario.Fecha_Registro =reader["fecha_registro"].ToString();
                     usuario.Estatus = reader["estatus"].ToString();
                     usuario.Alias_Red = reader["alias_red"].ToString();
                 }

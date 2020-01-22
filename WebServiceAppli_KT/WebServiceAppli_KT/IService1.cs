@@ -56,15 +56,16 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT")]
-        bool ModificarPerfil(Persona persona);
+                    Method = "PUT",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
+        bool ModificarPerfil(Persona entpersona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     BodyStyle = WebMessageBodyStyle.Wrapped,
                     Method = "DELETE")]
-        bool EliminarPerfil(Persona persona);
+        bool EliminarPerfil(Persona entpersona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/perfil/{usuario}/{contrasenia}",
                     RequestFormat = WebMessageFormat.Json,
@@ -77,19 +78,22 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/empleado",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST")]
+                    Method = "POST",
+                    BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<int> CrearPerfilEmpleado(Empleado empleado);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleado",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT")]
+                    Method = "PUT",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilEmpleado(Empleado empleado);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleado",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE")]
+                    Method = "DELETE",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilEmpleado(Empleado empleado);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleado/{usuario}/{contrasenia}",
@@ -103,19 +107,22 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/empleadoplantel",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST")]
+                    Method = "POST",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<int> CrearPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleadoplantel",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT")]
+                    Method = "PUT",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleadoplantel",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE")]
+                    Method = "DELETE",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilEmpleadoPlantel(EmpleadoPlantel empleadoPlantel);
         [OperationContract]
         [WebInvoke(UriTemplate = "/empleadoplantel/{usuario}/{contrasenia}",
@@ -129,19 +136,22 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/padrefamilia",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST")]
+                    Method = "POST",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<int> CrearPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
         [WebInvoke(UriTemplate = "/padrefamilia",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT")]
+                    Method = "PUT",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
         [WebInvoke(UriTemplate = "/padrefamilia",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE")]
+                    Method = "DELETE",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilPadreFamilia(PadreFamilia padreFamilia);
         [OperationContract]
         [WebInvoke(UriTemplate = "/padrefamilia/{usuario}/{contrasenia}",
@@ -155,19 +165,22 @@ namespace WebServiceAppli_KT
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "POST")]
+                    Method = "POST",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         List<int> CrearPerfilAlumno(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "PUT")]
+                    Method = "PUT",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool ModificarPerfilAlumno(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
-                    Method = "DELETE")]
+                    Method = "DELETE",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
         bool EliminarPerfilAlumno(Persona persona);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno/{idAlumno}",

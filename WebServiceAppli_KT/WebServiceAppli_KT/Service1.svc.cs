@@ -124,12 +124,12 @@ namespace WebServiceAppli_KT
         #endregion
 
         #region crear perfil
-        public List<int> CrearPerfil(Persona persona)
+        public List<int> CrearPerfil(Persona entpersona)
         {
             try
             {
                 perfilController = new ControladorPerfil();
-                return perfilController.CrearPerfill(persona);
+                return perfilController.CrearPerfill(entpersona);
             }
             catch (Exception)
             {

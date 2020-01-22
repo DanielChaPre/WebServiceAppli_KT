@@ -16,6 +16,7 @@ namespace WebServiceAppli_KT.Datos
         Empleado ent_empleado;
         EmpleadoPlantel ent_empleado_plantel;
         PadreFamilia ent_padre_familia;
+        int cveUsuario, cvePersona;
 
         #region Persona
         public List<int> GuardarPerfilPersona(Persona persona)
@@ -43,6 +44,7 @@ namespace WebServiceAppli_KT.Datos
                   cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.Usuario.Fecha_Registro));
                   cmd.Parameters.Add(new MySqlParameter("p_alias_redes", persona.Usuario.Alias_Red));
                   cmd.Parameters.Add(new MySqlParameter("p_idAlumno", persona.Usuario.IdAlumno));
+               // cmd.Parameters.Add(new MySqlParameter(""))
                  MySqlParameter cve_usuario = new MySqlParameter("p_cve_usuario", MySqlDbType.Int16);
                  MySqlParameter cve_persona = new MySqlParameter("p_cve_persona", MySqlDbType.Int16);
                  cve_usuario.Direction = System.Data.ParameterDirection.Output;
@@ -90,9 +92,10 @@ namespace WebServiceAppli_KT.Datos
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
+                ConsultarClaves(persona.Usuario.Nombre_Usuario, persona.Usuario.Contrasena);
                 MySqlCommand cmd = new MySqlCommand("p_modificar_perfil", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
-                cmd.Parameters.Add(new MySqlParameter("p_cve_persona", persona.Cve_Persona));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_persona", cvePersona));
                 cmd.Parameters.Add(new MySqlParameter("p_nombre", persona.Nombre));
                 cmd.Parameters.Add(new MySqlParameter("p_apellido_paterno", persona.Apellido_Paterno));
                 cmd.Parameters.Add(new MySqlParameter("p_apellido_materno", persona.Apellido_Materno));
@@ -105,7 +108,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_nacionalidad", persona.Nacionalidad));
                 cmd.Parameters.Add(new MySqlParameter("p_municipio", persona.Municipio));
                 cmd.Parameters.Add(new MySqlParameter("p_idColonia", persona.IdColonia));
-                cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", persona.Usuario.Cve_Usuario));
+                cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", cveUsuario));
                 cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", persona.Usuario.Nombre_Usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", persona.Usuario.Contrasena));
                 cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.Usuario.Fecha_Registro));
@@ -116,10 +119,45 @@ namespace WebServiceAppli_KT.Datos
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error en la modificacion de la información " + ex.Message);
                 return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public void ConsultarClaves(string user, string contrasena)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "    Select usuario.cve_usuario, persona.cve_persona from usuario , persona where (usuario.contrasena =@contrasena  and " +
+                    "nombre_usuario = @user ) and persona.cve_usuario = (Select cve_usuario from usuario where(usuario.contrasena = @contrasena and" +
+                    " nombre_usuario = @user)) ";
+                //  var clave = ByUsuarioCve(usuario, contrasenia);
+                cmd.Parameters.AddWithValue("@user", user);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                //   object o = reader.GetValue(1);
+                if (reader.Read())
+                {
+                    cvePersona = Convert.ToInt32(reader["cve_persona"].ToString());
+                    cveUsuario = Convert.ToInt32(reader["cve_usuario"].ToString());
+                    return;
+                }
+                return;
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
             finally
             {
@@ -135,7 +173,6 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "Select * from usuario u, persona p where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU";
-              //  var clave = ByUsuarioCve(usuario, contrasenia);
                 cmd.Parameters.AddWithValue("@cveUsuarioP", cveUsuario);
                 cmd.Parameters.AddWithValue("@cveUsuarioU", cveUsuario);
                 con.Open();
@@ -151,7 +188,7 @@ namespace WebServiceAppli_KT.Datos
                     persona.RFC = reader["rfc"].ToString();
                     persona.CURP = reader["curp"].ToString();
                     persona.Sexo = reader["sexo"].ToString();
-                    persona.Fecha_Nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     persona.Numero_Telefono = reader["numero_telefono"].ToString();
                     persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
                     persona.Nacionalidad = reader["nacionalidad"].ToString();
@@ -161,10 +198,13 @@ namespace WebServiceAppli_KT.Datos
                     persona.Usuario.Cve_Usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
                     persona.Usuario.Nombre_Usuario = reader["nombre_usuario"].ToString();
                     persona.Usuario.Contrasena = reader["contrasena"].ToString();
-                    persona.Usuario.Fecha_Registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    persona.Usuario.Fecha_Registro = reader["fecha_registro"].ToString();
                     persona.Usuario.Estatus = reader["estatus"].ToString();
                     persona.Usuario.Alias_Red = reader["alias_red"].ToString();
-                    persona.Usuario.IdAlumno = Int32.Parse(reader["idAlumno"].ToString());   //Convert.ToInt32(reader["idAlumno"].ToString());
+                    persona.Usuario.Tipo_Usuario = Convert.ToInt32(reader["tipo_usuario"].ToString());
+                    persona.Usuario.Ruta_Imagen = reader["ruta_imagen"].ToString();
+                    var idAlumno = reader["idAlumno"].ToString();
+                    persona.Usuario.IdAlumno = Convert.ToInt32(idAlumno);
                 }
                     return persona;
             }
@@ -185,11 +225,12 @@ namespace WebServiceAppli_KT.Datos
             try
             {
                 var conn = conexion.Builder;
+                ConsultarClaves(persona.Usuario.Nombre_Usuario, persona.Usuario.Contrasena);
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "update usuario set estatus = @estatus where cve_usuario = @cve_usuario";
                 cmd.Parameters.AddWithValue("@estatus", "Inactivo");
-                cmd.Parameters.AddWithValue("@cve_usuario", persona.Usuario.Cve_Usuario);
+                cmd.Parameters.AddWithValue("@cve_usuario", cveUsuario);
                 //Datos de la persona
                 //cmd.Parameters.AddWithValue("", cveUsuario);
                 //cmd.Parameters.AddWithValue("", cvePalabra);
@@ -338,7 +379,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado.Persona.Usuario.Cve_Usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
                     ent_empleado.Persona.Usuario.Nombre_Usuario = reader["nombre_usuario"].ToString();
                     ent_empleado.Persona.Usuario.Contrasena = reader["contrasena"].ToString();
-                    ent_empleado.Persona.Usuario.Fecha_Registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_empleado.Persona.Usuario.Fecha_Registro = reader["fecha_registro"].ToString();
                     ent_empleado.Persona.Usuario.Estatus = reader["estatus"].ToString();
                     ent_empleado.Persona.Usuario.Alias_Red = reader["alias_red"].ToString();
                     ent_empleado.Persona.Usuario.IdAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
@@ -349,7 +390,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado.Persona.RFC = reader["rfc"].ToString();
                     ent_empleado.Persona.CURP = reader["curp"].ToString();
                     ent_empleado.Persona.Sexo = reader["sexo"].ToString();
-                    ent_empleado.Persona.Fecha_Nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    ent_empleado.Persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     ent_empleado.Persona.Numero_Telefono = reader["numero_telefono"].ToString();
                     ent_empleado.Persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
                     ent_empleado.Persona.Nacionalidad = reader["nacionalidad"].ToString();
@@ -534,7 +575,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado_plantel.Persona.Usuario.Cve_Usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
                     ent_empleado_plantel.Persona.Usuario.Nombre_Usuario = reader["nombre_usuario"].ToString();
                     ent_empleado_plantel.Persona.Usuario.Contrasena = reader["contrasena"].ToString();
-                    ent_empleado_plantel.Persona.Usuario.Fecha_Registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_empleado_plantel.Persona.Usuario.Fecha_Registro = reader["fecha_registro"].ToString();
                     ent_empleado_plantel.Persona.Usuario.Estatus = reader["estatus"].ToString();
                     ent_empleado_plantel.Persona.Usuario.Alias_Red = reader["alias_red"].ToString();
                     ent_empleado_plantel.Persona.Usuario.IdAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
@@ -545,7 +586,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado_plantel.Persona.RFC = reader["rfc"].ToString();
                     ent_empleado_plantel.Persona.CURP = reader["curp"].ToString();
                     ent_empleado_plantel.Persona.Sexo = reader["sexo"].ToString();
-                    ent_empleado_plantel.Persona.Fecha_Nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    ent_empleado_plantel.Persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     ent_empleado_plantel.Persona.Numero_Telefono = reader["numero_telefono"].ToString();
                     ent_empleado_plantel.Persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
                     ent_empleado_plantel.Persona.Nacionalidad = reader["nacionalidad"].ToString();
@@ -723,7 +764,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_padre_familia.Persona.Usuario.Cve_Usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
                     ent_padre_familia.Persona.Usuario.Nombre_Usuario = reader["nombre_usuario"].ToString();
                     ent_padre_familia.Persona.Usuario.Contrasena = reader["contrasena"].ToString();
-                    ent_padre_familia.Persona.Usuario.Fecha_Registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_padre_familia.Persona.Usuario.Fecha_Registro = reader["fecha_registro"].ToString();
                     ent_padre_familia.Persona.Usuario.Estatus = reader["estatus"].ToString();
                     ent_padre_familia.Persona.Usuario.Alias_Red = reader["alias_red"].ToString();
                     ent_padre_familia.Persona.Usuario.IdAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
@@ -734,7 +775,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_padre_familia.Persona.RFC = reader["rfc"].ToString();
                     ent_padre_familia.Persona.CURP = reader["curp"].ToString();
                     ent_padre_familia.Persona.Sexo = reader["sexo"].ToString();
-                    ent_padre_familia.Persona.Fecha_Nacimiento = Convert.ToDateTime(reader["fecha_nacimiento"].ToString());
+                    ent_padre_familia.Persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     ent_padre_familia.Persona.Numero_Telefono = reader["numero_telefono"].ToString();
                     ent_padre_familia.Persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
                     ent_padre_familia.Persona.Nacionalidad = reader["nacionalidad"].ToString();

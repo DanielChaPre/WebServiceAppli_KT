@@ -18,7 +18,7 @@ namespace WebServiceAppli_KT.Modelo
         private string rfc;
         private string curp;
         private string sexo;
-        private DateTime fecha_nacimiento;
+        private string fecha_nacimiento;
         private string numero_telefono;
         private int estado_civil;
         private string nacionalidad;
@@ -41,7 +41,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string Sexo { get => sexo; set => sexo = value; }
         [DataMember]
-        public DateTime Fecha_Nacimiento { get => fecha_nacimiento; set => fecha_nacimiento = value; } 
+        public string Fecha_Nacimiento { get => fecha_nacimiento; set => fecha_nacimiento = value; } 
         [DataMember]
         public string Numero_Telefono { get => numero_telefono; set => numero_telefono = value; }
         [DataMember]
