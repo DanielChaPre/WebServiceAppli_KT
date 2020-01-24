@@ -54,5 +54,12 @@ namespace WebServiceAppli_KT.Controlador
             plantelES = escuelaESDAO.BuscarPlantel(plantel);
             return plantelES;
         }
+
+        public PlantelesEMS BuscarPlantelEMS(int idplantel)
+        {
+            var plantelEMS = new PlantelesEMS();
+            plantelEMS = escuelaESDAO.BuscarPlantelIDPlantelEMS(idplantel);
+            return plantelEMS;
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace WebServiceAppli_KT.Datos
         MySqlConnection con;
         List<PlantelesES> lstPlanteles;
         PlantelesES planteles;
+        PlantelesEMS plantelems;
 
         public List<PlantelesES> ObtenerPlnateles()
         {
@@ -28,7 +29,7 @@ namespace WebServiceAppli_KT.Datos
                 lstPlanteles = new List<PlantelesES>();
                 while (reader.Read())
                 {
-                  
+
                     lstPlanteles.Add(new PlantelesES()
                     {
                         idPlantelES = Convert.ToInt16(reader["idPlantelEs"].ToString()),
@@ -42,14 +43,14 @@ namespace WebServiceAppli_KT.Datos
                         NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
                         OPD = reader["OPD"].ToString(),
                         NivelAgrupado = reader["NivelAgrupado"].ToString()
-                     });
+                    });
                 }
 
                 return lstPlanteles;
             }
             catch (MySqlException ex)
             {
-                Console.WriteLine("Error en la consulta escuela: "+ex.Message);
+                Console.WriteLine("Error en la consulta escuela: " + ex.Message);
                 return null;
             }
             finally
@@ -174,6 +175,47 @@ namespace WebServiceAppli_KT.Datos
                 return planteles;
             }
             catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en la consulta escuela: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public PlantelesEMS BuscarPlantelIDPlantelEMS(int idplantel)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                //Queda pendiente la consulta en vista
+                cmd.CommandText = "Select  * from plantelesems where idPlantelEMS = @idPlantel";
+                cmd.Parameters.AddWithValue("@idPlantel", idplantel);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    plantelems = new PlantelesEMS();
+
+                    plantelems.idPlantelesEMS = Convert.ToInt32(reader["idPlantelEMS"].ToString());
+                    plantelems.ClavePlantel = reader["ClavePlantel"].ToString();
+                    plantelems.NombrePlantelEMS = reader["NombrePlantelEMS"].ToString();
+                    plantelems.Subsistema = reader["Subsistema"].ToString();
+                    plantelems.Sostenimiento = reader["Sostenimiento"].ToString();
+                    plantelems.Control = reader["Control"].ToString();
+                    plantelems.subcontrol = reader["subcontrol"].ToString();
+                    plantelems.idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString());
+                    plantelems.Activo = Convert.ToBoolean(reader["Activo"].ToString());
+                    plantelems.subsistemaSices = reader["subsistemaSices"].ToString();
+                    plantelems.Turno = reader["Turno"].ToString();
+                }
+                return plantelems;
+            }
+            catch (Exception ex)
             {
                 Console.WriteLine("Error en la consulta escuela: " + ex.Message);
                 return null;

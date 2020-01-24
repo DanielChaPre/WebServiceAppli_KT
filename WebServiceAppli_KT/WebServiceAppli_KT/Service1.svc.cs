@@ -138,10 +138,10 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public List<int> CrearPerfilAlumno(Persona persona)
+        public List<int> CrearPerfilAlumno(Alumno alumno)
         {
             controladorAlumno = new ControladorAlumno();
-            return controladorAlumno.GuardarAlumno(persona);
+            return controladorAlumno.GuardarAlumno(alumno);
 
         }
 
@@ -180,11 +180,11 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool EliminarPerfilAlumno(Persona persona)
+        public bool EliminarPerfilAlumno(Alumno alumno)
         {
             bool realizado;
             controladorAlumno = new ControladorAlumno();
-            realizado = controladorAlumno.EliminarAlumno(persona);
+            realizado = controladorAlumno.EliminarAlumno(alumno);
             return realizado;
         }
 
@@ -220,10 +220,10 @@ namespace WebServiceAppli_KT
                 return perfilController.ModificarPerfill(persona);
         }
 
-        public bool ModificarPerfilAlumno(Persona persona)
+        public bool ModificarPerfilAlumno(Alumno alumno)
         {
             controladorAlumno = new ControladorAlumno();
-            return controladorAlumno.ModificarAlumno(persona);
+            return controladorAlumno.ModificarAlumno(alumno);
         }
 
         public bool ModificarPerfilEmpleado(Empleado empleado)
@@ -437,6 +437,12 @@ namespace WebServiceAppli_KT
         {
             loginController = new ControladorLogin();
             return loginController.ConsultarUsuarioAlumno(idAlumno);
+        }
+
+        public PlantelesEMS BuscarPlantelesEMS(string idplantel)
+        {
+            escuelaESController = new ControladorEscuelasES();
+            return escuelaESController.BuscarPlantelEMS(Convert.ToInt32(idplantel));
         }
         #endregion
 

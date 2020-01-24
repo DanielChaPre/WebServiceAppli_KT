@@ -167,21 +167,21 @@ namespace WebServiceAppli_KT
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "POST",
                   BodyStyle = WebMessageBodyStyle.Wrapped)]
-        List<int> CrearPerfilAlumno(Persona persona);
+        List<int> CrearPerfilAlumno(Alumno alumno);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "PUT",
                   BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool ModificarPerfilAlumno(Persona persona);
+        bool ModificarPerfilAlumno(Alumno alumno);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "DELETE",
                   BodyStyle = WebMessageBodyStyle.Wrapped)]
-        bool EliminarPerfilAlumno(Persona persona);
+        bool EliminarPerfilAlumno(Alumno alumno);
         [OperationContract]
         [WebInvoke(UriTemplate = "/alumno/{idAlumno}",
                     RequestFormat = WebMessageFormat.Json,
@@ -238,6 +238,13 @@ namespace WebServiceAppli_KT
                    ResponseFormat = WebMessageFormat.Json,
                    Method = "GET")]
         PlantelesES BuscarPlanteles(string plantel);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/buscarplantelEMS/{idplantel}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET")]
+        PlantelesEMS BuscarPlantelesEMS(string idplantel);
         #endregion
         [OperationContract]
         [WebInvoke(UriTemplate = "/carreras",

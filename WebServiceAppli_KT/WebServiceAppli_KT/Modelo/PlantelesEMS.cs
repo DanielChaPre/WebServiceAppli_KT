@@ -9,6 +9,7 @@ namespace WebServiceAppli_KT.Modelo
     [DataContract]
     public class PlantelesEMS
     {
+
         [DataMember]
         public int idPlantelesEMS { get; set; }
         [DataMember]
@@ -24,12 +25,12 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string subcontrol { get; set; }
         [DataMember]
-        public string Municipio { get; set; }
+        public int idMunicipio { get; set; }
         [DataMember]
         public string Turno { get; set; }
         [DataMember]
         public string subsistemaSices { get; set; }
         [DataMember]
-        public int Activo { get; set; }
+        public bool Activo { get; set; }
     }
 }
