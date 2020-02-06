@@ -16,8 +16,8 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string url { get; set; }
         [DataMember]
-        public string cve_categoria { get; set; }
+        public int cve_categoria { get; set; }
         [DataMember]
-        public string cve_usuario { get; set; }
+        public int cve_usuario { get; set; }
     }
 }

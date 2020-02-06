@@ -10,12 +10,14 @@ namespace WebServiceAppli_KT.Datos
     public class EscuelaESDAO
     {
         ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
+        ConexionAppliktDAO conexionApplikt = new ConexionAppliktDAO();
         MySqlConnection con;
-        List<PlantelesES> lstPlanteles;
+        List<DetallePlantel> lstDetallePlantel;
         PlantelesES planteles;
         PlantelesEMS plantelems;
+        DetallePlantel detallePlantel;
 
-        public List<PlantelesES> ObtenerPlnateles()
+        public List<DetallePlantel> ObtenerPlnateles()
         {
             try
             {
@@ -23,32 +25,50 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 //Queda pendiente la consulta en vista
-                cmd.CommandText = "select * from vistaPlanteles";
+                cmd.CommandText = "Select * from bd_applikt.detalle_plantel" +
+                    " inner join suredsu.planteleses " +
+                    " on suredsu.planteleses.idPlantelES = bd_applikt.detalle_plantel.idPlantelesES";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
-                lstPlanteles = new List<PlantelesES>();
+                lstDetallePlantel = new List<DetallePlantel>();
                 while (reader.Read())
                 {
 
-                    lstPlanteles.Add(new PlantelesES()
+                    lstDetallePlantel.Add(new DetallePlantel()
                     {
-                        idPlantelES = Convert.ToInt16(reader["idPlantelEs"].ToString()),
-                        ClavePlantel = reader["ClavePlantel"].ToString(),
-                        NombrePlantelES = reader["NombrePlantelES"].ToString(),
-                        Subsistema = reader["Subsistema"].ToString(),
-                        Sostenimiento = reader["Sostenimiento"].ToString(),
-                        Municipio = reader["NombreMunicipio"].ToString(),
-                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
-                        ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
-                        NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
-                        OPD = reader["OPD"].ToString(),
-                        NivelAgrupado = reader["NivelAgrupado"].ToString()
+                        cve_detalle_plantel = Convert.ToInt32(reader["cve_detalle_plantel"].ToString()),
+                        url_vinculacion = reader["url_vinculacion"].ToString(),
+                        logo_plantel = reader["logo_plantel"].ToString(),
+                        costos = reader["costos"].ToString(),
+                        requisitos = reader["requisitos"].ToString(),
+                        fechas = reader["fechas"].ToString(),
+                        reseña = reader["reseña"].ToString(),
+                        latitud = reader["latitud"].ToString(),
+                        longitud = reader["longitud"].ToString(),
+                        ubicacion = reader["ubicacion"].ToString(),
+                        nivel_estudio = reader["nivel_estudio"].ToString(),
+                        cve_nivel_agrupado = Convert.ToInt32(reader["cve_nivel_agrupado"].ToString()),
+                        cve_nivel_estudio = Convert.ToInt32(reader["cve_nivel_estudio"].ToString()),
+                        PlantelesES = new PlantelesES()
+                        {
+                            idPlantelES = Convert.ToInt32(reader["idPlantelES"].ToString()),
+                            ClavePlantel = reader["ClavePlantel"].ToString(),
+                            NombrePlantelES = reader["NombrePlantelES"].ToString(),
+                            Subsistema = reader["Subsistema"].ToString(),
+                            Sostenimiento = reader["Sostenimiento"].ToString(),
+                            Municipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
+                            Activo = reader["Activo"].ToString(),
+                            ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
+                            NombreInstitucionES = reader["NombreInstitucionES"].ToString(),
+                            OPD = reader["OPD"].ToString(),
+                            NivelAgrupado = reader["NivelAgrupado"].ToString(),
+                        }
                     });
                 }
 
-                return lstPlanteles;
+                return lstDetallePlantel;
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error en la consulta escuela: " + ex.Message);
                 return null;
@@ -80,8 +100,8 @@ namespace WebServiceAppli_KT.Datos
                         NombrePlantelES = reader["NombrePlantelES"].ToString(),
                         Subsistema = reader["Subsistema"].ToString(),
                         Sostenimiento = reader["Sostenimiento"].ToString(),
-                        Municipio = reader["NombreMunicipio"].ToString(),
-                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
+                        Municipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
+                        Activo = reader["Activo"].ToString(),
                         ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
                         NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
                         OPD = reader["OPD"].ToString(),
@@ -122,8 +142,8 @@ namespace WebServiceAppli_KT.Datos
                         NombrePlantelES = reader["NombrePlantelES"].ToString(),
                         Subsistema = reader["Subsistema"].ToString(),
                         Sostenimiento = reader["Sostenimiento"].ToString(),
-                        Municipio = reader["NombreMunicipio"].ToString(),
-                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
+                        Municipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
+                        Activo = reader["Activo"].ToString(),
                         ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
                         NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
                         OPD = reader["OPD"].ToString(),
@@ -164,8 +184,8 @@ namespace WebServiceAppli_KT.Datos
                         NombrePlantelES = reader["NombrePlantelES"].ToString(),
                         Subsistema = reader["Subsistema"].ToString(),
                         Sostenimiento = reader["Sostenimiento"].ToString(),
-                        Municipio = reader["NombreMunicipio"].ToString(),
-                        Activo = Convert.ToInt32(reader["Activo"].ToString()),
+                        Municipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
+                        Activo = reader["Activo"].ToString(),
                         ClaveInstitucion = reader["ClaveInstitucion"].ToString(),
                         NombreInstitucionES = reader["NombreInstitucionEs"].ToString(),
                         OPD = reader["OPD"].ToString(),
@@ -200,7 +220,6 @@ namespace WebServiceAppli_KT.Datos
                 while (reader.Read())
                 {
                     plantelems = new PlantelesEMS();
-
                     plantelems.idPlantelesEMS = Convert.ToInt32(reader["idPlantelEMS"].ToString());
                     plantelems.ClavePlantel = reader["ClavePlantel"].ToString();
                     plantelems.NombrePlantelEMS = reader["NombrePlantelEMS"].ToString();
@@ -226,5 +245,47 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
+        public DetallePlantel BuscarDetallePlantel(string idPlantel)
+        {
+            try
+            {
+                var conn = conexionApplikt.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                //Queda pendiente la consulta en vista
+                cmd.CommandText = "Select * from detalle_plantel where idPlantelesES = @idPlantel";
+                cmd.Parameters.AddWithValue("@idPlantel", idPlantel);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    detallePlantel = new DetallePlantel()
+                    {
+                        costos = reader["costos"].ToString(),
+                        cve_detalle_plantel = Convert.ToInt32(reader["cve_detalle_plantel"].ToString()),
+                        fechas = reader["fechas"].ToString(),
+                        //idPlantelesES = Convert.ToInt32(reader["idPlantelesES"].ToString()),
+                        logo_plantel = reader["logo_plantel"].ToString(),
+                        nivel_estudio = reader["nivel_estudio"].ToString(),
+                        requisitos = reader["requisitos"].ToString(),
+                        reseña = reader["reseña"].ToString(),
+                        ubicacion = reader["ubicacion"].ToString(),
+                        url_vinculacion = reader["url_vinculacion"].ToString(),
+                        latitud = reader["latitud"].ToString(),
+                        longitud = reader["longitud"].ToString()
+                    };
+                }
+                return detallePlantel;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en la consulta escuela: " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

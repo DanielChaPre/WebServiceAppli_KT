@@ -22,11 +22,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string url { get; set; }
         [DataMember]
-        public string audiencia { get; set; }
-        [DataMember]
-        public string tipo_notificacion { get; set; }
-        [DataMember]
-        public MediosEnvio medio_de_difusion { get; set; }
+        public int cve_tipo_notificacion { get; set; }
         [DataMember]
         public string fecha_notificacion { get; set; }
         [DataMember]

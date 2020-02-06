@@ -20,9 +20,13 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string requisitos { get; set; }
         [DataMember]
-        public DateTime fechas { get; set; }
+        public string fechas { get; set; }
         [DataMember]
         public string reseña { get; set; }
+        [DataMember]
+        public string latitud { get; set; }
+        [DataMember]
+        public string longitud { get; set; }
         [DataMember]
         public string ubicacion { get; set; }
         [DataMember]
@@ -30,6 +34,10 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int cve_imagen_plantel{ get; set; }
         [DataMember]
-        public int idPlantelesES { get; set; }
+        public int cve_nivel_agrupado { get; set; }
+        [DataMember]
+        public int cve_nivel_estudio { get; set; }
+        [DataMember]
+        public PlantelesES PlantelesES { get; set; }
     }
 }

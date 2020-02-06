@@ -20,13 +20,12 @@ namespace WebServiceAppli_KT.Controlador
             escuelaESDAO = new EscuelaESDAO();
         }
 
-        public List<PlantelesES> ObtenerPlanteles()
+        public List<DetallePlantel> ObtenerPlanteles()
         {
             try
             {
                 lstPlanteles = new List<PlantelesES>();
-                lstPlanteles = escuelaESDAO.ObtenerPlnateles();
-                return lstPlanteles;
+                return escuelaESDAO.ObtenerPlnateles(); ;
             }
             catch (Exception)
             {
@@ -61,5 +60,12 @@ namespace WebServiceAppli_KT.Controlador
             plantelEMS = escuelaESDAO.BuscarPlantelIDPlantelEMS(idplantel);
             return plantelEMS;
         }
+
+        public DetallePlantel BuscarDetallePlantel(string idPlantel)
+        {
+
+            return escuelaESDAO.BuscarDetallePlantel(idPlantel);
+        }
+
     }
 }

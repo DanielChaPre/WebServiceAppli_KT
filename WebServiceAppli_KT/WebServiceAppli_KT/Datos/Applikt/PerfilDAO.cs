@@ -399,7 +399,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado.Cve_Empleado = Convert.ToInt32(reader["cve_empleado"].ToString());
                     ent_empleado.Numero_Empleado = reader["numero_empleado"].ToString();
                     ent_empleado.Estatus = reader["estatus"].ToString();
-                    ent_empleado.Fecha_Registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_empleado.Fecha_Registro = reader["fecha_registro"].ToString();
                 }
                 return ent_empleado;
             }
@@ -557,14 +557,15 @@ namespace WebServiceAppli_KT.Datos
         {
             try
             {
+                var cveUsuario = ByUsuarioCve(usuario, contrasenia);
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "Select * from usuario u, persona p, empleado_plantel e where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU and " +
                                    "e.cve_persona = (Select cve_persona from persona where cve_usuario = @cveUsuario)";
-                cmd.Parameters.AddWithValue("@cveUsuarioP", ByUsuarioCve(usuario, contrasenia));
-                cmd.Parameters.AddWithValue("@cveUsuarioU", ByUsuarioCve(usuario, contrasenia));
-                cmd.Parameters.AddWithValue("@cveUsuario", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuarioP", cveUsuario);
+                cmd.Parameters.AddWithValue("@cveUsuarioU", cveUsuario);
+                cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -595,7 +596,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado_plantel.Cve_Empleado_Plantel = Convert.ToInt32(reader["cve_empleado_plantel"].ToString());
                     ent_empleado_plantel.IdPlantelesES = Convert.ToInt16(reader["idPlantelesES"].ToString());
                     ent_empleado_plantel.Tipo = Convert.ToInt16(reader["tipo"].ToString());
-                    ent_empleado_plantel.Fecha_Registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_empleado_plantel.Fecha_Registro = reader["fecha_registro"].ToString();
                 }
                 return ent_empleado_plantel;
             }
@@ -783,7 +784,7 @@ namespace WebServiceAppli_KT.Datos
                     ent_padre_familia.Persona.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     ent_padre_familia.Cve_Padre_Familia = Convert.ToInt32(reader["cve_padre_familia"].ToString());
                     ent_padre_familia.IdAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
-                    ent_padre_familia.Fecha_Registro = Convert.ToDateTime(reader["fecha_registro"].ToString());
+                    ent_padre_familia.Fecha_Registro = reader["fecha_registro"].ToString();
                 }
                 return ent_padre_familia;
             }

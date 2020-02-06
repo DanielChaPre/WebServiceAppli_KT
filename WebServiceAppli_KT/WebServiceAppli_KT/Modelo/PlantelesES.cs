@@ -20,9 +20,9 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string Sostenimiento { get; set; }
         [DataMember]
-        public string Municipio { get; set; }
+        public int Municipio { get; set; }
         [DataMember]
-        public int Activo { get; set; }
+        public string Activo { get; set; }
         [DataMember]
         public string ClaveInstitucion { get; set; }
         [DataMember]

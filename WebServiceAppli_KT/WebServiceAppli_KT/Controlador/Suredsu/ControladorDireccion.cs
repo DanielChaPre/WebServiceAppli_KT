@@ -61,6 +61,20 @@ namespace WebServiceAppli_KT.Controlador.Suredsu
             }
         }
 
+        public List<Municipios> ConsultarTodosMunicipios()
+        {
+            try
+            {
+                return municipiosDAO.ObtenerTodosMunicipios();
+            }
+            catch (Exception)
+            {
+                return null;
+                throw;
+            }
+        }
+
+
         public List<Municipios> ConsultarMunicipios(string estado)
         {
             try

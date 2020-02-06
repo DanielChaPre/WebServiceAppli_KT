@@ -18,7 +18,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string estatus { get; set; }
         [DataMember]
-        public DateTime fecha_registro { get; set; }
+        public string fecha_registro { get; set; }
         [DataMember]
         public int cve_usuario { get; set; }
     }

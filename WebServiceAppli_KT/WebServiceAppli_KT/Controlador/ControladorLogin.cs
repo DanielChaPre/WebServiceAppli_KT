@@ -28,17 +28,29 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public int ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
+        public List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
                 return loginDAO.ValidarContrasenia(contrasenia, usuario, idAlumno);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                return 0;
+                return null;
             }
-        } 
+        }
+
+        public List<string> ValidarContrasenaAlumno(string contrasenia, string usuario, string idAlumno)
+        {
+            try
+            {
+                return loginDAO.ValidarContrasenaAlumno(contrasenia, usuario, idAlumno);
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
 
         public bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario)
         {

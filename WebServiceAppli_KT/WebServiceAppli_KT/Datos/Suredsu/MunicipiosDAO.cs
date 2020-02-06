@@ -14,6 +14,37 @@ namespace WebServiceAppli_KT.Datos
         List<Municipios> lst_municipios;
         Municipios municipios;
 
+
+        public List<Municipios> ObtenerTodosMunicipios()
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select * from municipios where idEstado = 11;";
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                lst_municipios = new List<Municipios>();
+                while (reader.Read())
+                {
+
+                    lst_municipios.Add(new Municipios()
+                    {
+                        idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
+                        NombreMunicipio = reader["NombreMunicipio"].ToString(),
+                        idEstado = Convert.ToInt32(reader["idEstado"].ToString()),
+                    });
+                }
+
+                return lst_municipios;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
         public List<Municipios> ObtenerMunicipios(string estado)
         {
             try

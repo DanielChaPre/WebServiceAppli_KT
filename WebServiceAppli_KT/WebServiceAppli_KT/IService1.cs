@@ -22,12 +22,20 @@ namespace WebServiceAppli_KT
         [WebGet(UriTemplate = "/validarUsuario/{usuario}",
                 ResponseFormat = WebMessageFormat.Json)]
         bool ValidarUsuario(string usuario);
+
         [OperationContract]
         [WebInvoke(UriTemplate = "/validarContrasenia/{contrasenia}/{usuario}/{idAlumno}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        int ValidarContrasenia(string contrasenia, string usuario, string idAlumno);
+        List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/validarContraseniaAlumno/{contrasenia}/{usuario}/{idAlumno}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET")]
+        List<string> ValidarContraseniaAlumno(string contrasenia, string usuario, string idAlumno);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/crearCuenta/{usuario}/{contrasena}/{idAlumno}/{tipoUsuario}",
@@ -204,11 +212,18 @@ namespace WebServiceAppli_KT
         #endregion
         //Notificaciones
         [OperationContract]
-        [WebInvoke(UriTemplate = "/notificacion",
+        [WebInvoke(UriTemplate = "/notificacion/{cveUsuario}",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        Notificaciones ConsultarNotificaciones();
+        List<Notificaciones> ConsultarNotificaciones(string cveUsuario);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/notificacion/{cveUsuario}/{cveNotificacion}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET")]
+        bool EliminarNotificacion(string cveUsuario, string cveNotificacion);
         //Atlas
         #region Planteles
         [OperationContract]
@@ -216,7 +231,7 @@ namespace WebServiceAppli_KT
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        List<PlantelesES> ObtenerPlanteles();
+        List<DetallePlantel> ObtenerPlanteles();
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/buscarplantelmunicipio/{municipio}",
@@ -238,6 +253,13 @@ namespace WebServiceAppli_KT
                    ResponseFormat = WebMessageFormat.Json,
                    Method = "GET")]
         PlantelesES BuscarPlanteles(string plantel);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/buscardetalleplantel/{idplantel}",
+                   RequestFormat = WebMessageFormat.Json,
+                   ResponseFormat = WebMessageFormat.Json,
+                   Method = "GET")]
+        DetallePlantel BuscarDetallePlantel (string idplantel);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/buscarplantelEMS/{idplantel}",
@@ -279,6 +301,13 @@ namespace WebServiceAppli_KT
         List<Municipios> ObtenerMunicipios(string estado);
 
         [OperationContract]
+        [WebInvoke(UriTemplate = "/municipios",
+                 RequestFormat = WebMessageFormat.Json,
+                 ResponseFormat = WebMessageFormat.Json,
+                 Method = "GET")]
+        List<Municipios> ObtenerTodosMunicipios();
+
+        [OperationContract]
         [WebGet(UriTemplate = "/estados",
                   RequestFormat = WebMessageFormat.Json,
                   ResponseFormat = WebMessageFormat.Json)]
@@ -291,7 +320,12 @@ namespace WebServiceAppli_KT
                   Method = "GET")]
         List<Paises> ObtenerPaises();
         //Historial
-
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/historial/{cveUsuario}",
+                  RequestFormat = WebMessageFormat.Json,
+                  ResponseFormat = WebMessageFormat.Json,
+                  Method = "GET")]
+        List<Historial> ObtenerHistorial(string cveUsuario);
         // TODO: agregue aquí sus operaciones de servicio
     }
 }

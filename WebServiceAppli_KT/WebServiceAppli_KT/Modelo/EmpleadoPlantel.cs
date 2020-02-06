@@ -12,7 +12,7 @@ namespace WebServiceAppli_KT.Modelo
         private int cve_empleado_plantel;
         private int idPlantelesES;
         private int tipo;
-        private DateTime fecha_registro;
+        private string fecha_registro;
         private Persona persona;
 
         [DataMember]
@@ -22,7 +22,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int Tipo { get => tipo; set => tipo = value; }
         [DataMember]
-        public DateTime Fecha_Registro { get => fecha_registro; set => fecha_registro = value; }
+        public string Fecha_Registro { get => fecha_registro; set => fecha_registro = value; }
         [DataMember]
         public Persona Persona { get => persona; set => persona = value; }
     }

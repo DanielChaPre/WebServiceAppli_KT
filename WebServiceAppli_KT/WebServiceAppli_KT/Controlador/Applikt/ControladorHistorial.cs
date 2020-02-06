@@ -2,22 +2,17 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using WebServiceAppli_KT.Datos;
+using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Controlador.Applikt
 {
     public class ControladorHistorial
     {
-        public void ConsultarHistorial()
+        public List<Historial> ConsultarHistorial(string cveUsuario)
         {
-            try
-            {
-
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
+            var historialDao =new HistorialDAO();
+            return historialDao.ConsultarHistorial(cveUsuario);
         }
     }
 }

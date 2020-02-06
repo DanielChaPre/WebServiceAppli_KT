@@ -1,5 +1,6 @@
 ﻿using MySql.Data.MySqlClient;
 using System;
+using System.Collections.Generic;
 using WebServiceAppli_KT.Modelo;
 
 namespace WebServiceAppli_KT.Datos
@@ -39,7 +40,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public int ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
+        public List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
@@ -47,27 +48,69 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select tipo_usuario from usuario where contrasena = @pass and (nombre_usuario = @usuario or idAlumno = @idAlumno)";
+                cmd.CommandText = "Select usuario.tipo_usuario, usuario.cve_usuario, persona.nombre, persona.apellido_paterno from usuario" +
+                    " inner join persona " +
+                    " on persona.cve_usuario = (Select cve_usuario from usuario where(contrasena = @pass) and(nombre_usuario = @usuario) and(idAlumno = @idAlumno)) and" +
+                    " (usuario.contrasena = @pass and usuario.nombre_usuario = @usuario and usuario.idAlumno = @idAlumno); ";
                 cmd.Parameters.AddWithValue("@pass", contrasenia);
                 cmd.Parameters.AddWithValue("@usuario", usuario);
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
+                var lstresultado = new List<string>();
                 MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
+                while (reader.Read())
                 {
-                    return Convert.ToInt32(reader["tipo_usuario"].ToString());
+                    lstresultado.Add(reader["tipo_usuario"].ToString());
+                    lstresultado.Add(reader["cve_usuario"].ToString());
+                    lstresultado.Add(reader["nombre"].ToString());
+                    lstresultado.Add(reader["apellido_paterno"].ToString());
                 }
-                else
-                    return 0;
+                return lstresultado;
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error en el logeo, " + ex.Message);
-                return 0;
+                return null;
             }
             finally
             {
                 con.Close();
+            }
+        }
+
+        public List<string> ValidarContrasenaAlumno(string contrasenia, string usuario, string idAlumno)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "    Select usuario.tipo_usuario, usuario.cve_usuario, suredsu.alumnos.Nombre, suredsu.alumnos.ApellidoPaterno from usuario" +
+                    " inner join suredsu.alumnos" +
+                    " on suredsu.alumnos.idAlumno = (Select idAlumno from usuario where(contrasena = @pass) and(nombre_usuario = @usuario) and(idAlumno = @idAlumno)) and" +
+                    " (usuario.contrasena = @pass and usuario.nombre_usuario = @usuario and usuario.idAlumno = @idAlumno)";
+                cmd.Parameters.AddWithValue("@pass", contrasenia);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                con.Open();
+                var lstresultado = new List<string>();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                while (reader.Read())
+                {
+                    //  lstresultado[0] = Convert.ToInt32(reader["tipo_usuario"].ToString());
+                    //lstresultado[1] = Convert.ToInt32(reader["cve_usuario"].ToString());
+                    // return Convert.ToInt32(reader["tipo_usuario"].ToString());
+                    lstresultado.Add(reader["tipo_usuario"].ToString());
+                    lstresultado.Add(reader["cve_usuario"].ToString());
+                    lstresultado.Add(reader["Nombre"].ToString());
+                    lstresultado.Add(reader["ApellidoPaterno"].ToString());
+                }
+                return lstresultado;
+            }
+            catch (Exception ex)
+            {
+                return null;
+                throw;
             }
         }
 

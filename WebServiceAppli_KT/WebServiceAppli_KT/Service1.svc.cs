@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using WebServiceAppli_KT.Controlador;
+using WebServiceAppli_KT.Controlador.Applikt;
 using WebServiceAppli_KT.Controlador.Suredsu;
 using WebServiceAppli_KT.Modelo;
 
@@ -18,11 +19,11 @@ namespace WebServiceAppli_KT
         ControladorPerfil perfilController;
         ControladorGrupoSeguridad grupoSeguridadController;
         ControladorDireccion controladorDireccion;
-        ControladorAlumno controladorAlumno;   
+        ControladorAlumno controladorAlumno;
         #endregion
 
         #region variables(Objetos)
-        Notificaciones entNotificacion;
+        List<Notificaciones> entNotificacion;
         Alumno entAlumno = new Alumno();
         Persona entPersona = new Persona();
         Usuario entUsuario = new Usuario();
@@ -39,13 +40,13 @@ namespace WebServiceAppli_KT
         #endregion
 
 
-        public Notificaciones ConsultarNotificaciones()
+        public List<Notificaciones> ConsultarNotificaciones(string cveUsuario)
         {
             try
             {
                 notificacionController = new ControladorNotificacion();
-                entNotificacion = new Notificaciones();
-                entNotificacion = notificacionController.Consultar();
+                entNotificacion = new List<Notificaciones>();
+                entNotificacion = notificacionController.Consultar(cveUsuario);
                 return entNotificacion;
             }
             catch (Exception)
@@ -340,7 +341,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public int ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
+        public List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
             {
@@ -349,7 +350,21 @@ namespace WebServiceAppli_KT
             }
             catch (Exception)
             {
-                return 0;
+                return null;
+                throw;
+            }
+        }
+
+        public List<string> ValidarContraseniaAlumno(string contrasenia, string usuario, string idAlumno)
+        {
+            try
+            {
+                loginController = new ControladorLogin();
+                return loginController.ValidarContrasenaAlumno(contrasenia, usuario, idAlumno);
+            }
+            catch (Exception)
+            {
+                return null;
                 throw;
             }
         }
@@ -369,14 +384,14 @@ namespace WebServiceAppli_KT
         }
 
         #region Plantel
-        public List<PlantelesES> ObtenerPlanteles()
+        public List<DetallePlantel> ObtenerPlanteles()
         {
             try
             {
                 escuelaESController = new ControladorEscuelasES();
                 lstPlanteles = new List<PlantelesES>();
-                lstPlanteles = escuelaESController.ObtenerPlanteles();
-                return lstPlanteles;
+              //  lstPlanteles = escuelaESController.ObtenerPlanteles();
+                return escuelaESController.ObtenerPlanteles();
             }
             catch (Exception)
             {
@@ -443,6 +458,30 @@ namespace WebServiceAppli_KT
         {
             escuelaESController = new ControladorEscuelasES();
             return escuelaESController.BuscarPlantelEMS(Convert.ToInt32(idplantel));
+        }
+
+        public bool EliminarNotificacion(string cveUsuario, string cveNotificacion)
+        {
+            notificacionController = new ControladorNotificacion();
+            return notificacionController.EliminarNotificacion(cveUsuario, cveNotificacion);
+        }
+
+        public List<Municipios> ObtenerTodosMunicipios()
+        {
+            controladorDireccion = new ControladorDireccion();
+            return controladorDireccion.ConsultarTodosMunicipios();
+        }
+
+        public DetallePlantel BuscarDetallePlantel(string idplantel)
+        {
+            escuelaESController = new ControladorEscuelasES();
+            return escuelaESController.BuscarDetallePlantel(idplantel);
+        }
+
+        public List<Historial> ObtenerHistorial(string cveUsuario)
+        {
+            var historialController = new ControladorHistorial();
+            return historialController.ConsultarHistorial(cveUsuario);
         }
         #endregion
 

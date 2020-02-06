@@ -10,25 +10,30 @@ namespace WebServiceAppli_KT.Controlador
     public class ControladorNotificacion
     {
         NotificacionDAO notificacionDAO;
-        Notificaciones entNotificacion;
+        List<Notificaciones> lstentNotificacion;
 
         public ControladorNotificacion()
         {
             notificacionDAO = new NotificacionDAO();
         }
 
-        public Notificaciones Consultar()
+        public List<Notificaciones> Consultar(string cveUsuario)
         {
             try
             {
-                entNotificacion = new Notificaciones();
-                entNotificacion = notificacionDAO.ConsultarNotificaciones();
-                return entNotificacion;
+                lstentNotificacion = new List<Notificaciones>();
+                lstentNotificacion = notificacionDAO.ConsultarNotificaciones(cveUsuario);
+                return lstentNotificacion;
             }
             catch (Exception ex) 
             {
                 return null;
             }
+        }
+
+        public bool EliminarNotificacion(string cveUsuario, string cveNotificacion)
+        {
+            return notificacionDAO.EliminarNotificacion(cveUsuario, cveNotificacion);
         }
     }
 }
