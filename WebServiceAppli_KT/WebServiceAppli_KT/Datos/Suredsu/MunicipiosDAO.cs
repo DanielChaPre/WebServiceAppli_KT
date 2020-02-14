@@ -22,7 +22,7 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * from municipios where idEstado = 11;";
+                cmd.CommandText = "Select * from municipios";
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 lst_municipios = new List<Municipios>();

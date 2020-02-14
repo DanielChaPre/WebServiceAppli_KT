@@ -383,6 +383,13 @@ namespace WebServiceAppli_KT
             }
         }
 
+        public bool ValidarUsuarioAlumno(string idAlumno)
+        {
+            loginController = new ControladorLogin();
+            return loginController.ValidarUsuarioAlumno(idAlumno);
+        }
+
+
         #region Plantel
         public List<DetallePlantel> ObtenerPlanteles()
         {

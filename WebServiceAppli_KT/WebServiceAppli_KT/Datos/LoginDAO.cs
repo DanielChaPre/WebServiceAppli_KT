@@ -40,6 +40,34 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
+        public bool ValidarUsuarioAlumno(string idAlumno)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select * From usuario where idAlumno = @idAlumno";
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en el logeo, " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
@@ -50,7 +78,7 @@ namespace WebServiceAppli_KT.Datos
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "Select usuario.tipo_usuario, usuario.cve_usuario, persona.nombre, persona.apellido_paterno from usuario" +
                     " inner join persona " +
-                    " on persona.cve_usuario = (Select cve_usuario from usuario where(contrasena = @pass) and(nombre_usuario = @usuario) and(idAlumno = @idAlumno)) and" +
+                    "on persona.cve_usuario = (Select cve_usuario from usuario where(contrasena = @pass) and(nombre_usuario = @usuario) and(idAlumno = @idAlumno)) and" +
                     " (usuario.contrasena = @pass and usuario.nombre_usuario = @usuario and usuario.idAlumno = @idAlumno); ";
                 cmd.Parameters.AddWithValue("@pass", contrasenia);
                 cmd.Parameters.AddWithValue("@usuario", usuario);
@@ -58,13 +86,48 @@ namespace WebServiceAppli_KT.Datos
                 con.Open();
                 var lstresultado = new List<string>();
                 MySqlDataReader reader = cmd.ExecuteReader();
-                while (reader.Read())
+                //if (reader.FieldCount == 0)
+                //{
+                //    cmd.CommandText = "Select usuario.tipo_usuario, usuario.cve_usuario from usuario where" +
+                //        " (usuario.contrasena = @pass and usuario.nombre_usuario = @usuario and usuario.idAlumno = @idAlumno) ";
+
+                //    cmd.Parameters.AddWithValue("@pass", contrasenia);
+                //    cmd.Parameters.AddWithValue("@usuario", usuario);
+                //    cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                //    reader = cmd.ExecuteReader();
+                //}
+                if (reader.Read())
                 {
-                    lstresultado.Add(reader["tipo_usuario"].ToString());
-                    lstresultado.Add(reader["cve_usuario"].ToString());
-                    lstresultado.Add(reader["nombre"].ToString());
-                    lstresultado.Add(reader["apellido_paterno"].ToString());
+                    while (reader.Read())
+                    {
+                        lstresultado.Add(reader["tipo_usuario"].ToString());
+                        lstresultado.Add(reader["cve_usuario"].ToString());
+                        lstresultado.Add(reader["nombre"].ToString());
+                        lstresultado.Add(reader["apellido_paterno"].ToString());
+                    }
                 }
+                else
+                {
+                    con.Close();
+                    cmd.CommandText = "Select usuario.tipo_usuario, usuario.cve_usuario from usuario where" +
+                       " (usuario.contrasena = @pass and usuario.nombre_usuario = @usuario and usuario.idAlumno = @idAlumno) ";
+
+                    //cmd.Parameters.AddWithValue("@pass", contrasenia);
+                    //cmd.Parameters.AddWithValue("@usuario", usuario);
+                    //cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                    con.Open();
+                    reader = cmd.ExecuteReader();
+
+                    while (reader.Read())
+                    {
+                        lstresultado.Add(reader["tipo_usuario"].ToString());
+                        lstresultado.Add(reader["cve_usuario"].ToString());
+                        lstresultado.Add(" ");
+                        lstresultado.Add(" ");
+                    }
+                }
+               
+                
                 return lstresultado;
             }
             catch (Exception ex)

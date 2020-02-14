@@ -16,7 +16,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int IdPlantelesES { get; set; }
         [DataMember]
-        public int Activa { get; set; }
+        public string Activa { get; set; }
         [DataMember]
         public string ClaveCarrera { get; set; }
         [DataMember]

@@ -28,6 +28,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
+        public bool ValidarUsuarioAlumno(string idAlumno)
+        {
+            return loginDAO.ValidarUsuarioAlumno(idAlumno);
+        }
+
         public List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try

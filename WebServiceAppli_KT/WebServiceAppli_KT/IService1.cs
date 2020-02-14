@@ -18,10 +18,17 @@ namespace WebServiceAppli_KT
         [WebGet(UriTemplate = "/recuperarContrasena/{usuario}/{nuevaContrasena}",
                 ResponseFormat = WebMessageFormat.Json)]
         bool RecuperarContrasena(string usuario, string nuevaContrasena);
+
+
         [OperationContract]
         [WebGet(UriTemplate = "/validarUsuario/{usuario}",
                 ResponseFormat = WebMessageFormat.Json)]
         bool ValidarUsuario(string usuario);
+
+        [OperationContract]
+        [WebGet(UriTemplate = "/validarUsuarioAlumno/{idAlumno}",
+                ResponseFormat = WebMessageFormat.Json)]
+        bool ValidarUsuarioAlumno(string idAlumno);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/validarContrasenia/{contrasenia}/{usuario}/{idAlumno}",
