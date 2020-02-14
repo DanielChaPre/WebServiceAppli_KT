@@ -74,6 +74,10 @@ namespace WebServiceAppli_KT
             }
         }
 
+        public bool CrearCuentaAliasRed(string alias_red)
+        {
+            return loginController.CrearCuentaAliasRed(alias_red);
+        }
         #region perfiles
         #region consultar perfiles
         public Alumno ConsultarPerfilAlumno(string idAlumno)
@@ -381,6 +385,12 @@ namespace WebServiceAppli_KT
                 return false;
                 throw;
             }
+        }
+
+        public bool ValidarUsuarioAliasRed(string alias_red)
+        {
+            loginController = new ControladorLogin();
+            return loginController.ValidarUsuarioAliasRed(alias_red);
         }
 
         public bool ValidarUsuarioAlumno(string idAlumno)

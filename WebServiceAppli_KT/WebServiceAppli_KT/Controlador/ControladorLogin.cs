@@ -33,6 +33,11 @@ namespace WebServiceAppli_KT.Controlador
             return loginDAO.ValidarUsuarioAlumno(idAlumno);
         }
 
+        public bool ValidarUsuarioAliasRed(string alias_red)
+        {
+            return loginDAO.ValidarUsuarioAliasRed(alias_red);
+        }
+
         public List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
@@ -70,6 +75,11 @@ namespace WebServiceAppli_KT.Controlador
             {
                 return false;
             }
+        }
+
+        public bool CrearCuentaAliasRed(string alias_red)
+        {
+            return loginDAO.CrearCuentaAliasRed(alias_red);
         }
 
         public bool RecuperarContrasena(string usuario, string nuevaContrasena)

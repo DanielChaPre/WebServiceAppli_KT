@@ -40,6 +40,34 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
+        public bool ValidarUsuarioAliasRed(string alias_red)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select * From usuario where alias_red = @alias_red";
+                cmd.Parameters.AddWithValue("@alias_red", alias_red);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                    return true;
+                else
+                    return false;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en el logeo, " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
         public bool ValidarUsuarioAlumno(string idAlumno)
         {
             try
@@ -193,6 +221,34 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.AddWithValue("@contrasena", contrasena);
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 cmd.Parameters.AddWithValue("@tipoUsuario", Convert.ToInt16(tipoUsuario));
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error al insertar la cuenta " + ex.Message);
+                return false;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public bool CrearCuentaAliasRed(string alias_red)
+        {
+            try
+            {
+
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+
+                cmd.CommandText = "Insert into usuario(alias_red, tipo_usuario) " +
+                    "values(@alias_red, @tipoUsuario) ";
+                cmd.Parameters.AddWithValue("@alias_red", alias_red);
+                cmd.Parameters.AddWithValue("@tipoUsuario", 1);
                 con.Open();
                 cmd.ExecuteNonQuery();
                 return true;

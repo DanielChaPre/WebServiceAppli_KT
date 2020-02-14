@@ -26,6 +26,11 @@ namespace WebServiceAppli_KT
         bool ValidarUsuario(string usuario);
 
         [OperationContract]
+        [WebGet(UriTemplate = "/validarUsuario/{alias_red}",
+               ResponseFormat = WebMessageFormat.Json)]
+        bool ValidarUsuarioAliasRed(string alias_red);
+
+        [OperationContract]
         [WebGet(UriTemplate = "/validarUsuarioAlumno/{idAlumno}",
                 ResponseFormat = WebMessageFormat.Json)]
         bool ValidarUsuarioAlumno(string idAlumno);
@@ -50,6 +55,13 @@ namespace WebServiceAppli_KT
             ResponseFormat = WebMessageFormat.Json, 
             Method = "GET")]
         bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/crearCuentaAliasRed/{alias_red}",
+            RequestFormat = WebMessageFormat.Json,
+            ResponseFormat = WebMessageFormat.Json,
+            Method = "GET")]
+        bool CrearCuentaAliasRed(string alias_red);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/verificarAlumno/{contrasena}/{idAlumno}",

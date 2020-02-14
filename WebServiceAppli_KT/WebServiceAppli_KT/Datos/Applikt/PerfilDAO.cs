@@ -362,13 +362,14 @@ namespace WebServiceAppli_KT.Datos
             try
             {
                 var conn = conexion.Builder;
+                var cveUsuario = ByUsuarioCve(usuario, contrasenia);
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "Select * from usuario u, persona p, empleado e where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU and " +
                     "e.cve_persona = (Select cve_persona from persona where cve_usuario = @cveUsuario)";
-                cmd.Parameters.AddWithValue("@cveUsuarioP", ByUsuarioCve(usuario, contrasenia));
-                cmd.Parameters.AddWithValue("@cveUsuarioU", ByUsuarioCve(usuario, contrasenia));
-                cmd.Parameters.AddWithValue("@cveUsuario", ByUsuarioCve(usuario, contrasenia));
+                cmd.Parameters.AddWithValue("@cveUsuarioP", cveUsuario);
+                cmd.Parameters.AddWithValue("@cveUsuarioU", cveUsuario);
+                cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
