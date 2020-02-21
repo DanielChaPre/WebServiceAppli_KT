@@ -46,7 +46,6 @@ namespace WebServiceAppli_KT.Datos
                         latitud = reader["latitud"].ToString(),
                         longitud = reader["longitud"].ToString(),
                         ubicacion = reader["ubicacion"].ToString(),
-                        nivel_estudio = reader["nivel_estudio"].ToString(),
                         cve_nivel_agrupado = Convert.ToInt32(reader["cve_nivel_agrupado"].ToString()),
                         cve_nivel_estudio = Convert.ToInt32(reader["cve_nivel_estudio"].ToString()),
                         PlantelesES = new PlantelesES()

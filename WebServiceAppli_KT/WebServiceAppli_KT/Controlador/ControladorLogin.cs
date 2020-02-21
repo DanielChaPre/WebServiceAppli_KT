@@ -33,11 +33,6 @@ namespace WebServiceAppli_KT.Controlador
             return loginDAO.ValidarUsuarioAlumno(idAlumno);
         }
 
-        public bool ValidarUsuarioAliasRed(string alias_red)
-        {
-            return loginDAO.ValidarUsuarioAliasRed(alias_red);
-        }
-
         public List<string> ValidarContrasenia(string contrasenia, string usuario, string idAlumno)
         {
             try
@@ -77,11 +72,6 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
-        public bool CrearCuentaAliasRed(string alias_red)
-        {
-            return loginDAO.CrearCuentaAliasRed(alias_red);
-        }
-
         public bool RecuperarContrasena(string usuario, string nuevaContrasena)
         {
             return loginDAO.RecuperarContraseña(usuario, nuevaContrasena);
@@ -97,6 +87,42 @@ namespace WebServiceAppli_KT.Controlador
         {
             loginDAO = new LoginDAO();
             return loginDAO.ConsultarUsuarioAlumno(idAlumno);
+        }
+
+        public List<string> ValidarUsuarioFacebook(string aliasred)
+        {
+            loginDAO = new LoginDAO();
+            return loginDAO.ValidarUsuarioFacebook(aliasred);
+        }
+
+        public List<string> ValidarUsuarioGoogle(string aliasred)
+        {
+            loginDAO = new LoginDAO();
+            return loginDAO.ValidarUsuarioGoogle(aliasred);
+        }
+
+        public List<string> RelacionarFacebookUsuario(string aliasred, string usuario, string contrasena)
+        {
+            loginDAO = new LoginDAO();
+            return loginDAO.RelacionarFacebookUsuario(aliasred, usuario, contrasena);
+        }
+
+        public List<string> RelacionarGoogleUsuario(string aliasred, string usuario, string contrasena)
+        {
+            loginDAO = new LoginDAO();
+            return loginDAO.RelacionarGoogleUsuario(aliasred, usuario, contrasena);
+        }
+
+        public List<string> RelacionarFacebookAlumno(string aliasred, string curp, string contrasena)
+        {
+            loginDAO = new LoginDAO();
+            return loginDAO.RelacionarFacebookAlumno(aliasred, curp, contrasena);
+        }
+
+        public List<string> RelacionarGoogleAlumno(string aliasred, string curp, string contrasena)
+        {
+            loginDAO = new LoginDAO();
+            return loginDAO.RelacionarGoogleAlumno(aliasred, curp, contrasena);
         }
     }
 }

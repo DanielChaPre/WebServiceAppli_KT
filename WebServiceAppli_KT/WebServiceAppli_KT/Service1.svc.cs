@@ -75,10 +75,6 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool CrearCuentaAliasRed(string alias_red)
-        {
-            return loginController.CrearCuentaAliasRed(alias_red);
-        }
         #region perfiles
         #region consultar perfiles
         public Alumno ConsultarPerfilAlumno(string idAlumno)
@@ -388,12 +384,6 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool ValidarUsuarioAliasRed(string alias_red)
-        {
-            loginController = new ControladorLogin();
-            return loginController.ValidarUsuarioAliasRed(alias_red);
-        }
-
         public bool ValidarUsuarioAlumno(string idAlumno)
         {
             loginController = new ControladorLogin();
@@ -512,6 +502,42 @@ namespace WebServiceAppli_KT
         {
             controladorConfiguracionPlantilla = new ControladorConfiguracionPlantilla();
             return controladorConfiguracionPlantilla.ConsultarPlantillasUsuarioAlumno(idAlumno);
+        }
+
+        public List<string> ValidarUsuarioFacebook(string aliasred)
+        {
+            loginController = new ControladorLogin();
+            return loginController.ValidarUsuarioFacebook(aliasred);
+        }
+
+        public List<string> ValidarUsuarioGoogle(string aliasred)
+        {
+            loginController = new ControladorLogin();
+            return loginController.ValidarUsuarioGoogle(aliasred);
+        }
+
+        public List<string> RelacionarFacebookUsuario(string aliasred, string usuario, string contrasena)
+        {
+            loginController = new ControladorLogin();
+            return loginController.RelacionarFacebookUsuario(aliasred, usuario, contrasena);
+        }
+
+        public List<string> RelacionarGoogleUsuario(string aliasred, string usuario, string contrasena)
+        {
+            loginController = new ControladorLogin();
+            return loginController.RelacionarGoogleUsuario(aliasred, usuario, contrasena);
+        }
+
+        public List<string> RelacionarFacebookAlumno(string aliasred, string curp, string contrasena)
+        {
+            loginController = new ControladorLogin();
+            return loginController.RelacionarFacebookAlumno(aliasred, curp, contrasena);
+        }
+
+        public List<string> RelacionarGoogleAlumno(string aliasred, string curp, string contrasena)
+        {
+            loginController = new ControladorLogin();
+            return loginController.RelacionarGoogleAlumno(aliasred, curp, contrasena);
         }
         #endregion
 

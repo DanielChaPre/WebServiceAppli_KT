@@ -12,6 +12,8 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int cve_notificacion { get; set; }
         [DataMember]
+        public int estatus { get; set; }
+        [DataMember]
         public string texto { get; set;}
         [DataMember]
         public string responsable { get; set; }

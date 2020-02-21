@@ -21,7 +21,8 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "  Select * from notificacion where cve_notificacion in " +
+                cmd.CommandText = "  Select * from notificacion inner join bandeja_notifiacion_usuario " +
+                    " where notificacion.cve_notificacion in " +
                     "(Select cve_notificacion from bandeja_notifiacion_usuario where cve_usuario = @cveUsuario); ";
                 cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
                 con.Open();
@@ -41,12 +42,12 @@ namespace WebServiceAppli_KT.Datos
                         url = reader["url"].ToString(),
                         fecha_notificacion = reader["fecha_notificacion"].ToString(),
                         hora_notificacion = reader["hora_notificacion"].ToString(),
-                        
+                        estatus = Convert.ToInt32(reader["estatus"].ToString())
                      });
                 }
                 return lstnotificaciones;
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error en la consulta de notificaciones: "+ex.Message);
                 return null;

@@ -40,7 +40,111 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool ValidarUsuarioAliasRed(string alias_red)
+        public List<string> ValidarUsuarioFacebook(string alias_red)
+        {
+            try
+            {
+                var tipousuario = ValidarTipoUsuario(alias_red, "");
+                var listResultado = new List<string>();
+                if (tipousuario == 2)
+                {
+                    //alumno
+                    listResultado = ValidarRedSocialAlumno(alias_red, "");
+                }
+                else
+                {
+                    //otros usuarios
+                    listResultado = ValidarRedSocialUsuario(alias_red, "");
+                }
+
+                return listResultado;
+                
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error en el logeo, " + ex.Message);
+                return null;
+            }
+        }
+
+        private List<string> ValidarRedSocialAlumno(string perfilFacebook, string perfilGoogle)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = " Select usuario.tipo_usuario, usuario.cve_usuario, suredsu.alumnos.Nombre, suredsu.alumnos.ApellidoPaterno from usuario" +
+                    " inner join suredsu.alumnos on suredsu.alumnos.idAlumno in " +
+                    "(Select idAlumno from usuario where(nombre_usuario_FB = @fb or nombre_usuario_GM = @gm )) and" +
+                    " (nombre_usuario_FB = @fb or nombre_usuario_GM = @gm)";
+                cmd.Parameters.AddWithValue("@fb", perfilFacebook);
+                cmd.Parameters.AddWithValue("@gm", perfilGoogle);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                var listaResultado = new List<string>();
+                if (reader.Read())
+                {
+                    listaResultado.Add(reader["tipo_usuario"].ToString());
+                    listaResultado.Add(reader["cve_usuario"].ToString());
+                    listaResultado.Add(reader["Nombre"].ToString());
+                    listaResultado.Add(reader["ApellidoPaterno"].ToString());
+                }
+                return listaResultado;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        private List<string> ValidarRedSocialUsuario(string perfilFacebook, string perfilGoogle)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = " Select  usuario.tipo_usuario, usuario.cve_usuario, persona.nombre, persona.apellido_paterno from usuario" +
+                    " inner join persona on persona.cve_usuario = " +
+                    "(Select cve_usuario from usuario where(nombre_usuario_FB = @fb or nombre_usuario_GM = @gm )) and" +
+                    " (nombre_usuario_FB = @fb or nombre_usuario_GM = @gm)";
+                cmd.Parameters.AddWithValue("@fb", perfilFacebook);
+                cmd.Parameters.AddWithValue("@gm", perfilGoogle);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                var listaResultado = new List<string>();
+                if (reader.Read())
+                {
+                    listaResultado.Add(reader["tipo_usuariox"].ToString());
+                    listaResultado.Add(reader["cve_usuario"].ToString());
+                    listaResultado.Add(reader["nombre"].ToString());
+                    listaResultado.Add(reader["apellido_paterno"].ToString());
+                }
+                else
+                {
+                    con.Close();
+                    cmd.CommandText = "Select usuario.tipo_usuario, usuario.cve_usuario from usuario where" +
+                       " (nombre_usuario_FB = @fb or nombre_usuario_GM = @gm) ";
+                    con.Open();
+                    reader = cmd.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        listaResultado.Add(reader["tipo_usuariox"].ToString());
+                        listaResultado.Add(reader["cve_usuario"].ToString());
+                        listaResultado.Add("");
+                        listaResultado.Add("");
+                    }
+                }
+                return listaResultado;
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
+        }
+
+        public int ValidarTipoUsuario(string aliasredfecebook, string aliasredgoogle)
         {
             try
             {
@@ -48,23 +152,50 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where alias_red = @alias_red";
-                cmd.Parameters.AddWithValue("@alias_red", alias_red);
+                cmd.CommandText = "Select tipo_usuario from usuario where nombre_usuario_FB = @fb or nombre_usuario_GM = @gm";
+                cmd.Parameters.AddWithValue("@fb", aliasredfecebook);
+                cmd.Parameters.AddWithValue("@gm", aliasredgoogle);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
-                    return true;
+                {
+                    return Convert.ToInt32(reader["tipo_usuario"].ToString());
+                }
                 else
-                    return false;
+                {
+                    return 0;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<string> ValidarUsuarioGoogle(string alias_red)
+        {
+            try
+            {
+                var tipousuario = ValidarTipoUsuario("", alias_red);
+                var listResultado = new List<string>();
+                if (tipousuario == 2)
+                {
+                    //alumno
+                    listResultado = ValidarRedSocialAlumno("", alias_red);
+                }
+                else
+                {
+                    //otros usuarios
+                    listResultado = ValidarRedSocialUsuario("", alias_red);
+                }
+
+                return listResultado;
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error en el logeo, " + ex.Message);
-                return false;
-            }
-            finally
-            {
-                con.Close();
+                return null;
             }
         }
 
@@ -212,27 +343,111 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool CrearCuentaAliasRed(string alias_red)
+        public List<string> RelacionarFacebookUsuario(string alias_red, string usuario, string contrasena)
         {
             try
             {
-
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-
-                cmd.CommandText = "Insert into usuario(alias_red, tipo_usuario) " +
-                    "values(@alias_red, @tipoUsuario) ";
-                cmd.Parameters.AddWithValue("@alias_red", alias_red);
-                cmd.Parameters.AddWithValue("@tipoUsuario", 1);
+                cmd.CommandText = "update usuario set nombre_usuario_FB = @aliasRed" +
+                    "  where nombre_usuario = @usuario and contrasena = @contrasena";
+                cmd.Parameters.AddWithValue("@aliasRed", alias_red);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
                 con.Open();
                 cmd.ExecuteNonQuery();
-                return true;
+                return ValidarRedSocialUsuario(alias_red,"");
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error al insertar la cuenta " + ex.Message);
-                return false;
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<string> RelacionarGoogleUsuario(string alias_red, string usuario, string contrasena)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "update usuario set nombre_usuario_GM = @aliasRed" +
+                    "  where nombre_usuario = @usuario and contrasena = @contrasena";
+                cmd.Parameters.AddWithValue("@aliasRed", alias_red);
+                cmd.Parameters.AddWithValue("@usuario", usuario);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return ValidarRedSocialUsuario("",alias_red);
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error al insertar la cuenta " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<string> RelacionarFacebookAlumno(string alias_red, string curp, string contrasena)
+        {
+            try
+            {
+                AlumnoDAO alumnoDAO = new AlumnoDAO();
+                var idAlumno = alumnoDAO.BuscarIdAlumnoCurp(curp);
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "update usuario set nombre_usuario_FB = @aliasRed" +
+                    "  where idAlumno = @idAlumno and contrasena = @contrasena";
+                cmd.Parameters.AddWithValue("@aliasRed", alias_red);
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return ValidarRedSocialAlumno(alias_red, "");
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error al insertar la cuenta " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<string> RelacionarGoogleAlumno(string alias_red, string curp, string contrasena)
+        {
+            try
+            {
+                AlumnoDAO alumnoDAO = new AlumnoDAO();
+                var idAlumno = alumnoDAO.BuscarIdAlumnoCurp(curp);
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "update usuario set nombre_usuario_GM = @aliasRed" +
+                    "  where idAlumno = @idAlumno and contrasena = @contrasena";
+                cmd.Parameters.AddWithValue("@aliasRed", alias_red);
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                cmd.Parameters.AddWithValue("@contrasena", contrasena);
+                con.Open();
+                cmd.ExecuteNonQuery();
+                return ValidarRedSocialAlumno("",alias_red);
+            }
+            catch (MySqlException ex)
+            {
+                Console.WriteLine("Error al insertar la cuenta " + ex.Message);
+                return null;
             }
             finally
             {
@@ -270,7 +485,6 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
 
-                //cmd.CommandText = "Select * from usuario where contrasena = @contrasena and idAlumno = @idAlumno";
                 cmd.CommandText = "Select * from usuario where idAlumno = @idAlumno";
                 cmd.Parameters.AddWithValue("@contrasena", contrasena);
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
