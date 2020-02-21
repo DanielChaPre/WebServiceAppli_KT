@@ -100,6 +100,7 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controlador\Applikt\ControladorConfiguracionPlantilla.cs" />
     <Compile Include="Controlador\Applikt\ControladorHistorial.cs" />
     <Compile Include="Controlador\Applikt\ControladorHistorialBusquedaCarrera.cs" />
     <Compile Include="Controlador\Suredsu\ControladorAlumno.cs" />
@@ -111,6 +112,7 @@
     <Compile Include="Controlador\Applikt\ControladorNotificacion.cs" />
     <Compile Include="Controlador\Applikt\ControladorPerfil.cs" />
     <Compile Include="Controlador\Suredsu\ControladorPlantelEMS.cs" />
+    <Compile Include="Datos\Applikt\ConfiguracionPlantillasDAO.cs" />
     <Compile Include="Datos\Applikt\HistorialBusquedaCarreraDAO.cs" />
     <Compile Include="Datos\Suredsu\AlumnoDAO.cs" />
     <Compile Include="Datos\Suredsu\CarrerasDAO.cs" />

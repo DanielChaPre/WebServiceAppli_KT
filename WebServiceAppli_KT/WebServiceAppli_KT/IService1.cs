@@ -24,9 +24,9 @@ namespace WebServiceAppli_KT
         [WebGet(UriTemplate = "/validarUsuario/{usuario}",
                 ResponseFormat = WebMessageFormat.Json)]
         bool ValidarUsuario(string usuario);
-
+        /***/
         [OperationContract]
-        [WebGet(UriTemplate = "/validarUsuario/{alias_red}",
+        [WebGet(UriTemplate = "/validarUsuarioAliasRed/{alias_red}",
                ResponseFormat = WebMessageFormat.Json)]
         bool ValidarUsuarioAliasRed(string alias_red);
 
@@ -56,6 +56,7 @@ namespace WebServiceAppli_KT
             Method = "GET")]
         bool CrearCuenta(string usuario, string contrasena, string idAlumno, string tipoUsuario);
 
+        /***/
         [OperationContract]
         [WebInvoke(UriTemplate = "/crearCuentaAliasRed/{alias_red}",
             RequestFormat = WebMessageFormat.Json,
@@ -345,6 +346,20 @@ namespace WebServiceAppli_KT
                   ResponseFormat = WebMessageFormat.Json,
                   Method = "GET")]
         List<Historial> ObtenerHistorial(string cveUsuario);
-        // TODO: agregue aquí sus operaciones de servicio
+        /***/
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/plantilla/{cveUsuario}",
+                  RequestFormat = WebMessageFormat.Json,
+                  ResponseFormat = WebMessageFormat.Json,
+                  Method = "GET")]
+        List<string> ConsultarPlantillas(string cveUsuario);
+        /***/
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/plantillaAlumno/{idAlumno}",
+                  RequestFormat = WebMessageFormat.Json,
+                  ResponseFormat = WebMessageFormat.Json,
+                  Method = "GET")]
+        List<string> ConsultarPlantillasAlumno(string idAlumno);
+
     }
 }

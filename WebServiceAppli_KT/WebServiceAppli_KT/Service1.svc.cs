@@ -20,6 +20,7 @@ namespace WebServiceAppli_KT
         ControladorGrupoSeguridad grupoSeguridadController;
         ControladorDireccion controladorDireccion;
         ControladorAlumno controladorAlumno;
+        ControladorConfiguracionPlantilla controladorConfiguracionPlantilla;
         #endregion
 
         #region variables(Objetos)
@@ -499,6 +500,18 @@ namespace WebServiceAppli_KT
         {
             var historialController = new ControladorHistorial();
             return historialController.ConsultarHistorial(cveUsuario);
+        }
+
+        public List<string> ConsultarPlantillas(string cveUsuario)
+        {
+            controladorConfiguracionPlantilla = new ControladorConfiguracionPlantilla();
+            return controladorConfiguracionPlantilla.ConsultarPlantillasUsuario(cveUsuario);
+        }
+
+        public List<string> ConsultarPlantillasAlumno(string idAlumno)
+        {
+            controladorConfiguracionPlantilla = new ControladorConfiguracionPlantilla();
+            return controladorConfiguracionPlantilla.ConsultarPlantillasUsuarioAlumno(idAlumno);
         }
         #endregion
 
