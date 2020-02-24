@@ -74,7 +74,7 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = " Select usuario.tipo_usuario, usuario.cve_usuario, suredsu.alumnos.Nombre, suredsu.alumnos.ApellidoPaterno from usuario" +
+                cmd.CommandText = " Select usuario.tipo_usuario, usuario.cve_usuario, usuario.idAlumno, suredsu.alumnos.Nombre, suredsu.alumnos.ApellidoPaterno from usuario" +
                     " inner join suredsu.alumnos on suredsu.alumnos.idAlumno in " +
                     "(Select idAlumno from usuario where(nombre_usuario_FB = @fb or nombre_usuario_GM = @gm )) and" +
                     " (nombre_usuario_FB = @fb or nombre_usuario_GM = @gm)";
@@ -87,6 +87,7 @@ namespace WebServiceAppli_KT.Datos
                 {
                     listaResultado.Add(reader["tipo_usuario"].ToString());
                     listaResultado.Add(reader["cve_usuario"].ToString());
+                    listaResultado.Add(reader["idAlumno"].ToString());
                     listaResultado.Add(reader["Nombre"].ToString());
                     listaResultado.Add(reader["ApellidoPaterno"].ToString());
                 }
@@ -118,6 +119,7 @@ namespace WebServiceAppli_KT.Datos
                 {
                     listaResultado.Add(reader["tipo_usuariox"].ToString());
                     listaResultado.Add(reader["cve_usuario"].ToString());
+                    listaResultado.Add("0");
                     listaResultado.Add(reader["nombre"].ToString());
                     listaResultado.Add(reader["apellido_paterno"].ToString());
                 }

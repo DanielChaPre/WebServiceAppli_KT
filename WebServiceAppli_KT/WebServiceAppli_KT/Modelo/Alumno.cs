@@ -30,7 +30,7 @@ namespace WebServiceAppli_KT.Modelo
         private string FolioSUREMS;
         private string Password;
         private int SeguirEstudiando;
-        private int idColonia;
+        private Colonias Colonia;
         private int idPlantelEMS;
         private string ClavePlantelESEC;
         private int idCarreraES1;
@@ -44,7 +44,7 @@ namespace WebServiceAppli_KT.Modelo
         private string PregutaActual;
         private int Finalizo;
         private int TerminosAceptadso;
-        private int idMunicipio;
+        private Municipios Municipio;
         private int idPais;
         private string OtraColonia;
         private string idMunicipioPlantel;
@@ -96,7 +96,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int SeguirEstudiando1 { get => SeguirEstudiando; set => SeguirEstudiando = value; }
         [DataMember]
-        public int IdColonia { get => idColonia; set => idColonia = value; }
+        public Colonias Colonias { get => Colonia; set => Colonia = value; }
         [DataMember]
         public int IdPlantelEMS { get => idPlantelEMS; set => idPlantelEMS = value; }
         [DataMember]
@@ -124,7 +124,7 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public int TerminosAceptadso1 { get => TerminosAceptadso; set => TerminosAceptadso = value; }
         [DataMember]
-        public int IdMunicipio { get => idMunicipio; set => idMunicipio = value; }
+        public Municipios Municipios { get => Municipio; set => Municipio = value; }
         [DataMember]
         public int IdPais { get => idPais; set => idPais = value; }
         [DataMember]

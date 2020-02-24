@@ -55,7 +55,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.AddWithValue("@FolioSUREMS", alumno.FolioSUREMS1);
                 cmd.Parameters.AddWithValue("@Password", alumno.Password1);
                 cmd.Parameters.AddWithValue("@SeguirEstudiando", alumno.SeguirEstudiando1);
-                cmd.Parameters.AddWithValue("@idColonia", alumno.IdColonia);
+                cmd.Parameters.AddWithValue("@idColonia", alumno.Colonias.idColonia);
                 cmd.Parameters.AddWithValue("@idPlantelEMS", alumno.IdPlantelEMS);
                 cmd.Parameters.AddWithValue("@ClavePlantelESEC", alumno.ClavePlantelESEC1);
                 cmd.Parameters.AddWithValue("@idCarreraES1", alumno.IdCarreraES1);
@@ -69,7 +69,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.AddWithValue("@PreguntaActual", alumno.PregutaActual1);
                 cmd.Parameters.AddWithValue("@Finalizo", alumno.Finalizo1);
                 cmd.Parameters.AddWithValue("@TerminosAceptados", alumno.TerminosAceptadso1);
-                cmd.Parameters.AddWithValue("@idMunicipio", alumno.IdMunicipio);
+                cmd.Parameters.AddWithValue("@idMunicipio", alumno.Municipios.idMunicipio);
                 cmd.Parameters.AddWithValue("@idPais", alumno.IdPais);
                 cmd.Parameters.AddWithValue("@OtraColonia", alumno.OtraColonia1);
                 cmd.Parameters.AddWithValue("@idMunicipioPlantel", alumno.IdMunicipioPlantel);
@@ -152,7 +152,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.AddWithValue("@FolioSUREMS", alumno.FolioSUREMS1);
                 cmd.Parameters.AddWithValue("@Password", alumno.Password1);
                 cmd.Parameters.AddWithValue("@SeguirEstudiando", alumno.SeguirEstudiando1);
-                cmd.Parameters.AddWithValue("@idColonia", alumno.IdColonia);
+                cmd.Parameters.AddWithValue("@idColonia", alumno.Colonias.idColonia);
                 cmd.Parameters.AddWithValue("@idPlantelEMS", alumno.IdPlantelEMS);
                 cmd.Parameters.AddWithValue("@ClavePlantelESEC", alumno.ClavePlantelESEC1);
                 cmd.Parameters.AddWithValue("@idCarreraES1", alumno.IdCarreraES1);
@@ -166,7 +166,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.AddWithValue("@PreguntaActual", alumno.PregutaActual1);
                 cmd.Parameters.AddWithValue("@Finalizo", alumno.Finalizo1);
                 cmd.Parameters.AddWithValue("@TerminosAceptados", alumno.TerminosAceptadso1);
-                cmd.Parameters.AddWithValue("@idMunicipio", alumno.IdMunicipio);
+                cmd.Parameters.AddWithValue("@idMunicipio", alumno.Municipios.idMunicipio);
                 cmd.Parameters.AddWithValue("@idPais", alumno.IdPais);
                 cmd.Parameters.AddWithValue("@OtraColonia", alumno.OtraColonia1);
                 cmd.Parameters.AddWithValue("@idMunicipioPlantel", alumno.IdMunicipioPlantel);
@@ -216,8 +216,17 @@ namespace WebServiceAppli_KT.Datos
                     alumno.Telefono1 = reader["Telefono"].ToString();
                     alumno.FOLIOSUREDSU1 = reader["FOLIOSUREDSU"].ToString();
                     alumno.FolioSUREMS1 = reader["FolioSUREMS"].ToString();
-                    alumno.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
-                    alumno.IdMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString());
+                    alumno.Colonias = new Colonias(){
+                        idColonia = Convert.ToInt32(reader["idColonia"].ToString()),
+                        CP = reader["CP"].ToString(),
+                        idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
+                        NombreColonia = reader["NombreColonia"].ToString()
+                         };
+                    alumno.Municipios = new Municipios()
+                    {
+                        idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
+                        idEstado = Convert.ToInt32(reader["idEstado"].ToString())
+                        };
                     alumno.IdPais = Convert.ToInt32(reader["idPais"].ToString());
                     alumno.ClavePlantelESEC1 = reader["ClavePlantelESEC"].ToString();
                     alumno.IdPlantelEMS = Convert.ToInt32(reader["idPlantelEMS"].ToString());
