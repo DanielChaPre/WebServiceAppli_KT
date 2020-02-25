@@ -118,19 +118,18 @@ namespace WebServiceAppli_KT.Datos
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "UPDATE alumnos SET Nombre = @Nombre, ApellidoPaterno = @ApellidoPaterno," +
                 " ApellidoMaterno = @ApellidoMaterno, CURP = @Curp,Sexo = @Sexo,Calle = @Calle," +
-                "NumeroExterior = @NumeroExterior, NumeroInterior = @NumeroInterior," +
-                "Email = @Email,Celular = @Celular,Telefono = @Telefono, OtroCicloEnProceso = @OtroCicloEnProceso," +
-                "MotivoNoEstudiar1 = @MotivoNoEstudiar1, MotivoNoEstudiar2 = @MotivoNoEstudiar2," +
-                "MotivoNoEstudiar3 = @MotivoNoEstudiar3, MeGustariaEstudiar = @MeGustaEstudiar, FOLIOSUREDSU = @FOLIOSUREDSU," +
-                "FolioSUREMS = @FolioSUREMS,Password = @Password,SeguirEstudiando = @SeguirEstudiando, " +
-                "idColonia =@idColonia,idPlantelEMS = @idPlantelEMS," +
-                "ClavePlantelESEC = @ClavePlantelESEC,idCarreraES1 = @idCarreraES1, idCarreraES2 = @idCarreraES2," +
-                "idCarreraES3 = @idCarreraES3, Nacionalidad = @Nacionalidad, TEMP_CP = @TEMP_CP,Paso = @Paso," +
+                " NumeroExterior = @NumeroExterior, NumeroInterior = @NumeroInterior," +
+                " Email = @Email,Celular = @Celular,Telefono = @Telefono, OtroCicloEnProceso = @OtroCicloEnProceso," +
+                " MotivoNoEstudiar1 = @MotivoNoEstudiar1, MotivoNoEstudiar2 = @MotivoNoEstudiar2," +
+                " MotivoNoEstudiar3 = @MotivoNoEstudiar3, MeGustariaEstudiar = @MeGustaEstudiar, FOLIOSUREDSU = @FOLIOSUREDSU," +
+                " FolioSUREMS = @FolioSUREMS,Password = @Password,SeguirEstudiando = @SeguirEstudiando, " +
+                " idColonia =@idColonia," +
+                " ClavePlantelESEC = @ClavePlantelESEC, Nacionalidad = @Nacionalidad, TEMP_CP = @TEMP_CP,Paso = @Paso," +
                 " UID_Firebase = @UID_Firebase, Actualizaciones = @Actualizaciones," +
-                "PreguntaActual = @PreguntaActual,Finalizo = @Finalizo, TerminosAceptados = @TerminosAceptados," +
-                "idMunicipio = @idMunicipio, idPais = @idPais, OtraColonia = @OtraColonia, " +
-                "idMunicipioPlantel = @idMunicipioPlantel,idPaisPlantel = @idPaisPlantel," +
-                "OtroPlantel = @OtroPlantel,FechaRegistro = @FechaRegistro, EmailValidado =@EmailValidado " +
+                " PreguntaActual = @PreguntaActual,Finalizo = @Finalizo, TerminosAceptados = @TerminosAceptados," +
+                " idMunicipio = @idMunicipio, idPais = @idPais, OtraColonia = @OtraColonia, " +
+                " idMunicipioPlantel = @idMunicipioPlantel,idPaisPlantel = @idPaisPlantel," +
+                " OtroPlantel = @OtroPlantel,FechaRegistro = @FechaRegistro, EmailValidado =@EmailValidado " +
                 "WHERE idAlumno = @idAlumno";
                 cmd.Parameters.AddWithValue("@Nombre", alumno.Nombre1);
                 cmd.Parameters.AddWithValue("@ApellidoPaterno", alumno.ApellidoPaterno1);
@@ -153,11 +152,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.AddWithValue("@Password", alumno.Password1);
                 cmd.Parameters.AddWithValue("@SeguirEstudiando", alumno.SeguirEstudiando1);
                 cmd.Parameters.AddWithValue("@idColonia", alumno.Colonias.idColonia);
-                cmd.Parameters.AddWithValue("@idPlantelEMS", alumno.IdPlantelEMS);
                 cmd.Parameters.AddWithValue("@ClavePlantelESEC", alumno.ClavePlantelESEC1);
-                cmd.Parameters.AddWithValue("@idCarreraES1", alumno.IdCarreraES1);
-                cmd.Parameters.AddWithValue("@idCarreraES2", alumno.IdCarreraES2);
-                cmd.Parameters.AddWithValue("@idCarreraES3", alumno.IdCarreraES3);
                 cmd.Parameters.AddWithValue("@Nacionalidad", alumno.Nacionalidad1);
                 cmd.Parameters.AddWithValue("@TEMP_CP", alumno.TEMP_CP1);
                 cmd.Parameters.AddWithValue("@Paso", alumno.Paso1);
@@ -193,9 +188,12 @@ namespace WebServiceAppli_KT.Datos
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select Nombre, ApellidoPaterno, ApellidoMaterno, CURP, Sexo, Calle, NumeroExterior, NumeroInterior," +
-                    " Email, Celular, Telefono, FOLIOSUREDSU, FolioSUREMS, idColonia, Nacionalidad, idMunicipio, idPais, ClavePlantelESEC," +
-                    " idPlantelEMS from alumnos where idAlumno = @idAlumno";
+                cmd.CommandText = "Select a.Nombre, a.ApellidoPaterno, a.ApellidoMaterno, a.CURP, a.Sexo, a.Calle, a.NumeroExterior, " +
+                    "a.NumeroInterior, a.Email, a.Celular, a.Telefono, a.FOLIOSUREDSU, a.FolioSUREMS, c.NombreColonia, c.idColonia,c.CP, " +
+                    "c.idMunicipio,a.Nacionalidad, m.idMunicipio, m.NombreMunicipio, m.idEstado, " +
+                    "a.idPais, a.ClavePlantelESEC, a.idPlantelEMS from alumnos as a " +
+                    "inner join colonias as c on a.idColonia = c.idColonia " +
+                    "inner join municipios as m on a.idMunicipio = m.idMunicipio where idAlumno = @idAlumno";
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
@@ -216,17 +214,18 @@ namespace WebServiceAppli_KT.Datos
                     alumno.Telefono1 = reader["Telefono"].ToString();
                     alumno.FOLIOSUREDSU1 = reader["FOLIOSUREDSU"].ToString();
                     alumno.FolioSUREMS1 = reader["FolioSUREMS"].ToString();
-                    alumno.Colonias = new Colonias(){
+                    alumno.Colonias = new Colonias() {
                         idColonia = Convert.ToInt32(reader["idColonia"].ToString()),
                         CP = reader["CP"].ToString(),
                         idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
                         NombreColonia = reader["NombreColonia"].ToString()
-                         };
+                    };
                     alumno.Municipios = new Municipios()
                     {
                         idMunicipio = Convert.ToInt32(reader["idMunicipio"].ToString()),
-                        idEstado = Convert.ToInt32(reader["idEstado"].ToString())
-                        };
+                        idEstado = Convert.ToInt32(reader["idEstado"].ToString()),
+                        NombreMunicipio = reader["NombreMunicipio"].ToString()
+                    };
                     alumno.IdPais = Convert.ToInt32(reader["idPais"].ToString());
                     alumno.ClavePlantelESEC1 = reader["ClavePlantelESEC"].ToString();
                     alumno.IdPlantelEMS = Convert.ToInt32(reader["idPlantelEMS"].ToString());

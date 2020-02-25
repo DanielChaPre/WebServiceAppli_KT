@@ -733,7 +733,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 Console.WriteLine("Error en la modificacion de la información " + ex.Message);
                 return false;
@@ -748,14 +748,15 @@ namespace WebServiceAppli_KT.Datos
         {
             try
             {
+                var cveUsuario = ByUsuarioCve(usuario, contrasenia);
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * from usuario u, persona p, padre_familia pf where p.cve_usuario = @cveUsuarioP and u.cve_usuario = @cveUsuarioU and " +
-                      "pf.cve_persona = (Select cve_persona from persona where cve_usuario = @cveUsuario)";
-                cmd.Parameters.AddWithValue("@cveUsuarioP", ByUsuarioCve(usuario, contrasenia));
-                cmd.Parameters.AddWithValue("@cveUsuarioU", ByUsuarioCve(usuario, contrasenia));
-                cmd.Parameters.AddWithValue("@cveUsuario", ByUsuarioCve(usuario, contrasenia));
+                cmd.CommandText = "Select u.*,p.*,pf.cve_padre_familia, pf.idAlumno as IdAlumnoPadre, pf.fecha_registro,pf.cve_persona from usuario as u " +
+                    " inner join persona as p on p.cve_usuario = u.cve_usuario" +
+                    " inner join padre_familia pf on pf.cve_persona = p.cve_persona" +
+                    " where u.cve_usuario = @cveUsuario";
+                cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
@@ -784,12 +785,12 @@ namespace WebServiceAppli_KT.Datos
                     ent_padre_familia.Persona.Municipio = reader["municipio"].ToString();
                     ent_padre_familia.Persona.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     ent_padre_familia.Cve_Padre_Familia = Convert.ToInt32(reader["cve_padre_familia"].ToString());
-                    ent_padre_familia.IdAlumno = Convert.ToInt16(reader["idAlumno"].ToString());
+                    ent_padre_familia.IdAlumno = Convert.ToInt32(reader["IdAlumnoPadre"].ToString());
                     ent_padre_familia.Fecha_Registro = reader["fecha_registro"].ToString();
                 }
                 return ent_padre_familia;
             }
-            catch (MySqlException ex)
+            catch (Exception ex)
             {
                 return null;
                 throw;
