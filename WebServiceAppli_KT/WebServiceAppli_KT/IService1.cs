@@ -246,11 +246,18 @@ namespace WebServiceAppli_KT
         //Atlas
         #region Planteles
         [OperationContract]
+        [WebInvoke(UriTemplate = "/detallePlantel",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET")]
+        List<DetallePlantel> ObtenerDetallePlantel();
+
+        [OperationContract]
         [WebInvoke(UriTemplate = "/planteles",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
                     Method = "GET")]
-        List<DetallePlantel> ObtenerPlanteles();
+        List<PlantelesES> ObtenerPlanteles();
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/buscarplantelmunicipio/{municipio}",
@@ -404,6 +411,34 @@ namespace WebServiceAppli_KT
                 ResponseFormat = WebMessageFormat.Json,
                 Method = "GET")]
         List<string> RelacionarGoogleAlumno(string aliasred, string curp, string contrasena);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/imagenesplantel/{idplantel}",
+                RequestFormat = WebMessageFormat.Json,
+                ResponseFormat = WebMessageFormat.Json,
+                Method = "GET")]
+        List<ImagenPlantel> BuscarImagenesPlantel(string idplantel);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/imagenesplanteles",
+               RequestFormat = WebMessageFormat.Json,
+               ResponseFormat = WebMessageFormat.Json,
+               Method = "GET")]
+        List<ImagenPlantel> BuscarImagenesPlanteles();
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/carrerasplantel/{idplantel}",
+               RequestFormat = WebMessageFormat.Json,
+               ResponseFormat = WebMessageFormat.Json,
+               Method = "GET")]
+        List<CarrerasES> ObtenerCarrerasPlantel(string idplantel);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/obtenerTema",
+               RequestFormat = WebMessageFormat.Json,
+               ResponseFormat = WebMessageFormat.Json,
+               Method = "GET")]
+        List<string> ObtenerTema();
 
     }
 }

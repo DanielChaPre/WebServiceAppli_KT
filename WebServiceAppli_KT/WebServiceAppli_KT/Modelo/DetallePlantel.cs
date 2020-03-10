@@ -20,7 +20,11 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string requisitos { get; set; }
         [DataMember]
-        public string fechas { get; set; }
+        public string fecha_expedicion { get; set; }
+        [DataMember]
+        public string fecha_inicio { get; set; }
+        [DataMember]
+        public string fechas_inscripcion { get; set; }
         [DataMember]
         public string reseña { get; set; }
         [DataMember]
@@ -30,14 +34,34 @@ namespace WebServiceAppli_KT.Modelo
         [DataMember]
         public string ubicacion { get; set; }
         [DataMember]
+        public string region { get; set; }
+        [DataMember]
+        public string nombre_region { get; set; }
+        [DataMember]
+        public string contacto { get; set; }
+        [DataMember]
+        public string domicilio { get; set; }
+        [DataMember]
+        public string telefono { get; set; }
+        [DataMember]
+        public string vinculacion { get; set; }
+        [DataMember]
+        public string nombre_corto { get; set; }
+        [DataMember]
+        public string actividades_extracurriculares { get; set; }
+        [DataMember]
         public string nivel_estudio { get; set; }
         [DataMember]
         public int cve_imagen_plantel{ get; set; }
         [DataMember]
-        public int cve_nivel_agrupado { get; set; }
+        public string cve_nivel_agrupado { get; set; }
         [DataMember]
         public int cve_nivel_estudio { get; set; }
         [DataMember]
-        public PlantelesES PlantelesES { get; set; }
+        public int idPlantelesES { get; set; }
+        [DataMember]
+        public string idColonia { get; set; }
+        [DataMember]
+        public int cve_subsistema { get; set; }
     }
 }

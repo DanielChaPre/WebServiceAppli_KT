@@ -20,17 +20,14 @@ namespace WebServiceAppli_KT.Controlador
             escuelaESDAO = new EscuelaESDAO();
         }
 
-        public List<DetallePlantel> ObtenerPlanteles()
+        public List<PlantelesES> ObtenerPlanteles()
         {
-            try
-            {
-                lstPlanteles = new List<PlantelesES>();
-                return escuelaESDAO.ObtenerPlnateles(); ;
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            return escuelaESDAO.ObtenerPlanteles();
+        }
+
+        public List<DetallePlantel> ObtenerDetallePlantel()
+        {
+            return escuelaESDAO.ObtenerDetallePlantel();
         }
 
         public PlantelesES BuscarPlantelMunicipio(string municipio)
@@ -65,6 +62,16 @@ namespace WebServiceAppli_KT.Controlador
         {
 
             return escuelaESDAO.BuscarDetallePlantel(idPlantel);
+        }
+
+        public List<ImagenPlantel> BuscarImagenPlantel(string idPlantel)
+        {
+            return escuelaESDAO.BuscarImagenPlantel(idPlantel);
+        }
+
+        public List<ImagenPlantel> BuscarImagenPlanteles()
+        {
+            return escuelaESDAO.BuscarImagenPlanteles();
         }
 
     }

@@ -218,8 +218,8 @@ namespace WebServiceAppli_KT
         #region Modificar perfiles
         public bool ModificarPerfil(Persona persona)
         {
-                perfilController = new ControladorPerfil();
-                return perfilController.ModificarPerfill(persona);
+            perfilController = new ControladorPerfil();
+            return perfilController.ModificarPerfill(persona);
         }
 
         public bool ModificarPerfilAlumno(Alumno alumno)
@@ -392,19 +392,17 @@ namespace WebServiceAppli_KT
 
 
         #region Plantel
-        public List<DetallePlantel> ObtenerPlanteles()
+        public List<PlantelesES> ObtenerPlanteles()
         {
-            try
-            {
-                escuelaESController = new ControladorEscuelasES();
-                lstPlanteles = new List<PlantelesES>();
-              //  lstPlanteles = escuelaESController.ObtenerPlanteles();
-                return escuelaESController.ObtenerPlanteles();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
+            escuelaESController = new ControladorEscuelasES();
+            return escuelaESController.ObtenerPlanteles();
+        }
+
+        public List<DetallePlantel> ObtenerDetallePlantel()
+        {
+
+            escuelaESController = new ControladorEscuelasES();
+            return escuelaESController.ObtenerDetallePlantel();
         }
 
         public PlantelesES BuscarPlantelesMunicipio(string municipio)
@@ -436,7 +434,7 @@ namespace WebServiceAppli_KT
             controladorAlumno = new ControladorAlumno();
             return controladorAlumno.BuscarAlumnoCurp(curp);
         }
-        
+
 
         public int BuscarColonia(string colonia)
         {
@@ -538,6 +536,30 @@ namespace WebServiceAppli_KT
         {
             loginController = new ControladorLogin();
             return loginController.RelacionarGoogleAlumno(aliasred, curp, contrasena);
+        }
+
+        public List<ImagenPlantel> BuscarImagenesPlantel(string idplantel)
+        {
+            escuelaESController = new ControladorEscuelasES();
+            return escuelaESController.BuscarImagenPlantel(idplantel);
+        }
+
+        public List<ImagenPlantel> BuscarImagenesPlanteles()
+        {
+            escuelaESController = new ControladorEscuelasES();
+            return escuelaESController.BuscarImagenPlanteles();
+        }
+
+        public List<CarrerasES> ObtenerCarrerasPlantel(string idplantel)
+        {
+            carrerasController = new ControladorCarreasES();
+            return carrerasController.ObtenerCarrerasPlantel(idplantel);
+        }
+
+        public List<string> ObtenerTema()
+        {
+            controladorConfiguracionPlantilla = new ControladorConfiguracionPlantilla();
+            return controladorConfiguracionPlantilla.ConsultarTema();
         }
         #endregion
 

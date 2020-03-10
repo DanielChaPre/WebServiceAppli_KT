@@ -704,7 +704,7 @@ namespace WebServiceAppli_KT.Datos
             {
                 var conn = conexion.Builder;
                 con = new MySqlConnection(conn.ToString());
-                MySqlCommand cmd = new MySqlCommand("p_modificar_perfilEmpleado", con);
+                MySqlCommand cmd = new MySqlCommand("p_modificar_perfilPadreFamilia", con);
                 cmd.CommandType = System.Data.CommandType.StoredProcedure;
                 cmd.Parameters.Add(new MySqlParameter("p_cve_persona", padreFamilia.Persona.Cve_Persona));
                 cmd.Parameters.Add(new MySqlParameter("p_nombre", padreFamilia.Persona.Nombre));
@@ -733,7 +733,7 @@ namespace WebServiceAppli_KT.Datos
                 cmd.ExecuteNonQuery();
                 return true;
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
                 Console.WriteLine("Error en la modificacion de la información " + ex.Message);
                 return false;

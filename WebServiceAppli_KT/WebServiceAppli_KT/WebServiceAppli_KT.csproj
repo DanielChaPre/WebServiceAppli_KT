@@ -139,6 +139,7 @@
     <Compile Include="Modelo\GrupoSeguridad.cs" />
     <Compile Include="Modelo\Historial.cs" />
     <Compile Include="Modelo\HistorialBusquedasCarrera.cs" />
+    <Compile Include="Modelo\ImagenPlantel.cs" />
     <Compile Include="Modelo\MediosEnvio.cs" />
     <Compile Include="Modelo\Municipios.cs" />
     <Compile Include="Modelo\Notificaciones.cs" />

@@ -291,10 +291,9 @@ namespace WebServiceAppli_KT.Datos
                 MySqlCommand cmd = con.CreateCommand();
                 cmd.CommandText = "    Select usuario.tipo_usuario, usuario.cve_usuario, suredsu.alumnos.Nombre, suredsu.alumnos.ApellidoPaterno from usuario" +
                     " inner join suredsu.alumnos" +
-                    " on suredsu.alumnos.idAlumno = (Select idAlumno from usuario where(contrasena = @pass) and(nombre_usuario = @usuario) and(idAlumno = @idAlumno)) and" +
-                    " (usuario.contrasena = @pass and usuario.nombre_usuario = @usuario and usuario.idAlumno = @idAlumno)";
+                    " on suredsu.alumnos.idAlumno = (Select idAlumno from usuario where(contrasena = @pass) and  (idAlumno = @idAlumno)) and" +
+                    " (usuario.contrasena = @pass and usuario.idAlumno = @idAlumno)";
                 cmd.Parameters.AddWithValue("@pass", contrasenia);
-                cmd.Parameters.AddWithValue("@usuario", usuario);
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 var lstresultado = new List<string>();

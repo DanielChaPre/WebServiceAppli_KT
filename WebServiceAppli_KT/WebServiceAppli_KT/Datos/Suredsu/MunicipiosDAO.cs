@@ -40,7 +40,7 @@ namespace WebServiceAppli_KT.Datos
 
                 return lst_municipios;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return null;
             }

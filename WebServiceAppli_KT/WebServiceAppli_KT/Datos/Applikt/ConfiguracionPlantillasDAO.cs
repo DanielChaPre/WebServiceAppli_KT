@@ -94,5 +94,37 @@ namespace WebServiceAppli_KT.Datos.Applikt
                 con.Close();
             }
         }
+
+        public List<string> ObtenerColores()
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "SELECT descripcion FROM bd_applikt.configuracion_tema;";
+                con.Open();
+                var lsttema = new List<string>();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    while (reader.Read())
+                    {
+                        lsttema.Add(reader["descripcion"].ToString());
+                    }
+                }
+                return lsttema;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en el logeo, " + ex.Message);
+                return null;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

@@ -25,5 +25,10 @@ namespace WebServiceAppli_KT.Controlador.Applikt
         {
             return configuracionPlantillasDAO.ConfigurarPlantillaUsuariosAlumno(idAlumno);
         }
+
+        public List<string> ConsultarTema()
+        {
+            return configuracionPlantillasDAO.ObtenerColores();
+        }
     }
 }
