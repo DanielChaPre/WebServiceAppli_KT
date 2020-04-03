@@ -22,12 +22,12 @@ namespace WebServiceAppli_KT
         [OperationContract]
         [WebGet(UriTemplate = "/validarUsuario/{usuario}",
                 ResponseFormat = WebMessageFormat.Json)]
-        bool ValidarUsuario(string usuario);
+        string ValidarUsuario(string usuario);
 
         [OperationContract]
         [WebGet(UriTemplate = "/validarUsuarioAlumno/{idAlumno}",
                 ResponseFormat = WebMessageFormat.Json)]
-        bool ValidarUsuarioAlumno(string idAlumno);
+        string ValidarUsuarioAlumno(string idAlumno);
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/validarContrasenia/{contrasenia}/{usuario}/{idAlumno}",
@@ -193,6 +193,14 @@ namespace WebServiceAppli_KT
         List<int> CrearPerfilAlumno(Alumno alumno);
 
         [OperationContract]
+        [WebInvoke(UriTemplate = "/aptitudes/{idAlumno}",
+                    RequestFormat = WebMessageFormat.Json,
+                    ResponseFormat = WebMessageFormat.Json,
+                    Method = "GET",
+                  BodyStyle = WebMessageBodyStyle.Wrapped)]
+        Resultados BuscarAptitudesAlumno(string idAlumno);
+
+        [OperationContract]
         [WebInvoke(UriTemplate = "/alumno",
                     RequestFormat = WebMessageFormat.Json,
                     ResponseFormat = WebMessageFormat.Json,
@@ -272,6 +280,13 @@ namespace WebServiceAppli_KT
                    ResponseFormat = WebMessageFormat.Json,
                    Method = "GET")]
         PlantelesES BuscarPlantelesId(string carrera);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/detallecarrera",
+                  RequestFormat = WebMessageFormat.Json,
+                  ResponseFormat = WebMessageFormat.Json,
+                  Method = "GET")]
+        List<DetalleCarreraPlantel> BuscarDetalleCarrera();
 
         [OperationContract]
         [WebInvoke(UriTemplate = "/buscarplantel/{plantel}",
@@ -355,14 +370,12 @@ namespace WebServiceAppli_KT
                   ResponseFormat = WebMessageFormat.Json,
                   Method = "GET")]
         List<Historial> ObtenerHistorial(string cveUsuario);
-        /***/
         [OperationContract]
         [WebInvoke(UriTemplate = "/plantilla/{cveUsuario}",
                   RequestFormat = WebMessageFormat.Json,
                   ResponseFormat = WebMessageFormat.Json,
                   Method = "GET")]
         List<string> ConsultarPlantillas(string cveUsuario);
-        /***/
         [OperationContract]
         [WebInvoke(UriTemplate = "/plantillaAlumno/{idAlumno}",
                   RequestFormat = WebMessageFormat.Json,
@@ -440,5 +453,18 @@ namespace WebServiceAppli_KT
                Method = "GET")]
         List<string> ObtenerTema();
 
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/busquedacarrera/{cveUsuario}/{idCarrera}",
+             RequestFormat = WebMessageFormat.Json,
+             ResponseFormat = WebMessageFormat.Json,
+             Method = "GET")]
+        bool BusquedaCarrera(string cveUsuario, string idCarrera);
+
+        [OperationContract]
+        [WebInvoke(UriTemplate = "/historialvisita/{cveUsuario}",
+             RequestFormat = WebMessageFormat.Json,
+             ResponseFormat = WebMessageFormat.Json,
+             Method = "GET")]
+        bool HistorialVisita(string cveUsuario);
     }
 }

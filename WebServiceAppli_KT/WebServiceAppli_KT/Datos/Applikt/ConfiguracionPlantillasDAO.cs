@@ -28,7 +28,8 @@ namespace WebServiceAppli_KT.Datos.Applikt
                     " INNER JOIN grupo_seguridad ON grupo_seguridad_usuario.cve_grupo_seguridad = grupo_seguridad.cve_grupo_seguridad" +
                     " INNER JOIN detalle_grupo_seguridad_plantilla ON grupo_seguridad.cve_grupo_seguridad = detalle_grupo_seguridad_plantilla.cve_grupo_seguridad" +
                     " INNER JOIN grupo_seguridad_plantilla ON detalle_grupo_seguridad_plantilla.cve_grupo_seguridad_plantilla = grupo_seguridad_plantilla.cve_grupo_seguridad_plantilla" +
-                    " WHERE usuario.cve_usuario = @cveUsuario AND  grupo_seguridad_plantilla.estatus = 'Activo'";
+                    " WHERE usuario.cve_usuario = @cveUsuario AND  grupo_seguridad_plantilla.estatus = 'Activo' AND" +
+                    " grupo_seguridad_plantilla.cve_plantilla_superior = 0";
                 cmd.Parameters.AddWithValue("@cveUsuario", cveUsuario);
                 con.Open();
                 var lstPlantillas = new List<string>();
@@ -70,7 +71,8 @@ namespace WebServiceAppli_KT.Datos.Applikt
                     " INNER JOIN grupo_seguridad ON grupo_seguridad_usuario.cve_grupo_seguridad = grupo_seguridad.cve_grupo_seguridad" +
                     " INNER JOIN detalle_grupo_seguridad_plantilla ON grupo_seguridad.cve_grupo_seguridad = detalle_grupo_seguridad_plantilla.cve_grupo_seguridad" +
                     " INNER JOIN grupo_seguridad_plantilla ON detalle_grupo_seguridad_plantilla.cve_grupo_seguridad_plantilla = grupo_seguridad_plantilla.cve_grupo_seguridad_plantilla" +
-                    " WHERE usuario.idAlumno = @idAlumno AND  grupo_seguridad_plantilla.estatus = 'Activo'";
+                    " WHERE usuario.idAlumno = @idAlumno AND  grupo_seguridad_plantilla.estatus = 'Activo'" +
+                    "AND grupo_seguridad_plantilla.cve_plantilla_superior = 0";
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 var lstPlantillas = new List<string>();

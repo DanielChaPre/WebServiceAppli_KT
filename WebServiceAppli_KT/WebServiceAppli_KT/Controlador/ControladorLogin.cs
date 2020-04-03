@@ -16,7 +16,7 @@ namespace WebServiceAppli_KT.Controlador
 
         }
 
-        public bool ValidarUsuario(string usuario)
+        public string ValidarUsuario(string usuario)
         {
             try
             {
@@ -24,11 +24,11 @@ namespace WebServiceAppli_KT.Controlador
             }
             catch (Exception)
             {
-                return false;
+                return "";
             }
         }
 
-        public bool ValidarUsuarioAlumno(string idAlumno)
+        public string ValidarUsuarioAlumno(string idAlumno)
         {
             return loginDAO.ValidarUsuarioAlumno(idAlumno);
         }

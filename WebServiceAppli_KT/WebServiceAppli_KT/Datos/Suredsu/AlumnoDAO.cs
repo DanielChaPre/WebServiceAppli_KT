@@ -266,5 +266,41 @@ namespace WebServiceAppli_KT.Datos
                 con.Close();
             }
         }
+
+        public Resultados BuscarAptitudesAlumno(string idAlumno)
+        {
+            try
+            {
+                var conn = conexion.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "Select * From resultados where idAlumno = @idAlumno";
+                cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    var resultado = new Resultados()
+                    {
+                        idAlumno = Convert.ToInt32(reader["idAlumno"].ToString()),
+                        aptitud1 = reader["aptitud1"].ToString(),
+                        aptitud2 = reader["aptitud2"].ToString(),
+                        aptitud3 = reader["aptitud3"].ToString()
+                    };
+                    return resultado;
+                }
+                else
+                    return null;
+             
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
     }
 }

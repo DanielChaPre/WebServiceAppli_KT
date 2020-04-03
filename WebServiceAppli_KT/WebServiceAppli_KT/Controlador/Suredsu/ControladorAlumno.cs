@@ -76,5 +76,10 @@ namespace WebServiceAppli_KT.Controlador
         {
             return alumnoDAO.BuscarIdAlumnoCurp(curp);
         }
+
+        public Resultados BuscarAptitudesAlumno(string idAlumno)
+        {
+            return alumnoDAO.BuscarAptitudesAlumno(idAlumno);
+        }
     }
 }

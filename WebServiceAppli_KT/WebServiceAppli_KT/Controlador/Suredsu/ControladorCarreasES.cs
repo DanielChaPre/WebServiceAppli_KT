@@ -32,6 +32,11 @@ namespace WebServiceAppli_KT.Controlador
             }
         }
 
+        public List<DetalleCarreraPlantel> ObtenerDetalleCarreras()
+        {
+                return carrerasDAO.ObtenerDetalleCarreras();
+        }
+
         public List<CarrerasES> ObtenerCarrerasPlantel(string idPlantelES)
         {
             return carrerasDAO.ObtenerCarrerasPlantel(idPlantelES);

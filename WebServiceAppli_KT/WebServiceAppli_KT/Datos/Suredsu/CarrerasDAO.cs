@@ -10,6 +10,7 @@ namespace WebServiceAppli_KT.Datos
     public class CarrerasDAO
     {
         ConexionSuredsuDAO conexion = new ConexionSuredsuDAO();
+        ConexionAppliktDAO conexionA = new ConexionAppliktDAO();
         MySqlConnection con;
         List<CarrerasES> lstCarreras;
 
@@ -115,6 +116,49 @@ namespace WebServiceAppli_KT.Datos
                 }
 
                 return lstCarreras;
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error en la consulta: " + ex.Message);
+                return null;
+                throw;
+            }
+            finally
+            {
+                con.Close();
+            }
+        }
+
+        public List<DetalleCarreraPlantel> ObtenerDetalleCarreras()
+        {
+            try
+            {
+                var conn = conexionA.Builder;
+                con = new MySqlConnection(conn.ToString());
+                MySqlCommand cmd = con.CreateCommand();
+                cmd.CommandText = "select * from detalle_carrera_plantel";
+                con.Open();
+                MySqlDataReader reader = cmd.ExecuteReader();
+               var lstDetalleCarreras = new List<DetalleCarreraPlantel>();
+                while (reader.Read())
+                {
+
+                    lstDetalleCarreras.Add(new DetalleCarreraPlantel()
+                    {
+                       costos = reader["costos"].ToString(),
+                       cve_detalle_carrera_plantel = Convert.ToInt32(reader["cve_detalle_carrera_plantel"]),
+                       //cve_detalle_plantel = Convert.ToInt32(reader["cve_detalle_plantel"]),
+                       duracion = reader["duracion"].ToString(),
+                       idCarreraES = Convert.ToInt32(reader["idCarreraES"]),
+                       modalidad = reader["modalidad"].ToString(),
+                       perfil_egreso = reader["perfil_egreso"].ToString(),
+                       perfil_ingreso = reader["perfil_ingreso"].ToString(),
+                       RVOE = reader["RVOE"].ToString(),
+                       sector_productivo = reader["sector_productivo"].ToString()
+                    });
+                }
+
+                return lstDetalleCarreras;
             }
             catch (Exception ex)
             {

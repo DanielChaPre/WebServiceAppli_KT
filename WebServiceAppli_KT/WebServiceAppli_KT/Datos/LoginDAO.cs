@@ -12,7 +12,7 @@ namespace WebServiceAppli_KT.Datos
 
 
 
-        public bool ValidarUsuario(string usuario)
+        public string ValidarUsuario(string usuario)
         {
             try
             {
@@ -20,19 +20,19 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where nombre_usuario = @user";
+                cmd.CommandText = "Select cve_usuario From usuario where nombre_usuario = @user";
                 cmd.Parameters.AddWithValue("@user", usuario);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
-                    return true;
+                    return reader["cve_usuario"].ToString();
                 else
-                    return false;
+                    return "";
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error en el logeo, " + ex.Message);
-                return false;
+                return "";
             }
             finally
             {
@@ -201,7 +201,7 @@ namespace WebServiceAppli_KT.Datos
             }
         }
 
-        public bool ValidarUsuarioAlumno(string idAlumno)
+        public string ValidarUsuarioAlumno(string idAlumno)
         {
             try
             {
@@ -209,19 +209,19 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select * From usuario where idAlumno = @idAlumno";
+                cmd.CommandText = "Select cve_usuario From usuario where idAlumno = @idAlumno";
                 cmd.Parameters.AddWithValue("@idAlumno", idAlumno);
                 con.Open();
                 MySqlDataReader reader = cmd.ExecuteReader();
                 if (reader.Read())
-                    return true;
+                    return reader["cve_usuario"].ToString();
                 else
-                    return false;
+                    return "";
             }
             catch (MySqlException ex)
             {
                 Console.WriteLine("Error en el logeo, " + ex.Message);
-                return false;
+                return "";
             }
             finally
             {

@@ -132,6 +132,7 @@
     <Compile Include="Modelo\CarrerasES.cs" />
     <Compile Include="Modelo\Colonias.cs" />
     <Compile Include="Modelo\ConfiguracionTema.cs" />
+    <Compile Include="Modelo\DetalleCarreraPlantel.cs" />
     <Compile Include="Modelo\DetallePlantel.cs" />
     <Compile Include="Modelo\Empleado.cs" />
     <Compile Include="Modelo\EmpleadoPlantel.cs" />
@@ -148,6 +149,7 @@
     <Compile Include="Modelo\Persona.cs" />
     <Compile Include="Modelo\PlantelesEMS.cs" />
     <Compile Include="Modelo\PlantelesES.cs" />
+    <Compile Include="Modelo\Resultados.cs" />
     <Compile Include="Modelo\Usuario.cs" />
     <Compile Include="Service1.svc.cs">
       <DependentUpon>Service1.svc</DependentUpon>

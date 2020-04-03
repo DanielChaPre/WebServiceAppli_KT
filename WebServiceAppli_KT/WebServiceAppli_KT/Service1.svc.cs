@@ -21,6 +21,7 @@ namespace WebServiceAppli_KT
         ControladorDireccion controladorDireccion;
         ControladorAlumno controladorAlumno;
         ControladorConfiguracionPlantilla controladorConfiguracionPlantilla;
+        ControladorHistorialBusquedaCarrera controladorHistorialBusquedaCarrera;
         #endregion
 
         #region variables(Objetos)
@@ -370,7 +371,7 @@ namespace WebServiceAppli_KT
             }
         }
 
-        public bool ValidarUsuario(string usuario)
+        public string ValidarUsuario(string usuario)
         {
             try
             {
@@ -379,12 +380,12 @@ namespace WebServiceAppli_KT
             }
             catch (Exception)
             {
-                return false;
+                return "";
                 throw;
             }
         }
 
-        public bool ValidarUsuarioAlumno(string idAlumno)
+        public string ValidarUsuarioAlumno(string idAlumno)
         {
             loginController = new ControladorLogin();
             return loginController.ValidarUsuarioAlumno(idAlumno);
@@ -560,6 +561,30 @@ namespace WebServiceAppli_KT
         {
             controladorConfiguracionPlantilla = new ControladorConfiguracionPlantilla();
             return controladorConfiguracionPlantilla.ConsultarTema();
+        }
+
+        public Resultados BuscarAptitudesAlumno(string idAlumno)
+        {
+            controladorAlumno = new ControladorAlumno();
+            return controladorAlumno.BuscarAptitudesAlumno(idAlumno);
+        }
+
+        public List<DetalleCarreraPlantel> BuscarDetalleCarrera()
+        {
+            carrerasController = new ControladorCarreasES();
+            return carrerasController.ObtenerDetalleCarreras();
+        }
+
+        public bool BusquedaCarrera(string cveUsuario, string idCarrera)
+        {
+            controladorHistorialBusquedaCarrera = new ControladorHistorialBusquedaCarrera();
+            return controladorHistorialBusquedaCarrera.AgregarBusquedaCarrera(cveUsuario, idCarrera);
+        }
+
+        public bool HistorialVisita(string cveUsuario)
+        {
+            controladorHistorialBusquedaCarrera = new ControladorHistorialBusquedaCarrera();
+            return controladorHistorialBusquedaCarrera.AgregarHistorialVisita(cveUsuario);
         }
         #endregion
 

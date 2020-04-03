@@ -111,7 +111,6 @@ namespace WebServiceAppli_KT.Datos
                 cmd.Parameters.Add(new MySqlParameter("p_cve_usuario", cveUsuario));
                 cmd.Parameters.Add(new MySqlParameter("p_nombre_usuario", persona.Usuario.Nombre_Usuario));
                 cmd.Parameters.Add(new MySqlParameter("p_contraseña", persona.Usuario.Contrasena));
-                cmd.Parameters.Add(new MySqlParameter("p_fecha_registro_u", persona.Usuario.Fecha_Registro));
                 cmd.Parameters.Add(new MySqlParameter("p_estatus", persona.Usuario.Estatus));
                 cmd.Parameters.Add(new MySqlParameter("p_alias_redes", persona.Usuario.Alias_Red));
                 cmd.Parameters.Add(new MySqlParameter("p_idAlumno", persona.Usuario.IdAlumno));
@@ -190,9 +189,9 @@ namespace WebServiceAppli_KT.Datos
                     persona.Sexo = reader["sexo"].ToString();
                     persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     persona.Numero_Telefono = reader["numero_telefono"].ToString();
-                    persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    persona.Estado_Civil = Convert.ToInt16(reader["cve_estado_civil"].ToString());
                     persona.Nacionalidad = reader["nacionalidad"].ToString();
-                    persona.Municipio = reader["municipio"].ToString();
+                    persona.Municipio = reader["idMunicipio"].ToString();
                     persona.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     persona.Usuario = new Usuario();
                     persona.Usuario.Cve_Usuario = Convert.ToInt16(reader["cve_usuario"].ToString());
@@ -393,9 +392,9 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado.Persona.Sexo = reader["sexo"].ToString();
                     ent_empleado.Persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     ent_empleado.Persona.Numero_Telefono = reader["numero_telefono"].ToString();
-                    ent_empleado.Persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    ent_empleado.Persona.Estado_Civil = Convert.ToInt16(reader["cve_estado_civil"].ToString());
                     ent_empleado.Persona.Nacionalidad = reader["nacionalidad"].ToString();
-                    ent_empleado.Persona.Municipio = reader["municipio"].ToString();
+                    ent_empleado.Persona.Municipio = reader["idMunicipio"].ToString();
                     ent_empleado.Persona.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     ent_empleado.Cve_Empleado = Convert.ToInt32(reader["cve_empleado"].ToString());
                     ent_empleado.Numero_Empleado = reader["numero_empleado"].ToString();
@@ -590,9 +589,9 @@ namespace WebServiceAppli_KT.Datos
                     ent_empleado_plantel.Persona.Sexo = reader["sexo"].ToString();
                     ent_empleado_plantel.Persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     ent_empleado_plantel.Persona.Numero_Telefono = reader["numero_telefono"].ToString();
-                    ent_empleado_plantel.Persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    ent_empleado_plantel.Persona.Estado_Civil = Convert.ToInt16(reader["cve_estado_civil"].ToString());
                     ent_empleado_plantel.Persona.Nacionalidad = reader["nacionalidad"].ToString();
-                    ent_empleado_plantel.Persona.Municipio = reader["municipio"].ToString();
+                    ent_empleado_plantel.Persona.Municipio = reader["idMunicipio"].ToString();
                     ent_empleado_plantel.Persona.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     ent_empleado_plantel.Cve_Empleado_Plantel = Convert.ToInt32(reader["cve_empleado_plantel"].ToString());
                     ent_empleado_plantel.IdPlantelesES = Convert.ToInt16(reader["idPlantelesES"].ToString());
@@ -780,9 +779,9 @@ namespace WebServiceAppli_KT.Datos
                     ent_padre_familia.Persona.Sexo = reader["sexo"].ToString();
                     ent_padre_familia.Persona.Fecha_Nacimiento = reader["fecha_nacimiento"].ToString();
                     ent_padre_familia.Persona.Numero_Telefono = reader["numero_telefono"].ToString();
-                    ent_padre_familia.Persona.Estado_Civil = Convert.ToInt16(reader["estado_civil"].ToString());
+                    ent_padre_familia.Persona.Estado_Civil = Convert.ToInt16(reader["cve_estado_civil"].ToString());
                     ent_padre_familia.Persona.Nacionalidad = reader["nacionalidad"].ToString();
-                    ent_padre_familia.Persona.Municipio = reader["municipio"].ToString();
+                    ent_padre_familia.Persona.Municipio = reader["idMunicipio"].ToString();
                     ent_padre_familia.Persona.IdColonia = Convert.ToInt32(reader["idColonia"].ToString());
                     ent_padre_familia.Cve_Padre_Familia = Convert.ToInt32(reader["cve_padre_familia"].ToString());
                     ent_padre_familia.IdAlumno = Convert.ToInt32(reader["IdAlumnoPadre"].ToString());

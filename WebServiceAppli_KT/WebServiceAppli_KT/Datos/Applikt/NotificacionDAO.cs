@@ -13,37 +13,6 @@ namespace WebServiceAppli_KT.Datos
         MySqlConnection con;
         List<Notificaciones> lstnotificaciones;
 
-        //public List<Notificaciones> ConsultarNotificaciones(string cveUsuario)
-        //{
-        //    try
-        //    {
-        //        var listnoti = new List<Notificaciones>();
-        //        var listnotieli = new List<int>();
-        //        listnoti = ConsultarNotificacionesUsuario(cveUsuario);
-        //        listnotieli = ConsultarNotificacionesEliminadas(cveUsuario);
-        //        for (int i = 0; i < listnoti.Count; i++)
-        //        {
-        //            for (int j = 0; j < listnotieli.Count; j++)
-        //            {
-        //                if (listnotieli[j] != listnoti[i].cve_notificacion)
-        //                {
-        //                    lstnotificaciones.Add(listnoti[j]);
-        //                }
-        //            }
-        //        }
-        //        return lstnotificaciones;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        Console.WriteLine("Error en la consulta de notificaciones: "+ex.Message);
-        //        return null;
-        //    }
-        //    finally
-        //    {
-        //        con.Close();
-        //    }
-        //}
-
         public List<Notificaciones> ConsultarNotificaciones(string cveUsuario)
         {
             try
@@ -52,7 +21,7 @@ namespace WebServiceAppli_KT.Datos
                 con = new MySqlConnection(conn.ToString());
 
                 MySqlCommand cmd = con.CreateCommand();
-                cmd.CommandText = "Select n.* from notificacion as n " +
+                cmd.CommandText = "Select  distinct n.* from notificacion as n " +
                     "inner join notificacion_grupo_seguridad as ngs on ngs.cve_notificacion = n.cve_notificacion " +
                     "inner join grupo_seguridad as gs on gs.cve_grupo_seguridad = ngs.cve_grupo_seguridad " +
                     "where gs.cve_grupo_seguridad in  " +
